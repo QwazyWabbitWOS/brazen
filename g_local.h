@@ -41,8 +41,8 @@
 //==================================================================
 
 // view pitching times
-#define DAMAGE_TIME		0.5
-#define	FALL_TIME		0.3
+#define DAMAGE_TIME		0.5f
+#define	FALL_TIME		0.3f
 
 
 // edict->spawnflags
@@ -76,7 +76,7 @@
 #define	FL_NOGIB				0x00010000	// player has been vaporized by a nuke, drop no gibs
 //ROGUE
 
-#define	FRAMETIME		0.1
+#define	FRAMETIME		0.1f
 
 // memory tags to allow dynamic memory to be cleaned up
 #define	TAG_GAME	765		// clear when unloading the dll
@@ -855,6 +855,7 @@ void ai_turn (edict_t *self, float dist);
 void ai_run (edict_t *self, float dist);
 void ai_charge (edict_t *self, float dist);
 int range (edict_t *self, edict_t *other);
+qboolean FindTarget(edict_t* self);
 
 void FoundTarget (edict_t *self);
 qboolean infront (edict_t *self, edict_t *other);
@@ -948,6 +949,10 @@ void G_RunEntity (edict_t *ent);
 //
 void SaveClientData (void);
 void FetchClientEntData (edict_t *ent);
+void ExitLevel(void);
+void CheckDMRules(void);
+void CheckNeedPass(void);
+void ClientEndServerFrames(void);
 
 //
 // g_chase.c
@@ -1038,6 +1043,7 @@ qboolean CheckGroundSpawnPoint (vec3_t origin, vec3_t entMins, vec3_t entMaxs, f
 void DetermineBBox (char *classname, vec3_t mins, vec3_t maxs);
 void SpawnGrow_Spawn (vec3_t startpos, int size);
 void Widowlegs_Spawn (vec3_t startpos, vec3_t angles);
+extern void ED_CallSpawn(edict_t* ent);
 
 //
 // p_client.c
@@ -1404,6 +1410,8 @@ struct edict_s
 // GRIM 26/06/2001 10:21AM - new defs
 #include "z_public.h"
 // GRIM
+
+#include "g_target.h"
 
 //=============
 //ROGUE

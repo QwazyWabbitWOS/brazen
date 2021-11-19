@@ -1,9 +1,9 @@
 #include "g_local.h"
 
-void UpdateChaseCam(edict_t *ent)
+void UpdateChaseCam(edict_t* ent)
 {
 	vec3_t o, ownerv, goal;
-	edict_t *targ;
+	edict_t* targ;
 	vec3_t forward, right;
 	trace_t trace;
 	int i;
@@ -12,11 +12,11 @@ void UpdateChaseCam(edict_t *ent)
 
 	// is our chase target gone?
 	if (!ent->client->chase_target->inuse
-	// GRIM 12/10/2001 11:56AM 
+		// GRIM 12/10/2001 11:56AM 
 		|| ent->client->chase_target->client->resp.spectator
-		 || (ent->client->chase_target->movetype == MOVETYPE_NOCLIP)) {
-	// GRIM
-		edict_t *old = ent->client->chase_target;
+		|| (ent->client->chase_target->movetype == MOVETYPE_NOCLIP)) {
+		// GRIM
+		edict_t* old = ent->client->chase_target;
 		ChaseNext(ent);
 		if (ent->client->chase_target == old) {
 			ent->client->chase_target = NULL;
@@ -35,7 +35,7 @@ void UpdateChaseCam(edict_t *ent)
 	VectorCopy(targ->client->v_angle, angles);
 	if (angles[PITCH] > 56)
 		angles[PITCH] = 56;
-	AngleVectors (angles, forward, right, NULL);
+	AngleVectors(angles, forward, right, NULL);
 	VectorNormalize(forward);
 	VectorMA(ownerv, -30, forward, o);
 
@@ -73,11 +73,11 @@ void UpdateChaseCam(edict_t *ent)
 	/*if (targ->deadflag)
 		ent->client->ps.pmove.pm_type = PM_DEAD;
 	else*/
-		ent->client->ps.pmove.pm_type = PM_FREEZE;
+	ent->client->ps.pmove.pm_type = PM_FREEZE;
 	// GEIM
 
 	VectorCopy(goal, ent->s.origin);
-	for (i=0 ; i<3 ; i++)
+	for (i = 0; i < 3; i++)
 		ent->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(targ->client->v_angle[i]);// - ent->client->resp.cmd_angles[i]);
 
 	// GRIM 10/10/2001 10:30PM - NEW COOP
@@ -85,8 +85,8 @@ void UpdateChaseCam(edict_t *ent)
 		ent->client->ps.viewangles[ROLL] = 40;
 		ent->client->ps.viewangles[PITCH] = -15;
 		ent->client->ps.viewangles[YAW] = targ->client->killer_yaw;
-	} else */{
-		// GRIM
+	} else */ {
+	// GRIM
 		VectorCopy(targ->client->v_angle, ent->client->ps.viewangles);
 		VectorCopy(targ->client->v_angle, ent->client->v_angle);
 	}
@@ -96,10 +96,10 @@ void UpdateChaseCam(edict_t *ent)
 	gi.linkentity(ent);
 }
 
-void ChaseNext(edict_t *ent)
+void ChaseNext(edict_t* ent)
 {
 	int i;
-	edict_t *e;
+	edict_t* e;
 
 	if (!ent->client->chase_target)
 		return;
@@ -124,10 +124,10 @@ void ChaseNext(edict_t *ent)
 	ent->client->update_chase = true;
 }
 
-void ChasePrev(edict_t *ent)
+void ChasePrev(edict_t* ent)
 {
 	int i;
-	edict_t *e;
+	edict_t* e;
 
 	if (!ent->client->chase_target)
 		return;
@@ -152,19 +152,19 @@ void ChasePrev(edict_t *ent)
 	ent->client->update_chase = true;
 }
 
-void GetChaseTarget(edict_t *ent)
+void GetChaseTarget(edict_t* ent)
 {
 	int i;
-	edict_t *other;
+	edict_t* other;
 
 	for (i = 1; i <= maxclients->value; i++) {
 		other = g_edicts + i;
-		
+
 		// GRIM 10/10/2001 1:36PM - since you can have a 
 		if (other == ent) // chase target even if you're not spectator
 			continue;
 		// GRIM
-		
+
 		if (other->inuse && !other->client->resp.spectator) {
 			ent->client->chase_target = other;
 			ent->client->update_chase = true;

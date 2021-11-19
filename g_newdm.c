@@ -18,10 +18,10 @@ void InitGameRules(void)
 	// clear out the game rule structure before we start
 	memset(&DMGame, 0, sizeof(dm_game_rt));
 
-	if(gamerules && gamerules->value)
+	if (gamerules && gamerules->value)
 	{
 		gameNum = gamerules->value;
-		switch(gameNum)
+		switch (gameNum)
 		{
 			// GRIM 19/10/2001 8:16PM - nope
 			/*
@@ -48,15 +48,15 @@ void InitGameRules(void)
 				DMGame.CheckDMRules = DBall_CheckDMRules;
 				break;
 */
-			// reset gamerules if it's not a valid number
-			default:
-				gamerules->value = 0;
-				break;
+// reset gamerules if it's not a valid number
+		default:
+			gamerules->value = 0;
+			break;
 		}
 	}
 
 	// if we're set up to play, initialize the game as needed.
-	if(DMGame.GameInit)
+	if (DMGame.GameInit)
 		DMGame.GameInit();
 }
 
@@ -64,13 +64,12 @@ void InitGameRules(void)
 //=================
 #define IT_TYPE_MASK	(IT_WEAPON|IT_AMMO|IT_POWERUP|IT_ARMOR|IT_KEY)
 
-extern void ED_CallSpawn (edict_t *ent);
-extern qboolean Pickup_Health (edict_t *ent, edict_t *other);
-extern qboolean Pickup_Adrenaline (edict_t *ent, edict_t *other);
-extern qboolean Pickup_Armor (edict_t *ent, edict_t *other);
-extern qboolean Pickup_PowerArmor (edict_t *ent, edict_t *other);
+extern qboolean Pickup_Health(edict_t* ent, edict_t* other);
+extern qboolean Pickup_Adrenaline(edict_t* ent, edict_t* other);
+extern qboolean Pickup_Armor(edict_t* ent, edict_t* other);
+extern qboolean Pickup_PowerArmor(edict_t* ent, edict_t* other);
 
-char *FindSubstituteItem (edict_t *ent)
+char* FindSubstituteItem(edict_t* ent)
 {
 	// GRIM - NEW INVENTORY SYSTEM
 	/*
@@ -133,7 +132,7 @@ char *FindSubstituteItem (edict_t *ent)
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		itflags = it->flags;
-		
+
 		if (!itflags || (itflags & IT_NOT_GIVEABLE))
 			continue;
 
@@ -155,7 +154,7 @@ char *FindSubstituteItem (edict_t *ent)
 		if ( ((int)dmflags->value & DF_NO_NUKES) && !strcmp(ent->classname, "ammo_nuke") )
 			continue;
 
-		if ( ((int)dmflags->value & DF_NO_MINES) && 
+		if ( ((int)dmflags->value & DF_NO_MINES) &&
 				(!strcmp(ent->classname, "ammo_prox") || !strcmp(ent->classname, "ammo_tesla")))
 			continue;
 
@@ -174,7 +173,7 @@ char *FindSubstituteItem (edict_t *ent)
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		itflags = it->flags;
-		
+
 		if (!itflags || (itflags & IT_NOT_GIVEABLE))
 			continue;
 
@@ -185,7 +184,7 @@ char *FindSubstituteItem (edict_t *ent)
 		if ( ((int)dmflags->value & DF_NO_NUKES) && !strcmp(ent->classname, "ammo_nuke") )
 			continue;
 
-		if ( ((int)dmflags->value & DF_NO_MINES) && 
+		if ( ((int)dmflags->value & DF_NO_MINES) &&
 				(!strcmp(ent->classname, "ammo_prox") || !strcmp(ent->classname, "ammo_tesla")))
 			continue;
 
@@ -197,33 +196,33 @@ char *FindSubstituteItem (edict_t *ent)
 		}
 	}
 	*/
-// GRIM
+	// GRIM
 	return NULL;
 }
 
 //=================
 //=================
-edict_t *DoRandomRespawn (edict_t *ent)
+edict_t* DoRandomRespawn(edict_t* ent)
 {
-	edict_t *newEnt;
-	char	*classname;
-	
-	classname = FindSubstituteItem (ent);
+	edict_t* newEnt;
+	char* classname;
+
+	classname = FindSubstituteItem(ent);
 	if (classname == NULL)
 		return NULL;
 
-	gi.unlinkentity (ent);
+	gi.unlinkentity(ent);
 
 	newEnt = G_Spawn();
 	newEnt->classname = classname;
-	VectorCopy (ent->s.origin, newEnt->s.origin);
-	VectorCopy (ent->s.old_origin, newEnt->s.old_origin);
-	VectorCopy (ent->mins, newEnt->mins);
-	VectorCopy (ent->maxs, newEnt->maxs);
-	
-	VectorSet (newEnt->gravityVector, 0, 0, -1);
+	VectorCopy(ent->s.origin, newEnt->s.origin);
+	VectorCopy(ent->s.old_origin, newEnt->s.old_origin);
+	VectorCopy(ent->mins, newEnt->mins);
+	VectorCopy(ent->maxs, newEnt->maxs);
 
-	ED_CallSpawn (newEnt);
+	VectorSet(newEnt->gravityVector, 0, 0, -1);
+
+	ED_CallSpawn(newEnt);
 
 	newEnt->s.renderfx |= RF_IR_VISIBLE;
 
@@ -232,18 +231,18 @@ edict_t *DoRandomRespawn (edict_t *ent)
 
 //=================
 //=================
-void PrecacheForRandomRespawn (void)
+void PrecacheForRandomRespawn(void)
 {
-	gitem_t	*it;
+	gitem_t* it;
 	int		i;
 	int		itflags;
 
 	it = itemlist;
-	for (i=0 ; i<game.num_items ; i++, it++)
+	for (i = 0; i < game.num_items; i++, it++)
 	{
 		itflags = it->flags;
-		
-		if (!itflags ) // GRIM|| (itflags & IT_NOT_GIVEABLE))
+
+		if (!itflags) // GRIM|| (itflags & IT_NOT_GIVEABLE))
 			continue;
 
 		PrecacheItem(it);

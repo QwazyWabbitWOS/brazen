@@ -9,45 +9,45 @@ Punching, neck snapping etc
 =================
 */
 
-void Think_Hands(edict_t *ent)
+void Think_Hands(edict_t* ent)
 {
-        int newState = -1;
-        int newFrame = -1;
-        
-        switch(ent->client->weaponstate)
-        {
-        case W_READY:
-        case W_IDLE:
-                if (ent->client->newRightWeapon > -1)
-                        ChangeRightWeapon(ent);
-                else if (ent->client->newLeftWeapon > -1)
-                        ChangeLeftWeapon(ent);
-                break;
+	int newState = -1;
+	int newFrame = -1;
 
-        case W_FIRING:
-                break;
+	switch (ent->client->weaponstate)
+	{
+	case W_READY:
+	case W_IDLE:
+		if (ent->client->newRightWeapon > -1)
+			ChangeRightWeapon(ent);
+		else if (ent->client->newLeftWeapon > -1)
+			ChangeLeftWeapon(ent);
+		break;
 
-        case W_ALT_FIRING:
-                break;
+	case W_FIRING:
+		break;
 
-        case W_RIGHT_RELOADING:
-                break;
+	case W_ALT_FIRING:
+		break;
 
-        case W_RIGHT_RAISING:
-        default:
-                newState = W_READY;
-                break;
-        }
+	case W_RIGHT_RELOADING:
+		break;
 
-        switch(ent->client->ps.gunframe)
-        {
-        default:
-                break;
-        }
+	case W_RIGHT_RAISING:
+	default:
+		newState = W_READY;
+		break;
+	}
 
-        if (newFrame != -1)
-                ent->client->ps.gunframe = newFrame;
+	switch (ent->client->ps.gunframe)
+	{
+	default:
+		break;
+	}
 
-        if (newState != -1)
-                ent->client->weaponstate = newState;
+	if (newFrame != -1)
+		ent->client->ps.gunframe = newFrame;
+
+	if (newState != -1)
+		ent->client->weaponstate = newState;
 }

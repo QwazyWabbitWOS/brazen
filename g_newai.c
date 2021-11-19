@@ -10,7 +10,7 @@
 		gi.WriteByte (TE_DEBUGTRAIL);
 		gi.WritePosition (pt1);
 		gi.WritePosition (pt2);
-		gi.multicast (pt1, MULTICAST_PVS);	
+		gi.multicast (pt1, MULTICAST_PVS);
 
 		self->nextthink = level.time + 10;
 */
@@ -22,20 +22,20 @@
 #define STATE_UP			2
 #define STATE_DOWN			3
 
-qboolean face_wall (edict_t *self);
-void HuntTarget (edict_t *self);
+qboolean face_wall(edict_t* self);
+void HuntTarget(edict_t* self);
 
 // PMM
-qboolean parasite_drain_attack_ok (vec3_t start, vec3_t end);
+qboolean parasite_drain_attack_ok(vec3_t start, vec3_t end);
 
 
 // blocked_checkshot
 //	shotchance: 0-1, chance they'll take the shot if it's clear.
-qboolean blocked_checkshot (edict_t *self, float shotChance)
+qboolean blocked_checkshot(edict_t* self, float shotChance)
 {
 	qboolean	playerVisible;
 
-	if(!self->enemy)
+	if (!self->enemy)
 		return false;
 
 	// blocked checkshot is only against players. this will
@@ -43,8 +43,8 @@ qboolean blocked_checkshot (edict_t *self, float shotChance)
 	// not be firing at.
 	// GRIM 8/01/2002 1:17PM - check for coopview decoys too
 	//if(!(self->enemy->client))
-	if((!self->enemy->client) && (!self->enemy->decoy))
-	// GRIM
+	if ((!self->enemy->client) && (!self->enemy->decoy))
+		// GRIM
 		return false;
 
 	if (random() < shotChance)
@@ -55,11 +55,11 @@ qboolean blocked_checkshot (edict_t *self, float shotChance)
 	{
 		vec3_t	f, r, offset, start, end;
 		trace_t	tr;
-		AngleVectors (self->s.angles, f, r, NULL);
-		VectorSet (offset, 24, 0, 6);
-		G_ProjectSource (self->s.origin, offset, f, r, start);
+		AngleVectors(self->s.angles, f, r, NULL);
+		VectorSet(offset, 24, 0, 6);
+		G_ProjectSource(self->s.origin, offset, f, r, start);
 
-		VectorCopy (self->enemy->s.origin, end);
+		VectorCopy(self->enemy->s.origin, end);
 		if (!parasite_drain_attack_ok(start, end))
 		{
 			end[2] = self->enemy->s.origin[2] + self->enemy->maxs[2] - 8;
@@ -70,37 +70,37 @@ qboolean blocked_checkshot (edict_t *self, float shotChance)
 					return false;
 			}
 		}
-		VectorCopy (self->enemy->s.origin, end);
+		VectorCopy(self->enemy->s.origin, end);
 
-		tr = gi.trace (start, NULL, NULL, end, self, MASK_SHOT);
+		tr = gi.trace(start, NULL, NULL, end, self, MASK_SHOT);
 		if (tr.ent != self->enemy)
 		{
 			self->monsterinfo.aiflags |= AI_BLOCKED;
-			
-			if(self->monsterinfo.attack)
+
+			if (self->monsterinfo.attack)
 				self->monsterinfo.attack(self);
-			
+
 			self->monsterinfo.aiflags &= ~AI_BLOCKED;
 			return true;
 		}
 	}
 
-	playerVisible = visible (self, self->enemy);
+	playerVisible = visible(self, self->enemy);
 	// always shoot at teslas
-	if(playerVisible)
+	if (playerVisible)
 	{
 		if (!strcmp(self->enemy->classname, "tesla"))
 		{
-//			if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("blocked: taking a shot\n");
+			//			if(g_showlogic && g_showlogic->value)
+			//				gi.dprintf("blocked: taking a shot\n");
 
-			// turn on AI_BLOCKED to let the monster know the attack is being called
-			// by the blocked functions...
+						// turn on AI_BLOCKED to let the monster know the attack is being called
+						// by the blocked functions...
 			self->monsterinfo.aiflags |= AI_BLOCKED;
-			
-			if(self->monsterinfo.attack)
+
+			if (self->monsterinfo.attack)
 				self->monsterinfo.attack(self);
-			
+
 			self->monsterinfo.aiflags &= ~AI_BLOCKED;
 			return true;
 		}
@@ -111,50 +111,50 @@ qboolean blocked_checkshot (edict_t *self, float shotChance)
 
 // blocked_checkplat
 //	dist: how far they are trying to walk.
-qboolean blocked_checkplat (edict_t *self, float dist)
+qboolean blocked_checkplat(edict_t* self, float dist)
 {
 	int			playerPosition;
 	trace_t		trace;
 	vec3_t		pt1, pt2;
 	vec3_t		forward;
-	edict_t		*plat;
+	edict_t* plat;
 
-	if(!self->enemy)
+	if (!self->enemy)
 		return false;
 
 	// check player's relative altitude
-	if(self->enemy->absmin[2] >= self->absmax[2])
+	if (self->enemy->absmin[2] >= self->absmax[2])
 		playerPosition = 1;
-	else if(self->enemy->absmax[2] <= self->absmin[2])
+	else if (self->enemy->absmax[2] <= self->absmin[2])
 		playerPosition = -1;
 	else
 		playerPosition = 0;
 
 	// if we're close to the same position, don't bother trying plats.
-	if(playerPosition == 0)
+	if (playerPosition == 0)
 		return false;
 
 	plat = NULL;
 
 	// see if we're already standing on a plat.
-	if(self->groundentity && self->groundentity != world)
+	if (self->groundentity && self->groundentity != world)
 	{
-		if(!strncmp(self->groundentity->classname, "func_plat", 8))
+		if (!strncmp(self->groundentity->classname, "func_plat", 8))
 			plat = self->groundentity;
 	}
 
 	// if we're not, check to see if we'll step onto one with this move
-	if(!plat)
+	if (!plat)
 	{
-		AngleVectors (self->s.angles, forward, NULL, NULL);
+		AngleVectors(self->s.angles, forward, NULL, NULL);
 		VectorMA(self->s.origin, dist, forward, pt1);
-		VectorCopy (pt1, pt2);
+		VectorCopy(pt1, pt2);
 		pt2[2] -= 384;
 
 		trace = gi.trace(pt1, vec3_origin, vec3_origin, pt2, self, MASK_MONSTERSOLID);
-		if(trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
+		if (trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
 		{
-			if(!strncmp(trace.ent->classname, "func_plat", 8))
+			if (!strncmp(trace.ent->classname, "func_plat", 8))
 			{
 				plat = trace.ent;
 			}
@@ -162,32 +162,32 @@ qboolean blocked_checkplat (edict_t *self, float dist)
 	}
 
 	// if we've found a plat, trigger it.
-	if(plat && plat->use)
+	if (plat && plat->use)
 	{
 		if (playerPosition == 1)
 		{
-			if((self->groundentity == plat && plat->moveinfo.state == STATE_BOTTOM) ||
+			if ((self->groundentity == plat && plat->moveinfo.state == STATE_BOTTOM) ||
 				(self->groundentity != plat && plat->moveinfo.state == STATE_TOP))
 			{
-//				if(g_showlogic && g_showlogic->value)
-//					gi.dprintf("player above, and plat will raise. using!\n");
-				plat->use (plat, self, self);
-				return true;			
-			}
-		}
-		else if(playerPosition == -1)
-		{
-			if((self->groundentity == plat && plat->moveinfo.state == STATE_TOP) ||
-				(self->groundentity != plat && plat->moveinfo.state == STATE_BOTTOM))
-			{
-//				if(g_showlogic && g_showlogic->value)
-//					gi.dprintf("player below, and plat will lower. using!\n");
-				plat->use (plat, self, self);
+				//				if(g_showlogic && g_showlogic->value)
+				//					gi.dprintf("player above, and plat will raise. using!\n");
+				plat->use(plat, self, self);
 				return true;
 			}
 		}
-//		if(g_showlogic && g_showlogic->value)
-//			gi.dprintf("hit a plat, not using. ppos: %d   plat: %d\n", playerPosition, plat->moveinfo.state);
+		else if (playerPosition == -1)
+		{
+			if ((self->groundentity == plat && plat->moveinfo.state == STATE_TOP) ||
+				(self->groundentity != plat && plat->moveinfo.state == STATE_BOTTOM))
+			{
+				//				if(g_showlogic && g_showlogic->value)
+				//					gi.dprintf("player below, and plat will lower. using!\n");
+				plat->use(plat, self, self);
+				return true;
+			}
+		}
+		//		if(g_showlogic && g_showlogic->value)
+		//			gi.dprintf("hit a plat, not using. ppos: %d   plat: %d\n", playerPosition, plat->moveinfo.state);
 	}
 
 	return false;
@@ -196,133 +196,133 @@ qboolean blocked_checkplat (edict_t *self, float dist)
 // blocked_checkjump
 //	dist: how far they are trying to walk.
 //  maxDown/maxUp: how far they'll ok a jump for. set to 0 to disable that direction.
-qboolean blocked_checkjump (edict_t *self, float dist, float maxDown, float maxUp)
+qboolean blocked_checkjump(edict_t* self, float dist, float maxDown, float maxUp)
 {
 	int			playerPosition;
 	trace_t		trace;
 	vec3_t		pt1, pt2;
 	vec3_t		forward, up;
 
-	if(!self->enemy)
+	if (!self->enemy)
 		return false;
 
-	AngleVectors (self->s.angles, forward, NULL, up);
+	AngleVectors(self->s.angles, forward, NULL, up);
 
-	if(self->enemy->absmin[2] > (self->absmin[2] + 16))
+	if (self->enemy->absmin[2] > (self->absmin[2] + 16))
 		playerPosition = 1;
-	else if(self->enemy->absmin[2] < (self->absmin[2] - 16))
+	else if (self->enemy->absmin[2] < (self->absmin[2] - 16))
 		playerPosition = -1;
 	else
 		playerPosition = 0;
 
-	if(playerPosition == -1 && maxDown)
+	if (playerPosition == -1 && maxDown)
 	{
 		// check to make sure we can even get to the spot we're going to "fall" from
 		VectorMA(self->s.origin, 48, forward, pt1);
 		trace = gi.trace(self->s.origin, self->mins, self->maxs, pt1, self, MASK_MONSTERSOLID);
-		if(trace.fraction < 1)
+		if (trace.fraction < 1)
 		{
-//			gi.dprintf("can't get thar from hear...\n");
+			//			gi.dprintf("can't get thar from hear...\n");
 			return false;
 		}
 
-		VectorCopy (pt1, pt2);
+		VectorCopy(pt1, pt2);
 		pt2[2] = self->mins[2] - maxDown - 1;
 
 		trace = gi.trace(pt1, vec3_origin, vec3_origin, pt2, self, MASK_MONSTERSOLID | MASK_WATER);
-		if(trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
+		if (trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
 		{
-			if((self->absmin[2] - trace.endpos[2]) >= 24 && trace.contents & MASK_SOLID)
+			if ((self->absmin[2] - trace.endpos[2]) >= 24 && trace.contents & MASK_SOLID)
 			{
-				if( (self->enemy->absmin[2] - trace.endpos[2]) > 32)
+				if ((self->enemy->absmin[2] - trace.endpos[2]) > 32)
 				{
-//					if(g_showlogic && g_showlogic->value)
-//						gi.dprintf("That'll take me too far down...%0.1f\n", (self->enemy->absmin[2] - trace.endpos[2]));
-					return false;
-				}	
-
-				if(trace.plane.normal[2] < 0.9)
-				{
-//					gi.dprintf("Floor angle too much! %s\n", vtos(trace.plane.normal));
+					//					if(g_showlogic && g_showlogic->value)
+					//						gi.dprintf("That'll take me too far down...%0.1f\n", (self->enemy->absmin[2] - trace.endpos[2]));
 					return false;
 				}
-//				if(g_showlogic && g_showlogic->value)
-//					gi.dprintf("Geronimo! %0.1f\n", (self->absmin[2] - trace.endpos[2]));
+
+				if (trace.plane.normal[2] < 0.9)
+				{
+					//					gi.dprintf("Floor angle too much! %s\n", vtos(trace.plane.normal));
+					return false;
+				}
+				//				if(g_showlogic && g_showlogic->value)
+				//					gi.dprintf("Geronimo! %0.1f\n", (self->absmin[2] - trace.endpos[2]));
 				return true;
 			}
-//			else if(g_showlogic && g_showlogic->value)
-//			{
-//				if(!(trace.contents & MASK_SOLID))
-//					gi.dprintf("Ooooh... Bad stuff down there...\n");
-//				else
-//					gi.dprintf("Too far to fall\n");
-//			}
+			//			else if(g_showlogic && g_showlogic->value)
+			//			{
+			//				if(!(trace.contents & MASK_SOLID))
+			//					gi.dprintf("Ooooh... Bad stuff down there...\n");
+			//				else
+			//					gi.dprintf("Too far to fall\n");
+			//			}
 		}
-//		else if(g_showlogic && g_showlogic->value)
-//			gi.dprintf("Ooooh... Too far to fall...\n");
+		//		else if(g_showlogic && g_showlogic->value)
+		//			gi.dprintf("Ooooh... Too far to fall...\n");
 	}
-	else if(playerPosition == 1 && maxUp)
+	else if (playerPosition == 1 && maxUp)
 	{
 		VectorMA(self->s.origin, 48, forward, pt1);
 		VectorCopy(pt1, pt2);
 		pt1[2] = self->absmax[2] + maxUp;
 
 		trace = gi.trace(pt1, vec3_origin, vec3_origin, pt2, self, MASK_MONSTERSOLID | MASK_WATER);
-		if(trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
+		if (trace.fraction < 1 && !trace.allsolid && !trace.startsolid)
 		{
-			if((trace.endpos[2] - self->absmin[2]) <= maxUp && trace.contents & MASK_SOLID)
+			if ((trace.endpos[2] - self->absmin[2]) <= maxUp && trace.contents & MASK_SOLID)
 			{
-//				if(g_showlogic && g_showlogic->value)
-//					gi.dprintf("Jumping Up! %0.1f\n", (trace.endpos[2] - self->absmin[2]));
-				
+				//				if(g_showlogic && g_showlogic->value)
+				//					gi.dprintf("Jumping Up! %0.1f\n", (trace.endpos[2] - self->absmin[2]));
+
 				face_wall(self);
 				return true;
 			}
-//			else if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("Too high to jump %0.1f\n", (trace.endpos[2] - self->absmin[2]));
+			//			else if(g_showlogic && g_showlogic->value)
+			//				gi.dprintf("Too high to jump %0.1f\n", (trace.endpos[2] - self->absmin[2]));
 		}
-//		else if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("Not something I could jump onto\n");
+		//		else if(g_showlogic && g_showlogic->value)
+		//				gi.dprintf("Not something I could jump onto\n");
 	}
-//	else if(g_showlogic && g_showlogic->value)
-//		gi.dprintf("Player at similar level. No need to jump up?\n");
+	//	else if(g_showlogic && g_showlogic->value)
+	//		gi.dprintf("Player at similar level. No need to jump up?\n");
 
 	return false;
 }
 
 // checks to see if another coop player is nearby, and will switch.
-qboolean blocked_checknewenemy (edict_t *self)
+qboolean blocked_checknewenemy(edict_t* self)
 {
-/*
-	int		player;
-	edict_t *ent;
+	/*
+		int		player;
+		edict_t *ent;
 
-	if (!(coop->value))
-		return false;
+		if (!(coop->value))
+			return false;
 
-	for (player = 1; player <= game.maxclients; player++)
-	{
-		ent = &g_edicts[player];
-		if (!ent->inuse)
-			continue;
-		if (!ent->client)
-			continue;
-		if (ent == self->enemy)
-			continue;
-
-		if (visible (self, ent))
+		for (player = 1; player <= game.maxclients; player++)
 		{
-			if (g_showlogic && g_showlogic->value)
-				gi.dprintf ("B_CNE: %s acquired new enemy %s\n", self->classname, ent->client->pers.netname);
+			ent = &g_edicts[player];
+			if (!ent->inuse)
+				continue;
+			if (!ent->client)
+				continue;
+			if (ent == self->enemy)
+				continue;
 
-			self->enemy = ent;
-			FoundTarget (self);
-			return true;
+			if (visible (self, ent))
+			{
+				if (g_showlogic && g_showlogic->value)
+					gi.dprintf ("B_CNE: %s acquired new enemy %s\n", self->classname, ent->client->pers.netname);
+
+				self->enemy = ent;
+				FoundTarget (self);
+				return true;
+			}
 		}
-	}
 
-	return false;
-*/
+		return false;
+	*/
 	return false;
 }
 
@@ -334,7 +334,7 @@ qboolean blocked_checknewenemy (edict_t *self)
 #define	MAX_HINT_CHAINS		100
 
 int	hint_paths_present;
-edict_t *hint_path_start[MAX_HINT_CHAINS];
+edict_t* hint_path_start[MAX_HINT_CHAINS];
 int	num_hint_paths;
 
 //
@@ -344,21 +344,21 @@ int	num_hint_paths;
 // =============
 // hintpath_findstart - given any hintpath node, finds the start node
 // =============
-edict_t	*hintpath_findstart(edict_t *ent)
+edict_t* hintpath_findstart(edict_t* ent)
 {
-	edict_t		*e;
-	edict_t		*last;
+	edict_t* e;
+	edict_t* last;
 	int			field;
 
-	if(ent->target)		// starting point
+	if (ent->target)		// starting point
 	{
 		last = world;
 		field = FOFS(targetname);
 		e = G_Find(NULL, field, ent->target);
-		while(e)
+		while (e)
 		{
 			last = e;
-			if(!e->target)
+			if (!e->target)
 				break;
 			e = G_Find(NULL, field, e->target);
 		}
@@ -368,22 +368,22 @@ edict_t	*hintpath_findstart(edict_t *ent)
 		last = world;
 		field = FOFS(target);
 		e = G_Find(NULL, field, ent->targetname);
-		while(e)
+		while (e)
 		{
 			last = e;
-			if(!e->targetname)
+			if (!e->targetname)
 				break;
 			e = G_Find(NULL, field, e->targetname);
 		}
 	}
 
-	if(!(last->spawnflags & HINT_ENDPOINT))
+	if (!(last->spawnflags & HINT_ENDPOINT))
 	{
-//		gi.dprintf ("end of chain is not HINT_ENDPOINT\n");
+		//		gi.dprintf ("end of chain is not HINT_ENDPOINT\n");
 		return NULL;
 	}
 
-	if(last == world)
+	if (last == world)
 		last = NULL;
 	return last;
 }
@@ -391,21 +391,21 @@ edict_t	*hintpath_findstart(edict_t *ent)
 // =============
 // hintpath_other_end - given one endpoint of a hintpath, returns the other end.
 // =============
-edict_t	*hintpath_other_end(edict_t *ent)
+edict_t* hintpath_other_end(edict_t* ent)
 {
-	edict_t		*e;
-	edict_t		*last;
+	edict_t* e;
+	edict_t* last;
 	int			field;
 
-	if(ent->target)		// starting point
+	if (ent->target)		// starting point
 	{
 		last = world;
 		field = FOFS(targetname);
 		e = G_Find(NULL, field, ent->target);
-		while(e)
+		while (e)
 		{
 			last = e;
-			if(!e->target)
+			if (!e->target)
 				break;
 			e = G_Find(NULL, field, e->target);
 		}
@@ -415,22 +415,22 @@ edict_t	*hintpath_other_end(edict_t *ent)
 		last = world;
 		field = FOFS(target);
 		e = G_Find(NULL, field, ent->targetname);
-		while(e)
+		while (e)
 		{
 			last = e;
-			if(!e->targetname)
+			if (!e->targetname)
 				break;
 			e = G_Find(NULL, field, e->targetname);
 		}
 	}
 
-	if(!(last->spawnflags & HINT_ENDPOINT))
+	if (!(last->spawnflags & HINT_ENDPOINT))
 	{
-//		gi.dprintf ("end of chain is not HINT_ENDPOINT\n");
+		//		gi.dprintf ("end of chain is not HINT_ENDPOINT\n");
 		return NULL;
 	}
 
-	if(last == world)
+	if (last == world)
 		last = NULL;
 	return last;
 }
@@ -439,7 +439,7 @@ edict_t	*hintpath_other_end(edict_t *ent)
 // hintpath_go - starts a monster (self) moving towards the hintpath (point)
 //		disables all contrary AI flags.
 // =============
-void hintpath_go (edict_t *self, edict_t *point)
+void hintpath_go(edict_t* self, edict_t* point)
 {
 	vec3_t	dir;
 	vec3_t	angles;
@@ -454,17 +454,17 @@ void hintpath_go (edict_t *self, edict_t *point)
 	self->monsterinfo.aiflags &= ~(AI_SOUND_TARGET | AI_PURSUIT_LAST_SEEN | AI_PURSUE_NEXT | AI_PURSUE_TEMP);
 	// run for it
 	self->monsterinfo.search_time = level.time;
-	self->monsterinfo.run (self);
+	self->monsterinfo.run(self);
 }
 
 // =============
 // hintpath_stop - bails a monster out of following hint paths
 // =============
-void hintpath_stop (edict_t *self)
+void hintpath_stop(edict_t* self)
 {
 	self->goalentity = NULL;
 	self->movetarget = NULL;
-//	self->monsterinfo.last_hint = NULL;
+	//	self->monsterinfo.last_hint = NULL;
 	self->monsterinfo.last_hint_time = level.time;
 	self->monsterinfo.goal_hint = NULL;
 	self->monsterinfo.aiflags &= ~AI_HINT_PATH;
@@ -473,21 +473,21 @@ void hintpath_stop (edict_t *self)
 		// if we can see our target, go nuts
 		if (visible(self, self->enemy))
 		{
-			FoundTarget (self);
+			FoundTarget(self);
 			return;
 		}
 		// otherwise, keep chasing
-		HuntTarget (self);
+		HuntTarget(self);
 		return;
 	}
 	// if our enemy is no longer valid, forget about our enemy and go into stand
 	self->enemy = NULL;
-		// we need the pausetime otherwise the stand code
-		// will just revert to walking with no target and
-		// the monsters will wonder around aimlessly trying
-		// to hunt the world entity
+	// we need the pausetime otherwise the stand code
+	// will just revert to walking with no target and
+	// the monsters will wonder around aimlessly trying
+	// to hunt the world entity
 	self->monsterinfo.pausetime = level.time + 100000000;
-	self->monsterinfo.stand (self);
+	self->monsterinfo.stand(self);
 }
 
 // =============
@@ -496,30 +496,30 @@ void hintpath_stop (edict_t *self)
 //		and the monster's enemy. if only one person is visible from the endpoints,
 //		it will not go for it.
 // =============
-qboolean monsterlost_checkhint2 (edict_t *self);
+qboolean monsterlost_checkhint2(edict_t* self);
 
-qboolean monsterlost_checkhint (edict_t *self)
+qboolean monsterlost_checkhint(edict_t* self)
 {
-	edict_t		*e, *monster_pathchain, *target_pathchain, *checkpoint;
-	edict_t		*closest;
+	edict_t* e, * monster_pathchain, * target_pathchain, * checkpoint = NULL;
+	edict_t* closest;
 	float		closest_range = 1000000;
-	edict_t		*start, *destination;
+	edict_t* start, * destination;
 	int			field;
-	int			count1=0, count2=0, count3=0, count4=0, count5=0;
+	int			count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0;
 	float		r;
 	int			i;
 	qboolean	hint_path_represented[MAX_HINT_CHAINS];
 
 	// if there are no hint paths on this map, exit immediately.
-	if(!hint_paths_present)
+	if (!hint_paths_present)
 		return false;
 
-	if(!self->enemy)
+	if (!self->enemy)
 		return false;
 
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 		return false;
-	
+
 	if (!strcmp(self->classname, "monster_turret"))
 		return false;
 
@@ -529,15 +529,15 @@ qboolean monsterlost_checkhint (edict_t *self)
 
 	// find all the hint_paths.
 	// FIXME - can we not do this every time?
-	for (i=0; i < num_hint_paths; i++)
+	for (i = 0; i < num_hint_paths; i++)
 	{
 		e = hint_path_start[i];
-		while(e)
+		while (e)
 		{
 			count1++;
 			if (e->monster_hint_chain)
 			{
-//				gi.dprintf ("uh, oh, I didn't clean up after myself\n");
+				//				gi.dprintf ("uh, oh, I didn't clean up after myself\n");
 				e->monster_hint_chain = NULL;
 			}
 			if (monster_pathchain)
@@ -553,28 +553,28 @@ qboolean monsterlost_checkhint (edict_t *self)
 			e = e->hint_chain;
 		}
 	}
-	
+
 	// filter them by distance and visibility to the monster
 	e = monster_pathchain;
 	checkpoint = NULL;
 	while (e)
 	{
-		r = realrange (self, e);
+		r = realrange(self, e);
 
-//		if (r > 512)
-//			count3++;
+		//		if (r > 512)
+		//			count3++;
 
 		if (r > 512)
 		{
 			count2++;
-//			if (g_showlogic && g_showlogic->value)
-//			{
-//				gi.dprintf ("MONSTER (%s) DISTANCE:  ", self->classname);
-//				if (e->targetname)
-//					gi.dprintf ("targetname %s\n", e->targetname);
-//				else
-//					gi.dprintf ("start -> %s\n", e->target);
-//			}
+			//			if (g_showlogic && g_showlogic->value)
+			//			{
+			//				gi.dprintf ("MONSTER (%s) DISTANCE:  ", self->classname);
+			//				if (e->targetname)
+			//					gi.dprintf ("targetname %s\n", e->targetname);
+			//				else
+			//					gi.dprintf ("start -> %s\n", e->target);
+			//			}
 			if (checkpoint)
 			{
 				checkpoint->monster_hint_chain = e->monster_hint_chain;
@@ -599,14 +599,14 @@ qboolean monsterlost_checkhint (edict_t *self)
 		if (!visible(self, e))
 		{
 			count4++;
-//			if (g_showlogic && g_showlogic->value)
-//			{
-//				gi.dprintf ("MONSTER (%s) VISIBILITY:  ", self->classname);
-//				if (e->targetname)
-//					gi.dprintf ("targetname %s\n", e->targetname);
-//				else
-//					gi.dprintf ("start -> %s\n", e->target);
-//			}
+			//			if (g_showlogic && g_showlogic->value)
+			//			{
+			//				gi.dprintf ("MONSTER (%s) VISIBILITY:  ", self->classname);
+			//				if (e->targetname)
+			//					gi.dprintf ("targetname %s\n", e->targetname);
+			//				else
+			//					gi.dprintf ("start -> %s\n", e->target);
+			//			}
 			if (checkpoint)
 			{
 				checkpoint->monster_hint_chain = e->monster_hint_chain;
@@ -649,12 +649,12 @@ qboolean monsterlost_checkhint (edict_t *self)
 	// first, we figure out which hint chains we have represented in monster_pathchain
 	if (count5 == 0)
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("No eligible hint paths found.\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("No eligible hint paths found.\n");
 		return false;
 	}
 
-	for (i=0; i < num_hint_paths; i++)
+	for (i = 0; i < num_hint_paths; i++)
 	{
 		hint_path_represented[i] = false;
 	}
@@ -664,8 +664,8 @@ qboolean monsterlost_checkhint (edict_t *self)
 	{
 		if ((e->hint_chain_id < 0) || (e->hint_chain_id > num_hint_paths))
 		{
-//			if (g_showlogic && g_showlogic->value)
-//				gi.dprintf ("bad hint_chain_id! %d\n", e->hint_chain_id);
+			//			if (g_showlogic && g_showlogic->value)
+			//				gi.dprintf ("bad hint_chain_id! %d\n", e->hint_chain_id);
 			return false;
 		}
 		hint_path_represented[e->hint_chain_id] = true;
@@ -682,7 +682,7 @@ qboolean monsterlost_checkhint (edict_t *self)
 	// validity (within range, visibility)
 	target_pathchain = NULL;
 	checkpoint = NULL;
-	for (i=0; i < num_hint_paths; i++)
+	for (i = 0; i < num_hint_paths; i++)
 	{
 		// if this hint chain is represented in the monster_hint_chain, add all of it's nodes to the target_pathchain
 		// for validity checking
@@ -711,22 +711,22 @@ qboolean monsterlost_checkhint (edict_t *self)
 	checkpoint = NULL;
 	while (e)
 	{
-		r = realrange (self->enemy, e);
+		r = realrange(self->enemy, e);
 
-//		if (r > 512)
-//			count3++;
+		//		if (r > 512)
+		//			count3++;
 
 		if (r > 512)
 		{
 			count2++;
-//			if (g_showlogic && g_showlogic->value)
-//			{
-//				gi.dprintf ("TARGET RANGE:  ");
-//				if (e->targetname)
-//					gi.dprintf ("targetname %s\n", e->targetname);
-//				else
-//					gi.dprintf ("start -> %s\n", e->target);
-//			}
+			//			if (g_showlogic && g_showlogic->value)
+			//			{
+			//				gi.dprintf ("TARGET RANGE:  ");
+			//				if (e->targetname)
+			//					gi.dprintf ("targetname %s\n", e->targetname);
+			//				else
+			//					gi.dprintf ("start -> %s\n", e->target);
+			//			}
 			if (checkpoint)
 			{
 				checkpoint->target_hint_chain = e->target_hint_chain;
@@ -749,14 +749,14 @@ qboolean monsterlost_checkhint (edict_t *self)
 		if (!visible(self->enemy, e))
 		{
 			count4++;
-//			if (g_showlogic && g_showlogic->value)
-//			{
-//				gi.dprintf ("TARGET VISIBILITY:  ");
-//				if (e->targetname)
-//					gi.dprintf ("targetname %s\n", e->targetname);
-//				else
-//					gi.dprintf ("start -> %s\n", e->target);
-//			}
+			//			if (g_showlogic && g_showlogic->value)
+			//			{
+			//				gi.dprintf ("TARGET VISIBILITY:  ");
+			//				if (e->targetname)
+			//					gi.dprintf ("targetname %s\n", e->targetname);
+			//				else
+			//					gi.dprintf ("start -> %s\n", e->target);
+			//			}
 			if (checkpoint)
 			{
 				checkpoint->target_hint_chain = e->target_hint_chain;
@@ -789,7 +789,7 @@ qboolean monsterlost_checkhint (edict_t *self)
 		checkpoint = e;
 		e = e->target_hint_chain;
 	}
-	
+
 	// at this point we should have:
 	// monster_pathchain - a list of "monster valid" hint_path nodes linked together by monster_hint_chain
 	// target_pathcain - a list of "target valid" hint_path nodes linked together by target_hint_chain.  these
@@ -806,13 +806,13 @@ qboolean monsterlost_checkhint (edict_t *self)
 
 	if (count5 == 0)
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("No valid target nodes found\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("No valid target nodes found\n");
 		return false;
 	}
 
 	// reuse the hint_chain_represented array, this time to see which chains are represented by the target
-	for (i=0; i < num_hint_paths; i++)
+	for (i = 0; i < num_hint_paths; i++)
 	{
 		hint_path_represented[i] = false;
 	}
@@ -823,13 +823,13 @@ qboolean monsterlost_checkhint (edict_t *self)
 	{
 		if ((e->hint_chain_id < 0) || (e->hint_chain_id > num_hint_paths))
 		{
-//			gi.dprintf ("bad hint_chain_id! %d\n", e->hint_chain_id);
+			//			gi.dprintf ("bad hint_chain_id! %d\n", e->hint_chain_id);
 			return false;
 		}
 		hint_path_represented[e->hint_chain_id] = true;
 		e = e->target_hint_chain;
 	}
-	
+
 	// traverse the monster_pathchain - if the hint_node isn't represented in the "target valid" chain list, 
 	// remove it
 	// if it is on the list, check it for range from the monster.  If the range is the closest, keep it
@@ -853,8 +853,8 @@ qboolean monsterlost_checkhint (edict_t *self)
 
 	if (!closest)
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("Failed to find closest node for monster.  Shouldn't happen.\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("Failed to find closest node for monster.  Shouldn't happen.\n");
 		return false;
 	}
 
@@ -879,30 +879,30 @@ qboolean monsterlost_checkhint (edict_t *self)
 
 	if (!closest)
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("Failed to find closest node for target.  Shouldn't happen.\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("Failed to find closest node for target.  Shouldn't happen.\n");
 		return false;
 	}
-	
+
 	destination = closest;
 
 	self->monsterinfo.goal_hint = destination;
-//	self->monsterinfo.last_hint = NULL;
+	//	self->monsterinfo.last_hint = NULL;
 	hintpath_go(self, start);
 
-//	if(g_showlogic && g_showlogic->value)
-//	{
-//		gi.dprintf ("found path.  proceed to ");
-//		if (start->targetname)
-//			gi.dprintf ("%s to get to ", start->targetname);
-//		else
-//			gi.dprintf ("start (->%s) to get to ", start->target);
-//		if (destination->targetname)
-//			gi.dprintf ("%s.", destination->targetname);
-//		else
-//			gi.dprintf ("start (->%s)", destination->target);
-//	}
-//		gi.dprintf("found path. proceed to %s to get to %s\n", vtos(start->s.origin), vtos(destination->s.origin));
+	//	if(g_showlogic && g_showlogic->value)
+	//	{
+	//		gi.dprintf ("found path.  proceed to ");
+	//		if (start->targetname)
+	//			gi.dprintf ("%s to get to ", start->targetname);
+	//		else
+	//			gi.dprintf ("start (->%s) to get to ", start->target);
+	//		if (destination->targetname)
+	//			gi.dprintf ("%s.", destination->targetname);
+	//		else
+	//			gi.dprintf ("start (->%s)", destination->target);
+	//	}
+	//		gi.dprintf("found path. proceed to %s to get to %s\n", vtos(start->s.origin), vtos(destination->s.origin));
 
 	return true;
 }
@@ -922,7 +922,7 @@ qboolean monsterlost_checkhint2 (edict_t *self)
 
 	goPoint = NULL;
 	field = FOFS(classname);
-	
+
 	// check all the hint_paths.
 	e = G_Find(NULL, field, "hint_path");
 	while(e)
@@ -974,7 +974,7 @@ qboolean monsterlost_checkhint2 (edict_t *self)
 					// set me to go to goPoint
 					if(g_showlogic && g_showlogic->value)
 						gi.dprintf("found path. proceed to %s\n", vtos(goPoint->s.origin));
-					
+
 					// since this is a new hint path trip, set last_hint to NULL
 					self->monsterinfo.last_hint = NULL;
 					hintpath_go(self, goPoint);
@@ -998,23 +998,23 @@ qboolean monsterlost_checkhint2 (edict_t *self)
 // =============
 // hint_path_touch - someone's touched the hint_path
 // =============
-void hint_path_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+void hint_path_touch(edict_t* self, edict_t* other, cplane_t* plane, csurface_t* surf)
 {
-	edict_t		*e, *goal, *next;
-//	int			chain;			 // direction - (-1) = upstream, (1) = downstream, (0) = done
+	edict_t* e, * goal, * next = NULL;
+	//	int			chain;			 // direction - (-1) = upstream, (1) = downstream, (0) = done
 	qboolean	goalFound = false;
 
 	// make sure we're the target of it's obsession
-	if(other->movetarget == self)
+	if (other->movetarget == self)
 	{
 		goal = other->monsterinfo.goal_hint;
-		
+
 		// if the monster is where he wants to be
 		if (goal == self)
 		{
-//			if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("Got to goal, detatching\n");
-			hintpath_stop (other);
+			//			if(g_showlogic && g_showlogic->value)
+			//				gi.dprintf("Got to goal, detatching\n");
+			hintpath_stop(other);
 			return;
 		}
 		else
@@ -1043,10 +1043,10 @@ void hint_path_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t
 		}
 
 		// if we couldn't find it, have the monster go back to normal hunting.
-		if(!next)
+		if (!next)
 		{
-//			if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("couldn't figure out next node, dropping hint path\n");
+			//			if(g_showlogic && g_showlogic->value)
+			//				gi.dprintf("couldn't figure out next node, dropping hint path\n");
 			hintpath_stop(other);
 			return;
 		}
@@ -1066,10 +1066,10 @@ void hint_path_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t
 
 		// have the monster freeze if the hint path we just touched has a wait time
 		// on it, for example, when riding a plat.
-		if(self->wait)
+		if (self->wait)
 		{
-//			if(g_showlogic && g_showlogic->value)
-//				gi.dprintf("monster waiting %0.1f\n", self->wait);
+			//			if(g_showlogic && g_showlogic->value)
+			//				gi.dprintf("monster waiting %0.1f\n", self->wait);
 			other->nextthink = level.time + self->wait;
 		}
 	}
@@ -1111,7 +1111,7 @@ void hint_path_touch2 (edict_t *self, edict_t *other, cplane_t *plane, csurface_
 				hintpath_stop (other);
 				return;
 			}
-			
+
 			// if we're an endpoint, then the monster is done moving.
 			if(self->spawnflags & HINT_ENDPOINT)
 			{
@@ -1176,7 +1176,7 @@ END - set this flag on the endpoints of each hintpath.
 
 "wait" - set this if you want the monster to freeze when they touch this hintpath
 */
-void SP_hint_path (edict_t *self)
+void SP_hint_path(edict_t* self)
 {
 	if (deathmatch->value)
 	{
@@ -1186,17 +1186,17 @@ void SP_hint_path (edict_t *self)
 
 	if (!self->targetname && !self->target)
 	{
-		gi.dprintf ("unlinked hint_path at %s\n", vtos(self->s.origin));
-		G_FreeEdict (self);
+		gi.dprintf("unlinked hint_path at %s\n", vtos(self->s.origin));
+		G_FreeEdict(self);
 		return;
 	}
 
 	self->solid = SOLID_TRIGGER;
 	self->touch = hint_path_touch;
-	VectorSet (self->mins, -8, -8, -8);
-	VectorSet (self->maxs, 8, 8, 8);
+	VectorSet(self->mins, -8, -8, -8);
+	VectorSet(self->maxs, 8, 8, 8);
 	self->svflags |= SVF_NOCLIENT;
-	gi.linkentity (self);
+	gi.linkentity(self);
 }
 
 //int	hint_paths_present;
@@ -1206,48 +1206,48 @@ void SP_hint_path (edict_t *self)
 // ============
 // InitHintPaths - Called by InitGame (g_save) to enable quick exits if valid
 // ============
-void InitHintPaths (void)
+void InitHintPaths(void)
 {
-	edict_t		*e, *current;
+	edict_t* e, * current;
 	int			field, i, count2;
 	qboolean	errors = false;
 
 	hint_paths_present = 0;
-	
+
 	// check all the hint_paths.
 	field = FOFS(classname);
 	e = G_Find(NULL, field, "hint_path");
-	if(e)
+	if (e)
 	{
-//		gi.dprintf("hint paths present on map\n");
+		//		gi.dprintf("hint paths present on map\n");
 		hint_paths_present = 1;
 	}
 	else
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("hint paths not present on map\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("hint paths not present on map\n");
 		return;
 	}
 
-	memset (hint_path_start, 0, MAX_HINT_CHAINS*sizeof (edict_t *));
+	memset(hint_path_start, 0, MAX_HINT_CHAINS * sizeof(edict_t*));
 	num_hint_paths = 0;
-	while(e)
+	while (e)
 	{
-		if(e->spawnflags & HINT_ENDPOINT)
+		if (e->spawnflags & HINT_ENDPOINT)
 		{
 			if (e->target) // start point
 			{
 				if (e->targetname) // this is a bad end, ignore it
 				{
-					gi.dprintf ("Hint path at %s marked as endpoint with both target (%s) and targetname (%s)\n",
-						vtos (e->s.origin), e->target, e->targetname);
+					gi.dprintf("Hint path at %s marked as endpoint with both target (%s) and targetname (%s)\n",
+						vtos(e->s.origin), e->target, e->targetname);
 					errors = true;
 				}
 				else
 				{
 					if (num_hint_paths >= MAX_HINT_CHAINS)
 					{
-//						gi.dprintf ("Only %d hint chains allowed.  Connect some together!\n", MAX_HINT_CHAINS);
+						//						gi.dprintf ("Only %d hint chains allowed.  Connect some together!\n", MAX_HINT_CHAINS);
 						break;
 					}
 					hint_path_start[num_hint_paths++] = e;
@@ -1258,17 +1258,17 @@ void InitHintPaths (void)
 	}
 
 	field = FOFS(targetname);
-	for (i=0; i< num_hint_paths; i++)
+	for (i = 0; i < num_hint_paths; i++)
 	{
 		count2 = 1;
 		current = hint_path_start[i];
 		current->hint_chain_id = i;
-//		gi.dprintf ("start ");
+		//		gi.dprintf ("start ");
 		e = G_Find(NULL, field, current->target);
 		if (G_Find(e, field, current->target))
 		{
-			gi.dprintf ("\nForked hint path at %s detected for chain %d, target %s\n", 
-				vtos (current->s.origin), num_hint_paths, current->target);
+			gi.dprintf("\nForked hint path at %s detected for chain %d, target %s\n",
+				vtos(current->s.origin), num_hint_paths, current->target);
 			hint_path_start[i]->hint_chain = NULL;
 			count2 = 0;
 			errors = true;
@@ -1278,8 +1278,8 @@ void InitHintPaths (void)
 		{
 			if (e->hint_chain)
 			{
-				gi.dprintf ("\nCircular hint path at %s detected for chain %d, targetname %s\n", 
-					vtos (e->s.origin), num_hint_paths, e->targetname);
+				gi.dprintf("\nCircular hint path at %s detected for chain %d, targetname %s\n",
+					vtos(e->s.origin), num_hint_paths, e->targetname);
 				hint_path_start[i]->hint_chain = NULL;
 				count2 = 0;
 				errors = true;
@@ -1289,32 +1289,32 @@ void InitHintPaths (void)
 			current->hint_chain = e;
 			current = e;
 			current->hint_chain_id = i;
-//			gi.dprintf ("-> %s ", current->targetname);
+			//			gi.dprintf ("-> %s ", current->targetname);
 			if (!current->target)
 				break;
 			e = G_Find(NULL, field, current->target);
 			if (G_Find(e, field, current->target))
 			{
-				gi.dprintf ("\nForked hint path at %s detected for chain %d, target %s\n", 
-					vtos (current->s.origin), num_hint_paths, current->target);
+				gi.dprintf("\nForked hint path at %s detected for chain %d, target %s\n",
+					vtos(current->s.origin), num_hint_paths, current->target);
 				hint_path_start[i]->hint_chain = NULL;
 				count2 = 0;
 				break;
 			}
 		}
-//		if ((g_showlogic) && (g_showlogic->value))
-//			if (count2)
-//			{
-//				goodcount++;
-//				gi.dprintf ("\nhint_path #%d, %d elements\n\n", i, count2);
-//			}
-//			else
-//				gi.dprintf ("\nhint_path #%d invalid\n\n", i);
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			if (count2)
+		//			{
+		//				goodcount++;
+		//				gi.dprintf ("\nhint_path #%d, %d elements\n\n", i, count2);
+		//			}
+		//			else
+		//				gi.dprintf ("\nhint_path #%d invalid\n\n", i);
 	}
-//	if (errors)
-//		gi.error ("hint_path processing failed, fix errors\n");
-//	if ((g_showlogic) && (g_showlogic->value))
-//		gi.dprintf ("hint_path processing done, %d hint paths linked\n", num_hint_paths);
+	//	if (errors)
+	//		gi.error ("hint_path processing failed, fix errors\n");
+	//	if ((g_showlogic) && (g_showlogic->value))
+	//		gi.dprintf ("hint_path processing done, %d hint paths linked\n", num_hint_paths);
 }
 
 // *****************************
@@ -1325,50 +1325,50 @@ void InitHintPaths (void)
 // use to see if opponent is behind you (not to side)
 // if it looks a lot like infront, well, there's a reason
 
-qboolean inback (edict_t *self, edict_t *other)
+qboolean inback(edict_t* self, edict_t* other)
 {
 	vec3_t	vec;
 	float	dot;
 	vec3_t	forward;
-	
-	AngleVectors (self->s.angles, forward, NULL, NULL);
-	VectorSubtract (other->s.origin, self->s.origin, vec);
-	VectorNormalize (vec);
-	dot = DotProduct (vec, forward);
-	
+
+	AngleVectors(self->s.angles, forward, NULL, NULL);
+	VectorSubtract(other->s.origin, self->s.origin, vec);
+	VectorNormalize(vec);
+	dot = DotProduct(vec, forward);
+
 	if (dot < -0.3)
 		return true;
 	return false;
 }
 
-float realrange (edict_t *self, edict_t *other)
+float realrange(edict_t* self, edict_t* other)
 {
 	vec3_t dir;
-	
-	VectorSubtract (self->s.origin, other->s.origin, dir);
+
+	VectorSubtract(self->s.origin, other->s.origin, dir);
 
 	return VectorLength(dir);
 }
 
-qboolean face_wall (edict_t *self)
+qboolean face_wall(edict_t* self)
 {
 	vec3_t	pt;
 	vec3_t	forward;
 	vec3_t	ang;
 	trace_t	tr;
 
-	AngleVectors (self->s.angles, forward, NULL, NULL);
+	AngleVectors(self->s.angles, forward, NULL, NULL);
 	VectorMA(self->s.origin, 64, forward, pt);
 	tr = gi.trace(self->s.origin, vec3_origin, vec3_origin, pt, self, MASK_MONSTERSOLID);
-	if(tr.fraction < 1 && !tr.allsolid && !tr.startsolid)
+	if (tr.fraction < 1 && !tr.allsolid && !tr.startsolid)
 	{
 		vectoangles2(tr.plane.normal, ang);
 		self->ideal_yaw = ang[YAW] + 180;
-		if(self->ideal_yaw > 360)
+		if (self->ideal_yaw > 360)
 			self->ideal_yaw -= 360;
 
-//		if(g_showlogic && g_showlogic->value)
-//			gi.dprintf("facing wall, dir %0.1f/%0.1f\n", ang[YAW], self->ideal_yaw);
+		//		if(g_showlogic && g_showlogic->value)
+		//			gi.dprintf("facing wall, dir %0.1f/%0.1f\n", ang[YAW], self->ideal_yaw);
 		M_ChangeYaw(self);
 		return true;
 	}
@@ -1380,16 +1380,16 @@ qboolean face_wall (edict_t *self)
 // Monster "Bad" Areas
 // 
 
-void badarea_touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
+void badarea_touch(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t* surf)
 {
-//	drawbbox(ent);
+	//	drawbbox(ent);
 }
 
-edict_t *SpawnBadArea(vec3_t mins, vec3_t maxs, float lifespan, edict_t *owner)
+edict_t* SpawnBadArea(vec3_t mins, vec3_t maxs, float lifespan, edict_t* owner)
 {
-	edict_t *badarea;
+	edict_t* badarea;
 	vec3_t	origin;
-	
+
 	VectorAdd(mins, maxs, origin);
 	VectorScale(origin, 0.5, origin);
 
@@ -1404,43 +1404,43 @@ edict_t *SpawnBadArea(vec3_t mins, vec3_t maxs, float lifespan, edict_t *owner)
 	badarea->movetype = MOVETYPE_NONE;
 	badarea->solid = SOLID_TRIGGER;
 	badarea->classname = "bad_area";
-	gi.linkentity (badarea);
+	gi.linkentity(badarea);
 
-//	gi.dprintf("(%s)-(%s)\n", vtos(badarea->absmin), vtos(badarea->absmax));
+	//	gi.dprintf("(%s)-(%s)\n", vtos(badarea->absmin), vtos(badarea->absmax));
 
-	if(lifespan)
+	if (lifespan)
 	{
 		badarea->think = G_FreeEdict;
 		badarea->nextthink = level.time + lifespan;
 	}
-	if(owner)
+	if (owner)
 	{
 		badarea->owner = owner;
 	}
 
-//	drawbbox(badarea);
+	//	drawbbox(badarea);
 	return badarea;
 }
 
 // CheckForBadArea
 //		This is a customized version of G_TouchTriggers that will check
 //		for bad area triggers and return them if they're touched.
-edict_t *CheckForBadArea(edict_t *ent)
+edict_t* CheckForBadArea(edict_t* ent)
 {
 	int			i, num;
-	edict_t		*touch[MAX_EDICTS], *hit;
+	edict_t* touch[MAX_EDICTS], * hit;
 	vec3_t		mins, maxs;
 
 	VectorAdd(ent->s.origin, ent->mins, mins);
 	VectorAdd(ent->s.origin, ent->maxs, maxs);
 
-	num = gi.BoxEdicts (mins, maxs, touch, MAX_EDICTS, AREA_TRIGGERS);
+	num = gi.BoxEdicts(mins, maxs, touch, MAX_EDICTS, AREA_TRIGGERS);
 
-//	drawbbox(ent);
+	//	drawbbox(ent);
 
-	// be careful, it is possible to have an entity in this
-	// list removed before we get to it (killtriggered)
-	for (i=0 ; i<num ; i++)
+		// be careful, it is possible to have an entity in this
+		// list removed before we get to it (killtriggered)
+	for (i = 0; i < num; i++)
 	{
 		hit = touch[i];
 		if (!hit->inuse)
@@ -1450,20 +1450,20 @@ edict_t *CheckForBadArea(edict_t *ent)
 			return hit;
 		}
 	}
-	
+
 	return NULL;
 }
 
 #define TESLA_DAMAGE_RADIUS		128
 
-qboolean MarkTeslaArea(edict_t *self, edict_t *tesla)
+qboolean MarkTeslaArea(edict_t* self, edict_t* tesla)
 {
 	vec3_t	mins, maxs;
-	edict_t *e;
-	edict_t *tail;
-	edict_t *area;
+	edict_t* e;
+	edict_t* tail;
+	edict_t* area;
 
-	if(!tesla || !self)
+	if (!tesla || !self)
 		return false;
 
 	area = NULL;
@@ -1474,45 +1474,45 @@ qboolean MarkTeslaArea(edict_t *self, edict_t *tesla)
 	while (e)
 	{
 		tail = tail->teamchain;
-		if(!strcmp(e->classname, "bad_area"))
+		if (!strcmp(e->classname, "bad_area"))
 		{
-//			gi.dprintf("tesla already has a bad area marked\n");
+			//			gi.dprintf("tesla already has a bad area marked\n");
 			return false;
 		}
 		e = e->teamchain;
 	}
 
 	// see if we can grab the trigger directly
-	if(tesla->teamchain && tesla->teamchain->inuse)
+	if (tesla->teamchain && tesla->teamchain->inuse)
 	{
-		edict_t *trigger;
+		edict_t* trigger;
 
 		trigger = tesla->teamchain;
 
-//		VectorAdd (trigger->s.origin, trigger->mins, mins);
-//		VectorAdd (trigger->s.origin, trigger->maxs, maxs);
+		//		VectorAdd (trigger->s.origin, trigger->mins, mins);
+		//		VectorAdd (trigger->s.origin, trigger->maxs, maxs);
 		VectorCopy(trigger->absmin, mins);
 		VectorCopy(trigger->absmax, maxs);
 
-		if(tesla->air_finished)
-			area = SpawnBadArea (mins, maxs, tesla->air_finished, tesla);
+		if (tesla->air_finished)
+			area = SpawnBadArea(mins, maxs, tesla->air_finished, tesla);
 		else
-			area = SpawnBadArea (mins, maxs, tesla->nextthink, tesla);
+			area = SpawnBadArea(mins, maxs, tesla->nextthink, tesla);
 	}
 	// otherwise we just guess at how long it'll last.
 	else
 	{
-	
-		VectorSet (mins, -TESLA_DAMAGE_RADIUS, -TESLA_DAMAGE_RADIUS, tesla->mins[2]);
-		VectorSet (maxs, TESLA_DAMAGE_RADIUS, TESLA_DAMAGE_RADIUS, TESLA_DAMAGE_RADIUS);
+
+		VectorSet(mins, -TESLA_DAMAGE_RADIUS, -TESLA_DAMAGE_RADIUS, tesla->mins[2]);
+		VectorSet(maxs, TESLA_DAMAGE_RADIUS, TESLA_DAMAGE_RADIUS, TESLA_DAMAGE_RADIUS);
 
 		area = SpawnBadArea(mins, maxs, 30, tesla);
 	}
 
 	// if we spawned a bad area, then link it to the tesla
-	if(area)
+	if (area)
 	{
-//		gi.dprintf("bad area marker spawned and linked to tesla\n");
+		//		gi.dprintf("bad area marker spawned and linked to tesla\n");
 		tail->teamchain = area;
 	}
 	return true;
@@ -1526,14 +1526,14 @@ qboolean MarkTeslaArea(edict_t *self, edict_t *tesla)
 // offset is how much time to miss by
 // aimdir is the resulting aim direction (pass in NULL if you don't want it)
 // aimpoint is the resulting aimpoint (pass in NULL if don't want it)
-void PredictAim (edict_t *target, vec3_t start, float bolt_speed, qboolean eye_height, float offset, vec3_t aimdir, vec3_t aimpoint)
+void PredictAim(edict_t* target, vec3_t start, float bolt_speed, qboolean eye_height, float offset, vec3_t aimdir, vec3_t aimpoint)
 {
 	vec3_t dir, vec;
 	float dist, time;
 
 	if (!target || !target->inuse)
 	{
-		VectorCopy (vec3_origin, aimdir);
+		VectorCopy(vec3_origin, aimdir);
 		return;
 	}
 
@@ -1551,34 +1551,34 @@ void PredictAim (edict_t *target, vec3_t start, float bolt_speed, qboolean eye_h
 
 	if (aimdir)
 	{
-		VectorSubtract (vec, start, aimdir);
-		VectorNormalize (aimdir);
+		VectorSubtract(vec, start, aimdir);
+		VectorNormalize(aimdir);
 	}
-	
+
 	if (aimpoint)
 	{
-		VectorCopy (vec, aimpoint);
+		VectorCopy(vec, aimpoint);
 	}
 }
 
 
-qboolean below (edict_t *self, edict_t *other)
+qboolean below(edict_t* self, edict_t* other)
 {
 	vec3_t	vec;
 	float	dot;
 	vec3_t	down;
-	
-	VectorSubtract (other->s.origin, self->s.origin, vec);
-	VectorNormalize (vec);
-	VectorSet (down, 0, 0, -1);
-	dot = DotProduct (vec, down);
-	
+
+	VectorSubtract(other->s.origin, self->s.origin, vec);
+	VectorNormalize(vec);
+	VectorSet(down, 0, 0, -1);
+	dot = DotProduct(vec, down);
+
 	if (dot > 0.95)  // 18 degree arc below
 		return true;
 	return false;
 }
 
-void drawbbox (edict_t *self)
+void drawbbox(edict_t* self)
 {
 	int	lines[4][3] = {
 		{1, 2, 4},
@@ -1587,74 +1587,74 @@ void drawbbox (edict_t *self)
 		{2, 4, 7}
 	};
 
-	int starts[4] = {0, 3, 5, 6};
+	int starts[4] = { 0, 3, 5, 6 };
 
 	vec3_t pt[8];
 	int i, j, k;
 	vec3_t coords[2];
 	vec3_t newbox;
-	vec3_t f,r,u, dir;
+	vec3_t f, r, u, dir;
 
-	VectorCopy (self->absmin, coords[0]);
-	VectorCopy (self->absmax, coords[1]);
+	VectorCopy(self->absmin, coords[0]);
+	VectorCopy(self->absmax, coords[1]);
 
-	for (i=0; i<=1; i++)
+	for (i = 0; i <= 1; i++)
 	{
-		for (j=0; j<=1; j++)
+		for (j = 0; j <= 1; j++)
 		{
-			for (k=0; k<=1; k++)
+			for (k = 0; k <= 1; k++)
 			{
-				pt[4*i+2*j+k][0] = coords[i][0];
-				pt[4*i+2*j+k][1] = coords[j][1];
-				pt[4*i+2*j+k][2] = coords[k][2];
+				pt[4 * i + 2 * j + k][0] = coords[i][0];
+				pt[4 * i + 2 * j + k][1] = coords[j][1];
+				pt[4 * i + 2 * j + k][2] = coords[k][2];
 			}
 		}
 	}
-	
-	for (i=0; i<= 3; i++)
+
+	for (i = 0; i <= 3; i++)
 	{
-		for (j=0; j<= 2; j++)
+		for (j = 0; j <= 2; j++)
 		{
-			gi.WriteByte (svc_temp_entity);
-			gi.WriteByte (TE_DEBUGTRAIL);
-			gi.WritePosition (pt[starts[i]]);
-			gi.WritePosition (pt[lines[i][j]]);
-			gi.multicast (pt[starts[i]], MULTICAST_ALL);	
+			gi.WriteByte(svc_temp_entity);
+			gi.WriteByte(TE_DEBUGTRAIL);
+			gi.WritePosition(pt[starts[i]]);
+			gi.WritePosition(pt[lines[i][j]]);
+			gi.multicast(pt[starts[i]], MULTICAST_ALL);
 		}
 	}
 
-	vectoangles2 (self->s.angles, dir);
-	AngleVectors (dir, f, r, u);
+	vectoangles2(self->s.angles, dir);
+	AngleVectors(dir, f, r, u);
 
-	VectorMA (self->s.origin, 50, f, newbox);
-	gi.WriteByte (svc_temp_entity);
-	gi.WriteByte (TE_DEBUGTRAIL);
-	gi.WritePosition (self->s.origin);
-	gi.WritePosition (newbox);
-	gi.multicast (self->s.origin, MULTICAST_PVS);	
-	VectorClear (newbox);
+	VectorMA(self->s.origin, 50, f, newbox);
+	gi.WriteByte(svc_temp_entity);
+	gi.WriteByte(TE_DEBUGTRAIL);
+	gi.WritePosition(self->s.origin);
+	gi.WritePosition(newbox);
+	gi.multicast(self->s.origin, MULTICAST_PVS);
+	VectorClear(newbox);
 
-	VectorMA (self->s.origin, 50, r, newbox);
-	gi.WriteByte (svc_temp_entity);
-	gi.WriteByte (TE_DEBUGTRAIL);
-	gi.WritePosition (self->s.origin);
-	gi.WritePosition (newbox);
-	gi.multicast (self->s.origin, MULTICAST_PVS);	
-	VectorClear (newbox);
+	VectorMA(self->s.origin, 50, r, newbox);
+	gi.WriteByte(svc_temp_entity);
+	gi.WriteByte(TE_DEBUGTRAIL);
+	gi.WritePosition(self->s.origin);
+	gi.WritePosition(newbox);
+	gi.multicast(self->s.origin, MULTICAST_PVS);
+	VectorClear(newbox);
 
-	VectorMA (self->s.origin, 50, u, newbox);
-	gi.WriteByte (svc_temp_entity);
-	gi.WriteByte (TE_DEBUGTRAIL);
-	gi.WritePosition (self->s.origin);
-	gi.WritePosition (newbox);
-	gi.multicast (self->s.origin, MULTICAST_PVS);	
-	VectorClear (newbox);
+	VectorMA(self->s.origin, 50, u, newbox);
+	gi.WriteByte(svc_temp_entity);
+	gi.WriteByte(TE_DEBUGTRAIL);
+	gi.WritePosition(self->s.origin);
+	gi.WritePosition(newbox);
+	gi.multicast(self->s.origin, MULTICAST_PVS);
+	VectorClear(newbox);
 }
 
 //
 // New dodge code
 //
-void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
+void M_MonsterDodge(edict_t* self, edict_t* attacker, float eta, trace_t* tr)
 {
 	float	r = random();
 	float	height;
@@ -1672,33 +1672,33 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 	if ((!ducker) && (!dodger))
 		return;
 
-//	if ((g_showlogic) && (g_showlogic->value))
-//	{
-//		if (self->monsterinfo.aiflags & AI_DODGING)
-//			gi.dprintf ("dodging - ");
-//		if (self->monsterinfo.aiflags & AI_DUCKED)
-//			gi.dprintf ("ducked - ");
-//	}
+	//	if ((g_showlogic) && (g_showlogic->value))
+	//	{
+	//		if (self->monsterinfo.aiflags & AI_DODGING)
+	//			gi.dprintf ("dodging - ");
+	//		if (self->monsterinfo.aiflags & AI_DUCKED)
+	//			gi.dprintf ("ducked - ");
+	//	}
 	if (!self->enemy)
 	{
 		self->enemy = attacker;
-		FoundTarget (self);
+		FoundTarget(self);
 	}
 
 	// PMM - don't bother if it's going to hit anyway; fix for weird in-your-face etas (I was
 	// seeing numbers like 13 and 14)
 	if ((eta < 0.1) || (eta > 5))
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("timeout\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("timeout\n");
 		return;
 	}
 
 	// skill level determination..
-	if (r > (0.25*((skill->value)+1)))
+	if (r > (0.25f * ((skill->value) + 1)))
 	{
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("skillout\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("skillout\n");
 		return;
 	}
 
@@ -1707,7 +1707,7 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 
 	if (ducker)
 	{
-		height = self->absmax[2]-32-1;  // the -1 is because the absmax is s.origin + maxs + 1
+		height = self->absmax[2] - 32 - 1;  // the -1 is because the absmax is s.origin + maxs + 1
 
 		// FIXME, make smarter
 		// if we only duck, and ducking won't help or we're already ducking, do nothing
@@ -1725,8 +1725,8 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 		// if we're already dodging, just finish the sequence, i.e. don't do anything else
 		if (self->monsterinfo.aiflags & AI_DODGING)
 		{
-//			if ((g_showlogic) && (g_showlogic->value))
-//				gi.dprintf ("already dodging\n");
+			//			if ((g_showlogic) && (g_showlogic->value))
+			//				gi.dprintf ("already dodging\n");
 			return;
 		}
 
@@ -1735,24 +1735,25 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 		{
 			vec3_t right, diff;
 
-			AngleVectors (self->s.angles, NULL, right, NULL);
-			VectorSubtract (tr->endpos, self->s.origin, diff);
+			AngleVectors(self->s.angles, NULL, right, NULL);
+			VectorSubtract(tr->endpos, self->s.origin, diff);
 
-			if (DotProduct (right, diff) < 0)
+			if (DotProduct(right, diff) < 0)
 			{
 				self->monsterinfo.lefty = 0;
-//				gi.dprintf ("left\n");
-			} else {
-				self->monsterinfo.lefty = 1;
-//				gi.dprintf ("right\n");
+				//				gi.dprintf ("left\n");
 			}
-	
+			else {
+				self->monsterinfo.lefty = 1;
+				//				gi.dprintf ("right\n");
+			}
+
 			// if we are currently ducked, unduck
 
 			if ((ducker) && (self->monsterinfo.aiflags & AI_DUCKED))
 			{
-//				if ((g_showlogic) && (g_showlogic->value))
-//					gi.dprintf ("unducking - ");
+				//				if ((g_showlogic) && (g_showlogic->value))
+				//					gi.dprintf ("unducking - ");
 				self->monsterinfo.unduck(self);
 			}
 
@@ -1760,7 +1761,7 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 			self->monsterinfo.attack_state = AS_SLIDING;
 
 			// call the monster specific code here
-			self->monsterinfo.sidestep (self);
+			self->monsterinfo.sidestep(self);
 			return;
 		}
 	}
@@ -1769,39 +1770,39 @@ void M_MonsterDodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 	{
 		if (self->monsterinfo.next_duck_time > level.time)
 		{
-//			if ((g_showlogic) && (g_showlogic->value))
-//				gi.dprintf ("ducked too often, not ducking\n");
+			//			if ((g_showlogic) && (g_showlogic->value))
+			//				gi.dprintf ("ducked too often, not ducking\n");
 			return;
 		}
 
-//		if ((g_showlogic) && (g_showlogic->value))
-//			gi.dprintf ("ducking!\n");
+		//		if ((g_showlogic) && (g_showlogic->value))
+		//			gi.dprintf ("ducking!\n");
 
-		monster_done_dodge (self);
+		monster_done_dodge(self);
 		// set this prematurely; it doesn't hurt, and prevents extra iterations
 		self->monsterinfo.aiflags |= AI_DUCKED;
 
-		self->monsterinfo.duck (self, eta);
+		self->monsterinfo.duck(self, eta);
 	}
 }
 
-void monster_duck_down (edict_t *self)
+void monster_duck_down(edict_t* self)
 {
-//	if (self->monsterinfo.aiflags & AI_DUCKED)
-//		return;
+	//	if (self->monsterinfo.aiflags & AI_DUCKED)
+	//		return;
 	self->monsterinfo.aiflags |= AI_DUCKED;
 
-//	if ((g_showlogic) && (g_showlogic->value))
-//		gi.dprintf ("duck down!\n");
-//	self->maxs[2] -= 32;
+	//	if ((g_showlogic) && (g_showlogic->value))
+	//		gi.dprintf ("duck down!\n");
+	//	self->maxs[2] -= 32;
 	self->maxs[2] = self->monsterinfo.base_height - 32;
 	self->takedamage = DAMAGE_YES;
 	if (self->monsterinfo.duck_wait_time < level.time)
 		self->monsterinfo.duck_wait_time = level.time + 1;
-	gi.linkentity (self);
+	gi.linkentity(self);
 }
 
-void monster_duck_hold (edict_t *self)
+void monster_duck_hold(edict_t* self)
 {
 	if (level.time >= self->monsterinfo.duck_wait_time)
 		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
@@ -1809,19 +1810,19 @@ void monster_duck_hold (edict_t *self)
 		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
 }
 
-void monster_duck_up (edict_t *self)
+void monster_duck_up(edict_t* self)
 {
 	self->monsterinfo.aiflags &= ~AI_DUCKED;
-//	self->maxs[2] += 32;
+	//	self->maxs[2] += 32;
 	self->maxs[2] = self->monsterinfo.base_height;
 	self->takedamage = DAMAGE_AIM;
 	self->monsterinfo.next_duck_time = level.time + DUCK_INTERVAL;
-	gi.linkentity (self);
+	gi.linkentity(self);
 }
 
 //=========================
 //=========================
-qboolean has_valid_enemy (edict_t *self)
+qboolean has_valid_enemy(edict_t* self)
 {
 	if (!self->enemy)
 		return false;
@@ -1835,7 +1836,7 @@ qboolean has_valid_enemy (edict_t *self)
 	return true;
 }
 
-void TargetTesla (edict_t *self, edict_t *tesla)
+void TargetTesla(edict_t* self, edict_t* tesla)
 {
 	if ((!self) || (!tesla))
 		return;
@@ -1850,20 +1851,20 @@ void TargetTesla (edict_t *self, edict_t *tesla)
 
 	// store the player enemy in case we lose track of him.
 	// GRIM 8/01/2002 1:19PM - check for coopview decoys
-	if(self->enemy && ((self->enemy->client || self->enemy->decoy)))
-	// GRIM
+	if (self->enemy && ((self->enemy->client || self->enemy->decoy)))
+		// GRIM
 		self->monsterinfo.last_player_enemy = self->enemy;
 
-	if(self->enemy != tesla)
+	if (self->enemy != tesla)
 	{
 		self->oldenemy = self->enemy;
 		self->enemy = tesla;
-		if(self->monsterinfo.attack)
+		if (self->monsterinfo.attack)
 		{
 			if (self->health <= 0)
 			{
-//				if ((g_showlogic) && (g_showlogic->value))
-//					gi.dprintf ("bad tesla attack avoided!\n");
+				//				if ((g_showlogic) && (g_showlogic->value))
+				//					gi.dprintf ("bad tesla attack avoided!\n");
 				return;
 			}
 			self->monsterinfo.attack(self);
@@ -1878,19 +1879,19 @@ void TargetTesla (edict_t *self, edict_t *tesla)
 // this returns a randomly selected coop player who is visible to self
 // returns NULL if bad
 
-edict_t * PickCoopTarget (edict_t *self)
+edict_t* PickCoopTarget(edict_t* self)
 {
 	// no more than 4 players in coop, so..
-	edict_t *targets[4];
+	edict_t* targets[4];
 	int		num_targets = 0, targetID;
-	edict_t *ent;
+	edict_t* ent;
 	int		player;
 
 	// if we're not in coop, this is a noop
 	if (!coop || !coop->value)
 		return NULL;
 
-	memset (targets, 0, 4*sizeof(edict_t *));
+	memset(targets, 0, 4 * sizeof(edict_t*));
 
 	for (player = 1; player <= game.maxclients; player++)
 	{
@@ -1901,8 +1902,8 @@ edict_t * PickCoopTarget (edict_t *self)
 			continue;
 		if (visible(self, ent))
 		{
-//			if ((g_showlogic) && (g_showlogic->value))
-//				gi.dprintf ("%s: found coop player %s - ", self->classname, ent->client->pers.netname);
+			//			if ((g_showlogic) && (g_showlogic->value))
+			//				gi.dprintf ("%s: found coop player %s - ", self->classname, ent->client->pers.netname);
 			targets[num_targets++] = ent;
 		}
 		// GRIM 8/01/2002 1:19PM - check for coopview decoys in sight instead
@@ -1916,45 +1917,45 @@ edict_t * PickCoopTarget (edict_t *self)
 		// GRIM
 	}
 
-/*
-	ent = g_edicts+1; // skip the worldspawn
-	// cycle through players
-	while (ent)
-	{
-		if ((ent->client) && (ent->inuse))
+	/*
+		ent = g_edicts+1; // skip the worldspawn
+		// cycle through players
+		while (ent)
 		{
-			if (visible(self, ent))
+			if ((ent->client) && (ent->inuse))
 			{
-				if ((g_showlogic) && (g_showlogic->value))
-					gi.dprintf ("%s: found coop player %s - ", self->classname, ent->client->pers.netname);
-				targets[num_targets++] = ent;
+				if (visible(self, ent))
+				{
+					if ((g_showlogic) && (g_showlogic->value))
+						gi.dprintf ("%s: found coop player %s - ", self->classname, ent->client->pers.netname);
+					targets[num_targets++] = ent;
+				}
+				ent++;
 			}
-			ent++;
+			else
+				ent = NULL;
 		}
-		else
-			ent = NULL;
-	}
-*/
+	*/
 
 	if (!num_targets)
 		return NULL;
 
 	// get a number from 0 to (num_targets-1)
 	targetID = (random() * (float)num_targets);
-	
+
 	// just in case we got a 1.0 from random
 	if (targetID == num_targets)
 		targetID--;
 
-//	if (g_showlogic && g_showlogic->value)
-//		gi.dprintf ("using player %s\n", targets[targetID]->client->pers.netname);
+	//	if (g_showlogic && g_showlogic->value)
+	//		gi.dprintf ("using player %s\n", targets[targetID]->client->pers.netname);
 	return targets[targetID];
 }
 
 // only meant to be used in coop
-int CountPlayers (void)
+int CountPlayers(void)
 {
-	edict_t *ent;
+	edict_t* ent;
 	int		count = 0;
 	int		player;
 
@@ -1971,19 +1972,19 @@ int CountPlayers (void)
 			continue;
 		count++;
 	}
-/*
-	ent = g_edicts+1; // skip the worldspawn
-	while (ent)
-	{
-		if ((ent->client) && (ent->inuse))
+	/*
+		ent = g_edicts+1; // skip the worldspawn
+		while (ent)
 		{
-			ent++;
-			count++;
+			if ((ent->client) && (ent->inuse))
+			{
+				ent++;
+				count++;
+			}
+			else
+				ent = NULL;
 		}
-		else
-			ent = NULL;
-	}
-*/
+	*/
 	return count;
 }
 
@@ -1991,19 +1992,19 @@ int CountPlayers (void)
 // JUMPING AIDS
 //*******************
 
-void monster_jump_start (edict_t *self)
+void monster_jump_start(edict_t* self)
 {
 	self->timestamp = level.time;
 }
 
-qboolean monster_jump_finished (edict_t *self)
+qboolean monster_jump_finished(edict_t* self)
 {
 	if ((level.time - self->timestamp) > 3)
 	{
-//		if (g_showlogic && g_showlogic->value)
-//		{
-//			gi.dprintf("%s jump timed out!\n", self->classname);
-//		}
+		//		if (g_showlogic && g_showlogic->value)
+		//		{
+		//			gi.dprintf("%s jump timed out!\n", self->classname);
+		//		}
 		return true;
 	}
 	return false;

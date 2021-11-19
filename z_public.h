@@ -1,61 +1,69 @@
 // m_actor.c
-void FindSomeMonster (edict_t *self);
+void FindSomeMonster(edict_t* self);
 
 
 //g_combat.c
-void SpawnDamage (int type, vec3_t origin, vec3_t normal, int damage);
+void SpawnDamage(int type, vec3_t origin, vec3_t normal, int damage);
 
 // z_client.c
-void z_PutClientInServer(edict_t *ent);
-void z_InitClientPers(edict_t *ent);
+void z_PutClientInServer(edict_t* ent);
+void z_InitClientPers(edict_t* ent);
 
 // g_weapon.c
-void fire_cgrenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius, int ammotype);
+void fire_cgrenade(edict_t* self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius, int ammotype);
 
 // z_weapon.c
 #define IDLE_DELAY      8       // FIX ME - 8 seconds too long??
-void Calc_Arc (edict_t *ent);
-void SetupItemModels(edict_t *ent);
-void ChangeRightWeapon(edict_t *ent);
-void ChangeLeftWeapon(edict_t *ent);
-void P_ProjectSource (gclient_t *client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result);
-void PlayerNoise(edict_t *who, vec3_t where, int type);
-qboolean CheckAltAmmo (edict_t *ent, gitem_t *curweapon, int ammoTag);
-void AutoSwitchWeapon(edict_t *ent, int last_right, int last_left);
+void Calc_Arc(edict_t* ent);
+void SetupItemModels(edict_t* ent);
+void ChangeRightWeapon(edict_t* ent);
+void ChangeLeftWeapon(edict_t* ent);
+void P_ProjectSource(gclient_t* client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result);
+void PlayerNoise(edict_t* who, vec3_t where, int type);
+qboolean CheckAltAmmo(edict_t* ent, gitem_t* curweapon, int ammoTag);
+void AutoSwitchWeapon(edict_t* ent, int last_right, int last_left);
 
 // z_items.c
-void DroppedThink( edict_t *ent );
-int CountItemByTag(edict_t *ent, int index);
-gitem_t	*GetItemByTag (int tag);
-void RemoveItem (edict_t *player, int bodyarea);
-edict_t *LaunchItem (edict_t *ent, gitem_t *item, vec3_t origin, vec3_t velocity);
-void GiveItem(edict_t *ent, int tag);
-void DropClip(edict_t *ent, int index, int count);
-void ReloadHand (edict_t *ent, int hand);
-qboolean CanRightReload (edict_t *ent);
-qboolean CanLeftReload (edict_t *ent);
-void UpdateExtraAmmoCounts (edict_t *ent);
-int GetFreeBodyArea (gitem_t *item, edict_t *ent);
-void StashItem (edict_t *player, gitem_t *item, int bodyarea, int quantity, int flags, int ammotype);
-void RemoveItem (edict_t *player, int bodyarea);
-int CountOffHandGrenades(edict_t *ent, int type);
+void DroppedThink(edict_t* ent);
+int CountItemByTag(edict_t* ent, int index);
+gitem_t* GetItemByTag(int tag);
+void RemoveItem(edict_t* player, int bodyarea);
+edict_t* LaunchItem(edict_t* ent, gitem_t* item, vec3_t origin, vec3_t velocity);
+void GiveItem(edict_t* ent, int tag);
+void DropClip(edict_t* ent, int index, int count);
+void ReloadHand(edict_t* ent, int hand);
+qboolean CanRightReload(edict_t* ent);
+qboolean CanLeftReload(edict_t* ent);
+void UpdateExtraAmmoCounts(edict_t* ent);
+int GetFreeBodyArea(gitem_t* item, edict_t* ent);
+void StashItem(edict_t* player, gitem_t* item, int bodyarea, int quantity, int flags, int ammotype);
+void RemoveItem(edict_t* player, int bodyarea);
+int CountOffHandGrenades(edict_t* ent, int type);
+qboolean Pickup_BAItem(gitem_t* item, int count, int flags, int ammotype, edict_t* other);
 
 // z_handgrenade.c
-void ThrowOffHandGrenade(edict_t *ent);
+void ThrowOffHandGrenade(edict_t* ent);
 
 // z_coop.c
-void G_RunEditFrame (void);
+void G_RunEditFrame(void);
 void StepShake(vec3_t pos, float dist, float speed);
-void MonsterDropItem (edict_t *self, gitem_t *item, int count, int flags, int ammoTag);
-void G_TouchDeadBodies(edict_t *ent);
+void MonsterDropItem(edict_t* self, gitem_t* item, int count, int flags, int ammoTag);
+void G_TouchDeadBodies(edict_t* ent);
+
+// GRIM 9/10/2001 1:03PM - NEW COOP
+void CheckCoopAllDead(void);
+void PutClientAtLatestRallyPoint(edict_t* self);
+// GRIM
 
 // z_cmds.c
-qboolean z_ClientCommand (edict_t *ent);
-edict_t *ThrowBodyAreaItem(edict_t *ent, int speed, int bodyarea);
-void ThrowLeftHandItem(edict_t *ent, int speed );
-void ThrowRightHandItem(edict_t *ent, int speed );
-void DrawItemSelect(edict_t *ent);
-void UpdateInv(edict_t *ent);
+qboolean z_ClientCommand(edict_t* ent);
+edict_t* ThrowBodyAreaItem(edict_t* ent, int speed, int bodyarea);
+void ThrowLeftHandItem(edict_t* ent, int speed);
+void ThrowRightHandItem(edict_t* ent, int speed);
+void DrawItemSelect(edict_t* ent);
+void UpdateInv(edict_t* ent);
+void EndCoopView(edict_t* ent);
+void CmdCoopView(edict_t* ent);
 
 #define CYCLE_ITEMS_TIME        1
 #define MAX_WEAPONS             16
