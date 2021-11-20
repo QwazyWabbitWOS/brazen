@@ -614,11 +614,13 @@ void ED_ParseField(char* key, char* value, edict_t* ent)
 				break;
 			case F_IGNORE:
 				break;
+			default:
+				break;
 			}
 			return;
 		}
 	}
-	gi.dprintf("%s is not a field\n", key);
+	gi.dprintf("%s: %s is not a field\n", __func__, key);
 }
 
 /*
@@ -799,7 +801,7 @@ void Svcmd_EntZ_f(void)
 				//CreateDirectory (path, NULL);
 
 		// create the file
-		sprintf(path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
 		entfile = fopen(path, "wb");
 		if (entfile == NULL)
 		{
@@ -837,7 +839,7 @@ int SpawnAnts(char* mapname, float skill_level)
 		char path[MAX_OSPATH];
 
 		// load adition entstring from file (and ANT file)
-		sprintf(path, "%s/maps/ents/%s.ant", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ant", GAMEVERSION, current_mapname);
 
 		entfile = fopen(path, "rb");
 		if (entfile != NULL)
@@ -1213,7 +1215,7 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 		strncpy(original_entstring, entstring, strlen(original_entstring) - 1);
 
 		// load modified entstring from file
-		sprintf(path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
 		entfile = fopen(path, "rb");
 		if (entfile != NULL)
 		{
@@ -1705,17 +1707,17 @@ void SP_worldspawn(edict_t * ent)
 	SetItemNames();
 
 	if (st.nextmap)
-		strcpy(level.nextmap, st.nextmap);
+		strncpy(level.nextmap, st.nextmap, sizeof(level.nextmap) - 1);
 
 	// make some data visible to the server
 
 	if (ent->message && ent->message[0])
 	{
 		gi.configstring(CS_NAME, ent->message);
-		strncpy(level.level_name, ent->message, sizeof(level.level_name));
+		strncpy(level.level_name, ent->message, sizeof level.level_name - 1);
 	}
 	else
-		strncpy(level.level_name, level.mapname, sizeof(level.level_name));
+		strncpy(level.level_name, level.mapname, sizeof level.level_name);
 
 	if (st.sky && st.sky[0])
 		gi.configstring(CS_SKY, st.sky);
@@ -2024,10 +2026,10 @@ edict_t* CreateGroundMonster(vec3_t origin, vec3_t angles, vec3_t entMins, vec3_
 qboolean FindSpawnPoint(vec3_t startpoint, vec3_t mins, vec3_t maxs, vec3_t spawnpoint, float maxMoveUp)
 {
 	trace_t		tr;
-	float		height;
+	//float		height;
 	vec3_t		top = { 0 };
 
-	height = maxs[2] - mins[2];
+	//height = maxs[2] - mins[2];
 
 	tr = gi.trace(startpoint, mins, maxs, startpoint, NULL, MASK_MONSTERSOLID | CONTENTS_PLAYERCLIP);
 	if ((tr.startsolid || tr.allsolid) || (tr.ent != world))
