@@ -992,7 +992,7 @@ void ai_run_missile(edict_t* self)
 		//		else if (self->monsterinfo.attack_state != AS_SLIDING)
 		//			gi.dprintf ("ai_run_missile: Unexpected attack state %d !\n", self->monsterinfo.attack_state);
 	}
-};
+}
 
 
 /*
@@ -1103,10 +1103,12 @@ qboolean ai_checkattack(edict_t* self, float dist)
 			if ((level.time - self->enemy->teleport_time) > 5.0f)
 			{
 				if (self->goalentity == self->enemy)
+				{
 					if (self->movetarget)
 						self->goalentity = self->movetarget;
 					else
 						self->goalentity = NULL;
+				}
 				self->monsterinfo.aiflags &= ~AI_SOUND_TARGET;
 				if (self->monsterinfo.aiflags & AI_TEMP_STAND_GROUND)
 					self->monsterinfo.aiflags &= ~(AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
@@ -1302,7 +1304,7 @@ void ai_run(edict_t* self, float dist)
 	vec3_t		v;
 	edict_t* tempgoal;
 	edict_t* save;
-	qboolean	new;
+	qboolean	bnew;
 	edict_t* marker;
 	float		d1, d2;
 	trace_t		tr;
@@ -1576,7 +1578,7 @@ void ai_run(edict_t* self, float dist)
 	tempgoal = G_Spawn();
 	self->goalentity = tempgoal;
 
-	new = false;
+	bnew = false;
 
 	if (!(self->monsterinfo.aiflags & AI_LOST_SIGHT))
 	{
@@ -1584,7 +1586,7 @@ void ai_run(edict_t* self, float dist)
 //		gi.dprintf("lost sight of player, last seen at %s\n", vtos(self->monsterinfo.last_sighting));
 		self->monsterinfo.aiflags |= (AI_LOST_SIGHT | AI_PURSUIT_LAST_SEEN);
 		self->monsterinfo.aiflags &= ~(AI_PURSUE_NEXT | AI_PURSUE_TEMP);
-		new = true;
+		bnew = true;
 	}
 
 	if (self->monsterinfo.aiflags & AI_PURSUE_NEXT)
@@ -1604,7 +1606,7 @@ void ai_run(edict_t* self, float dist)
 			self->monsterinfo.aiflags &= ~AI_PURSUE_TEMP;
 			marker = NULL;
 			VectorCopy(self->monsterinfo.saved_goal, self->monsterinfo.last_sighting);
-			new = true;
+			bnew = true;
 		}
 		else if (self->monsterinfo.aiflags & AI_PURSUIT_LAST_SEEN)
 		{
@@ -1624,7 +1626,7 @@ void ai_run(edict_t* self, float dist)
 			//			gi.dprintf("heading is %0.1f\n", self->ideal_yaw);
 
 			//			debug_drawline(self.origin, self.last_sighting, 52);
-			new = true;
+			bnew = true;
 		}
 	}
 
@@ -1638,7 +1640,7 @@ void ai_run(edict_t* self, float dist)
 
 	VectorCopy(self->monsterinfo.last_sighting, self->goalentity->s.origin);
 
-	if (new)
+	if (bnew)
 	{
 		//		gi.dprintf("checking for course correction\n");
 

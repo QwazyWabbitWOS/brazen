@@ -58,14 +58,14 @@ static int	commander_sound_hook_retract;
 static int	commander_sound_spawn;
 
 char* reinforcements[] = {
-	{"monster_soldier_light"},	// 0
-	{"monster_soldier"},		// 1
-	{"monster_soldier_ss"},		// 2
-	{"monster_infantry"},		// 3
-	{"monster_gunner"},			// 4
-//	{"monster_chick"},			// 4
-	{"monster_medic"},			// 5
-	{"monster_gladiator"}		// 6
+	"monster_soldier_light",	// 0
+	"monster_soldier",		// 1
+	"monster_soldier_ss",		// 2
+	"monster_infantry",		// 3
+	"monster_gunner",			// 4
+//	"monster_chick",			// 4
+	"monster_medic",			// 5
+	"monster_gladiator"		// 6
 };
 
 vec3_t reinforcement_mins[] = {
@@ -294,96 +294,96 @@ void medic_sight(edict_t* self, edict_t* other)
 
 mframe_t medic_frames_stand[] =
 {
-	ai_stand, 0, medic_idle,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
-	ai_stand, 0, NULL,
+	{ai_stand, 0, medic_idle},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
+	{ai_stand, 0, NULL},
 
 };
 mmove_t medic_move_stand = { FRAME_wait1, FRAME_wait90, medic_frames_stand, NULL };
@@ -396,18 +396,18 @@ void medic_stand(edict_t* self)
 
 mframe_t medic_frames_walk[] =
 {
-	ai_walk, 6.2,	NULL,
-	ai_walk, 18.1,  NULL,
-	ai_walk, 1,		NULL,
-	ai_walk, 9,		NULL,
-	ai_walk, 10,	NULL,
-	ai_walk, 9,		NULL,
-	ai_walk, 11,	NULL,
-	ai_walk, 11.6,  NULL,
-	ai_walk, 2,		NULL,
-	ai_walk, 9.9,	NULL,
-	ai_walk, 14,	NULL,
-	ai_walk, 9.3,	NULL
+	{ai_walk, 6.2f,	NULL},
+	{ai_walk, 18.1f,  NULL},
+	{ai_walk, 1,		NULL},
+	{ai_walk, 9,		NULL},
+	{ai_walk, 10,	NULL},
+	{ai_walk, 9,		NULL},
+	{ai_walk, 11,	NULL},
+	{ai_walk, 11.6f,  NULL},
+	{ai_walk, 2,		NULL},
+	{ai_walk, 9.9f,	NULL},
+	{ai_walk, 14,	NULL},
+	{ai_walk, 9.3f,	NULL}
 };
 mmove_t medic_move_walk = { FRAME_walk1, FRAME_walk12, medic_frames_walk, NULL };
 
@@ -419,13 +419,13 @@ void medic_walk(edict_t* self)
 
 mframe_t medic_frames_run[] =
 {
-	ai_run, 18,		NULL,
-	ai_run, 22.5,	NULL,
-	ai_run, 25.4,	monster_done_dodge,
-	ai_run, 23.4,	NULL,
-	ai_run, 24,		NULL,
-	ai_run, 35.6,	NULL		//pmm
-
+	{ai_run, 18,		NULL},
+	{ai_run, 22.5,	NULL},
+	{ai_run, 25.4f,	NULL},
+	{ai_run, 23.4f,	NULL},
+	{ai_run, 24,		NULL},
+	{ai_run, 35.6f,	NULL}
+	
 };
 mmove_t medic_move_run = { FRAME_run1, FRAME_run6, medic_frames_run, NULL };
 
@@ -461,34 +461,34 @@ void medic_run(edict_t* self)
 
 mframe_t medic_frames_pain1[] =
 {
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL}
 };
 mmove_t medic_move_pain1 = { FRAME_paina1, FRAME_paina8, medic_frames_pain1, medic_run };
 
 mframe_t medic_frames_pain2[] =
 {
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL}
 };
 mmove_t medic_move_pain2 = { FRAME_painb1, FRAME_painb15, medic_frames_pain2, medic_run };
 
@@ -497,10 +497,12 @@ void medic_pain(edict_t* self, edict_t* other, float kick, int damage)
 	monster_done_dodge(self);
 
 	if ((self->health < (self->max_health / 2)))
+	{
 		if (self->mass > 400)
 			self->s.skinnum = 3;
 		else
 			self->s.skinnum = 1;
+	}
 
 	if (level.time < self->pain_debounce_time)
 		return;
@@ -655,36 +657,36 @@ void medic_dead(edict_t* self)
 
 mframe_t medic_frames_death[] =
 {
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL}
 };
 mmove_t medic_move_death = { FRAME_death1, FRAME_death30, medic_frames_death, medic_dead };
 void medic_die(edict_t* self, edict_t* inflictor, edict_t* attacker, int damage, vec3_t point)
@@ -724,22 +726,22 @@ void medic_die(edict_t* self, edict_t* inflictor, edict_t* attacker, int damage,
 
 mframe_t medic_frames_duck[] =
 {
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	monster_duck_down,
-	ai_move, -1,	monster_duck_hold,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,		// PMM - duck up used to be here
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL,
-	ai_move, -1,	monster_duck_up,
-	ai_move, -1,	NULL,
-	ai_move, -1,	NULL
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	monster_duck_down},
+	{ai_move, -1,	monster_duck_hold},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	monster_duck_up},
+	{ai_move, -1,	NULL},
+	{ai_move, -1,	NULL}
 };
 mmove_t medic_move_duck = { FRAME_duck1, FRAME_duck16, medic_frames_duck, medic_run };
 
@@ -747,22 +749,22 @@ mmove_t medic_move_duck = { FRAME_duck1, FRAME_duck16, medic_frames_duck, medic_
 
 mframe_t medic_frames_attackHyperBlaster[] =
 {
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	medic_fire_blaster
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	medic_fire_blaster}
 };
 mmove_t medic_move_attackHyperBlaster = { FRAME_attack15, FRAME_attack30, medic_frames_attackHyperBlaster, medic_run };
 
@@ -777,20 +779,20 @@ void medic_continue(edict_t* self)
 
 mframe_t medic_frames_attackBlaster[] =
 {
-	ai_charge, 0,	NULL,
-	ai_charge, 5,	NULL,
-	ai_charge, 5,	NULL,
-	ai_charge, 3,	NULL,
-	ai_charge, 2,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	medic_fire_blaster,
-	ai_charge, 0,	NULL,
-	ai_charge, 0,	medic_continue	// Change to medic_continue... Else, go to frame 32
+	{ai_charge, 0,	NULL},
+	{ai_charge, 5,	NULL},
+	{ai_charge, 5,	NULL},
+	{ai_charge, 3,	NULL},
+	{ai_charge, 2,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	medic_fire_blaster},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	medic_fire_blaster},	
+	{ai_charge, 0,	NULL},
+	{ai_charge, 0,	medic_continue}	// Change to medic_continue. Else, go to frame 32
 };
 mmove_t medic_move_attackBlaster = { FRAME_attack1, FRAME_attack14, medic_frames_attackBlaster, medic_run };
 
@@ -806,16 +808,16 @@ void medic_hook_launch(edict_t* self)
 
 static vec3_t	medic_cable_offsets[] =
 {
-	45.0,  -9.2, 15.5,
-	48.4,  -9.7, 15.2,
-	47.8,  -9.8, 15.8,
-	47.3,  -9.3, 14.3,
-	45.4, -10.1, 13.1,
-	41.9, -12.7, 12.0,
-	37.8, -15.8, 11.2,
-	34.3, -18.4, 10.7,
-	32.7, -19.7, 10.4,
-	32.7, -19.7, 10.4
+	{45.0f,  -9.2f, 15.5f},
+	{48.4f,  -9.7f, 15.2f},
+	{47.8f,  -9.8f, 15.8f},
+	{47.3f,  -9.3f, 14.3f},
+	{45.4f, -10.1f, 13.1f},
+	{41.9f, -12.7f, 12.0f},
+	{37.8f, -15.8f, 11.2f},
+	{34.3f, -18.4f, 10.7f},
+	{32.7f, -19.7f, 10.4f},
+	{32.7f, -19.7f, 10.4f}
 };
 
 void medic_cable_attack(edict_t* self)
@@ -995,11 +997,13 @@ void medic_cable_attack(edict_t* self)
 	else
 	{
 		if (self->s.frame == FRAME_attack44)
+		{
 			// PMM - medic commander sounds
 			if (self->mass == 400)
 				gi.sound(self, CHAN_WEAPON, sound_hook_heal, 1, ATTN_NORM, 0);
 			else
 				gi.sound(self, CHAN_WEAPON, commander_sound_hook_heal, 1, ATTN_NORM, 0);
+		}
 	}
 
 	// adjust start for beam origin being in middle of a segment
@@ -1046,34 +1050,34 @@ mframe_t medic_frames_attackCable[] =
 	// ROGUE - negated 36-40 so he scoots back from his target a little
 	// ROGUE - switched 33-36 to ai_charge
 	// ROGUE - changed frame 52 to 0 to compensate for changes in 36-40
-		ai_charge, 2,		NULL,					//33
-		ai_charge, 3,		NULL,
-		ai_charge, 5,		NULL,
-		ai_charge, -4.4,	NULL,					//36
-		ai_charge, -4.7,	NULL,					//37
-		ai_charge, -5,	NULL,
-		ai_charge, -6,	NULL,
-		ai_charge, -4,	NULL,					//40
-		ai_charge, 0,	NULL,
-		ai_move, 0,		medic_hook_launch,		//42
-		ai_move, 0,		medic_cable_attack,		//43
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,
-		ai_move, 0,		medic_cable_attack,		//51
-		ai_move, 0,		medic_hook_retract,		//52
-		ai_move, -1.5,	NULL,
-		ai_move, -1.2,	NULL,
-		ai_move, -3,	NULL,
-		ai_move, -2,	NULL,
-		ai_move, 0.3,	NULL,
-		ai_move, 0.7,	NULL,
-		ai_move, 1.2,	NULL,
-		ai_move, 1.3,	NULL					//60
+	{ai_charge, 2,		NULL},					//33
+	{ai_charge, 3,		NULL},
+	{ai_charge, 5,		NULL},
+	{ai_charge, -4.4f,	NULL},					//36
+	{ai_charge, 4.7f,	NULL},
+	{ai_charge, 5,	NULL},
+	{ai_charge, 6,	NULL},
+	{ai_charge, 4,	NULL},
+	{ai_charge, 0,	NULL},
+	{ai_move, 0,		medic_hook_launch},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_cable_attack},
+	{ai_move, 0,		medic_hook_retract},		//52
+	{ai_move, -1.5,	NULL},
+	{ai_move, -1.2f,	NULL},
+	{ai_move, -3,	NULL},
+	{ai_move, -2,	NULL},
+	{ai_move, 0.3f,	NULL},
+	{ai_move, 0.7f,	NULL},
+	{ai_move, 1.2f,	NULL},
+	{ai_move, 1.3f,	NULL}
 };
 mmove_t medic_move_attackCable = { FRAME_attack33, FRAME_attack60, medic_frames_attackCable, medic_run };
 
@@ -1285,7 +1289,7 @@ void medic_finish_spawn(edict_t* self)
 	int		count;
 	int		inc;
 	int		num_summoned; // should be 1, 3, or 5
-	qboolean	behind = false;
+	//qboolean	behind = false;
 	edict_t* designated_enemy;
 
 	//	trace_t		tr;
@@ -1298,7 +1302,7 @@ void medic_finish_spawn(edict_t* self)
 		//FIXME - better place to store this info?
 	if (self->plat2flags < 0)
 	{
-		behind = true;
+		//behind = true;
 		self->plat2flags *= -1;
 	}
 	summonStr = self->plat2flags;
@@ -1422,34 +1426,34 @@ void medic_finish_spawn(edict_t* self)
 mframe_t medic_frames_callReinforcements[] =
 {
 	// ROGUE - 33-36 now ai_charge
-	ai_charge, 2,		NULL,					//33
-	ai_charge, 3,		NULL,
-	ai_charge, 5,		NULL,
-	ai_charge, 4.4,	NULL,					//36
-	ai_charge, 4.7,	NULL,
-	ai_charge, 5,	NULL,
-	ai_charge, 6,	NULL,
-	ai_charge, 4,	NULL,					//40
-	ai_charge, 0,	NULL,
-	ai_move, 0,		medic_start_spawn,		//42
-	ai_move, 0,		NULL,		//43 -- 43 through 47 are skipped
-	ai_move, 0,		NULL,
-	ai_move, 0,		NULL,
-	ai_move, 0,		NULL,
-	ai_move, 0,		NULL,
-	ai_move, 0,		medic_determine_spawn,		//48
-	ai_charge, 0,		medic_spawngrows,			//49
-	ai_move, 0,		NULL,		//50
-	ai_move, 0,		NULL,		//51
-	ai_move, -15,	medic_finish_spawn,		//52
-	ai_move, -1.5,	NULL,
-	ai_move, -1.2,	NULL,
-	ai_move, -3,	NULL,
-	ai_move, -2,	NULL,
-	ai_move, 0.3,	NULL,
-	ai_move, 0.7,	NULL,
-	ai_move, 1.2,	NULL,
-	ai_move, 1.3,	NULL					//60
+	{ai_charge, 2,		NULL},					//33
+	{ai_charge, 3,		NULL},
+	{ai_charge, 5,		NULL},
+	{ai_charge, 4.4,	NULL},					//36
+	{ai_charge, 4.7,	NULL},
+	{ai_charge, 5,	NULL},
+	{ai_charge, 6,	NULL},
+	{ai_charge, 4,	NULL},					//40
+	{ai_charge, 0,	NULL},
+	{ai_move, 0,		medic_start_spawn},		//42
+	{ai_move, 0,		NULL},		//43 -- 43 through 47 are skipped
+	{ai_move, 0,		NULL},
+	{ai_move, 0,		NULL},
+	{ai_move, 0,		NULL},
+	{ai_move, 0,		NULL},
+	{ai_move, 0,		medic_determine_spawn},		//48
+	{ai_charge, 0,		medic_spawngrows},			//49
+	{ai_move, 0,		NULL},		//50
+	{ai_move, 0,		NULL},		//51
+	{ai_move, -15,	medic_finish_spawn},		//52
+	{ai_move, -1.5,	NULL},
+	{ai_move, -1.2,	NULL},
+	{ai_move, -3,	NULL},
+	{ai_move, -2,	NULL},
+	{ai_move, 0.3,	NULL},
+	{ai_move, 0.7,	NULL},
+	{ai_move, 1.2,	NULL},
+	{ai_move, 1.3,	NULL}					//60
 };
 mmove_t medic_move_callReinforcements = { FRAME_attack33, FRAME_attack60, medic_frames_callReinforcements, medic_run };
 
@@ -1655,7 +1659,7 @@ void medic_dodge (edict_t *self, edict_t *attacker, float eta, trace_t *tr)
 void MedicCommanderCache(void)
 {
 	edict_t* newEnt;
-	int	modelidx;
+	//int	modelidx;
 	int i;
 
 	//FIXME - better way to do this?  this is quick and dirty
@@ -1674,8 +1678,8 @@ void MedicCommanderCache(void)
 		G_FreeEdict(newEnt);
 	}
 
-	modelidx = gi.modelindex("models/items/spawngro/tris.md2");
-	modelidx = gi.modelindex("models/items/spawngro2/tris.md2");
+	//modelidx = gi.modelindex("models/items/spawngro/tris.md2");
+	//modelidx = gi.modelindex("models/items/spawngro2/tris.md2");
 }
 
 void medic_duck(edict_t* self, float eta)

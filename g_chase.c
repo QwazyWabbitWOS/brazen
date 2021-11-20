@@ -2,13 +2,13 @@
 
 void UpdateChaseCam(edict_t* ent)
 {
-	vec3_t o, ownerv, goal;
+	vec3_t o, ownerv = { 0 }, goal = { 0 };
 	edict_t* targ;
 	vec3_t forward, right;
 	trace_t trace;
 	int i;
-	vec3_t oldgoal;
-	vec3_t angles;
+	vec3_t oldgoal = { 0 };
+	vec3_t angles = { 0 };
 
 	// is our chase target gone?
 	if (!ent->client->chase_target->inuse
@@ -27,8 +27,8 @@ void UpdateChaseCam(edict_t* ent)
 
 	targ = ent->client->chase_target;
 
-	VectorCopy(targ->s.origin, ownerv);
-	VectorCopy(ent->s.origin, oldgoal);
+	_VectorCopy(targ->s.origin, ownerv);
+	_VectorCopy(ent->s.origin, oldgoal);
 
 	ownerv[2] += targ->viewheight;
 
@@ -99,7 +99,7 @@ void UpdateChaseCam(edict_t* ent)
 void ChaseNext(edict_t* ent)
 {
 	int i;
-	edict_t* e;
+	edict_t* e = { 0 };
 
 	if (!ent->client->chase_target)
 		return;
@@ -127,7 +127,7 @@ void ChaseNext(edict_t* ent)
 void ChasePrev(edict_t* ent)
 {
 	int i;
-	edict_t* e;
+	edict_t* e = { 0 };
 
 	if (!ent->client->chase_target)
 		return;

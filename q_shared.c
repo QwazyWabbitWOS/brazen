@@ -15,13 +15,13 @@ vec3_t vec3_origin = { 0,0,0 };
 
 void RotatePointAroundVector(vec3_t dst, const vec3_t dir, const vec3_t point, float degrees)
 {
-	float	m[3][3];
+	float	m[3][3] = { 0 };
 	float	im[3][3];
 	float	zrot[3][3];
 	float	tmpmat[3][3];
 	float	rot[3][3];
 	int	i;
-	vec3_t vr, vup, vf;
+	vec3_t vr, vup, vf = { 0 };
 
 	vf[0] = dir[0];
 	vf[1] = dir[1];
@@ -114,7 +114,7 @@ void AngleVectors(vec3_t angles, vec3_t forward, vec3_t right, vec3_t up)
 void ProjectPointOnPlane(vec3_t dst, const vec3_t p, const vec3_t normal)
 {
 	float d;
-	vec3_t n;
+	vec3_t n = { 0 };
 	float inv_denom;
 
 	inv_denom = 1.0F / DotProduct(normal, normal);
@@ -138,7 +138,7 @@ void PerpendicularVector(vec3_t dst, const vec3_t src)
 	int	pos;
 	int i;
 	float minelem = 1.0F;
-	vec3_t tempvec;
+	vec3_t tempvec = { 0 };
 
 	/*
 	** find the smallest magnitude axially aligned vector
@@ -232,32 +232,6 @@ void R_ConcatTransforms(float in1[3][4], float in2[3][4], float out[3][4])
 //============================================================================
 
 
-float Q_fabs(float f)
-{
-#if 0
-	if (f >= 0)
-		return f;
-	return -f;
-#else
-	int tmp = *(int*)&f;
-	tmp &= 0x7FFFFFFF;
-	return *(float*)&tmp;
-#endif
-}
-
-#if defined _M_IX86 && !defined C_ONLY
-#pragma warning (disable:4035)
-__declspec(naked) long Q_ftol(float f)
-{
-	static int tmp;
-	__asm fld dword ptr[esp + 4]
-		__asm fistp tmp
-	__asm mov eax, tmp
-	__asm ret
-}
-#pragma warning (default:4035)
-#endif
-
 /*
 ===============
 LerpAngle
@@ -293,7 +267,7 @@ int BoxOnPlaneSide2(vec3_t emins, vec3_t emaxs, struct cplane_s* p)
 	int		i;
 	float	dist1, dist2;
 	int		sides;
-	vec3_t	corners[2];
+	vec3_t	corners[2] = { 0 };
 
 	for (i = 0; i < 3; i++)
 	{
@@ -858,9 +832,8 @@ skipwhite:
 			c = *data++;
 			if (c == '\"' || !c)
 			{
-				com_token[len] = 0;
-				*data_p = data;
-				return com_token;
+				//bugfix from skuller
+				goto finish;
 			}
 			if (len < MAX_TOKEN_CHARS)
 			{
@@ -882,9 +855,10 @@ skipwhite:
 		c = *data;
 	} while (c > 32);
 
+finish:
 	if (len == MAX_TOKEN_CHARS)
 	{
-		//		Com_Printf ("Token exceeded %i chars, discarded.\n", MAX_TOKEN_CHARS);
+		Com_Printf ("Token exceeded %i chars, discarded.\n", MAX_TOKEN_CHARS);
 		len = 0;
 	}
 	com_token[len] = 0;
@@ -920,15 +894,15 @@ void Com_PageInMemory(byte* buffer, int size)
 ============================================================================
 */
 
-// FIXME: replace all Q_stricmp with Q_strcasecmp
-int Q_stricmp(char* s1, char* s2)
-{
-#if defined(WIN32)
-	return _stricmp(s1, s2);
-#else
-	return strcasecmp(s1, s2);
-#endif
-}
+//// FIXME: replace all Q_stricmp with Q_strcasecmp
+//int Q_stricmp(char* s1, char* s2)
+//{
+//#if defined(WIN32)
+//	return _stricmp(s1, s2);
+//#else
+//	return strcasecmp(s1, s2);
+//#endif
+//}
 
 
 int Q_strncasecmp(char* s1, char* s2, int n)
@@ -978,6 +952,28 @@ void Com_sprintf(char* dest, int size, char* fmt, ...)
 	strncpy(dest, bigbuffer, size - 1);
 }
 
+int	Q_stricmp(const char *s1, const char *s2)
+{
+	const unsigned char
+		*uc1 = (const unsigned char *)s1,
+		*uc2 = (const unsigned char *)s2;
+
+	while (tolower(*uc1) == tolower(*uc2++))
+		if (*uc1++ == '\0')
+			return (0);
+	return (tolower(*uc1) - tolower(*--uc2));
+}
+
+/**
+ A wrapper for strncpy that unlike strncpy, always terminates strings with NUL.
+ */
+//void Q_strncpy(char* pszDest, const char* pszSrc, int nDestSize)
+//{
+//	strncpy(pszDest, pszSrc, nDestSize);
+//	pszDest[nDestSize - 1] = '\0';
+//}
+
+
 /*
 =====================================================================
 
@@ -996,9 +992,8 @@ key and returns the associated value, or an empty string.
 */
 char* Info_ValueForKey(char* s, char* key)
 {
-	char	pkey[512];
-	static	char value[2][512];	// use two buffers so compares
-								// work without stomping on each other
+	char	pkey[512] = {0};
+	static	char value[2][MAX_INFO_STRING]; // Use two buffers so compares work without stomping on each other.
 	static	int	valueindex;
 	char* o;
 
@@ -1039,8 +1034,8 @@ char* Info_ValueForKey(char* s, char* key)
 void Info_RemoveKey(char* s, char* key)
 {
 	char* start;
-	char	pkey[512];
-	char	value[512];
+	char	pkey[512] = {0};
+	char	value[512] = {0};
 	char* o;
 
 	if (strstr(key, "\\"))
@@ -1061,7 +1056,7 @@ void Info_RemoveKey(char* s, char* key)
 				return;
 			*o++ = *s++;
 		}
-		*o = 0;
+		*o = '\0';
 		s++;
 
 		o = value;
@@ -1071,7 +1066,7 @@ void Info_RemoveKey(char* s, char* key)
 				return;
 			*o++ = *s++;
 		}
-		*o = 0;
+		*o = '\0';
 
 		if (!strcmp(key, pkey))
 		{

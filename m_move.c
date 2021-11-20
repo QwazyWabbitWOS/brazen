@@ -64,8 +64,8 @@ realcheck:
 	start[2] = mins[2];
 
 	// the midpoint must be within 16 of the bottom
-	start[0] = stop[0] = (mins[0] + maxs[0]) * 0.5;
-	start[1] = stop[1] = (mins[1] + maxs[1]) * 0.5;
+	start[0] = stop[0] = (mins[0] + maxs[0])*0.5f;
+	start[1] = stop[1] = (mins[1] + maxs[1])*0.5f;
 
 	//PGM
 #ifdef ROGUE_GRAVITY

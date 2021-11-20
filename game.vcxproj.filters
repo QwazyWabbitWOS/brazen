@@ -335,4 +335,7 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GNUmakefile" />
+  </ItemGroup>
 </Project>

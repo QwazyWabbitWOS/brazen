@@ -225,11 +225,8 @@ qboolean TwoWeaponComboOk(edict_t* ent, int rtag, int ltag)
 void SetupItemModels(edict_t* ent)
 {
 	gitem_t* right, * left;
-	qboolean two;
 	char* viewmodel = NULL;
 	int i, w2tag;
-
-	two = false;
 
 	right = NULL;
 	if (ent->client->pers.cstats[CSTAT_RIGHTHAND] > II_HANDS)

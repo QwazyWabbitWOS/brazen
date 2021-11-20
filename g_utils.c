@@ -64,7 +64,7 @@ findradius (origin, radius)
 */
 edict_t* findradius(edict_t* from, vec3_t org, float rad)
 {
-	vec3_t	eorg;
+	vec3_t	eorg = { 0 };
 	int		j;
 
 	if (!from)
@@ -514,7 +514,7 @@ char* G_CopyString(char* in)
 {
 	char* out;
 
-	out = gi.TagMalloc(strlen(in) + 1, TAG_LEVEL);
+	out = gi.TagMalloc((int)strlen(in) + 1, TAG_LEVEL);
 	strcpy(out, in);
 	return out;
 }
