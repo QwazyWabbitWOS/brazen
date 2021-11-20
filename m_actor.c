@@ -108,7 +108,7 @@ void actor_stand(edict_t* self)
 
 
 /*
-mframe_t actor_frames_walk [] =
+mframe_t actor_frames_walk[] =
 {
 	{ai_walk, 0,  NULL},
 	{ai_walk, 6,  NULL},
@@ -457,10 +457,10 @@ mframe_t actor_frames_attack[] =
 	{ai_charge, -2,  actor_fire},
 	{ai_charge, -2,  NULL},
 	{ai_charge, 3,   NULL},
-	ai_charge, 3,   NULL,
-	ai_charge, 3,   NULL,
-	ai_charge, 3,   NULL,
-	ai_charge, 3,   NULL,
+	{ai_charge, 3,   NULL},
+	{ai_charge, 3,   NULL},
+	{ai_charge, 3,   NULL},
+	{ai_charge, 3,   NULL},
 	{ai_charge, 2,   NULL}
 };
 mmove_t actor_move_attack = { FRAME_attack1, FRAME_attack8, actor_frames_attack, actor_run };

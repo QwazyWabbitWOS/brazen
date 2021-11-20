@@ -1210,7 +1210,7 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 
 		//strcpy (original_entstring, entstring); 
 		// GRIM - FIXES problem with ware2, boss2 etc
-		strncpy(original_entstring, entstring, strlen(entstring) - 1);
+		strncpy(original_entstring, entstring, strlen(original_entstring) - 1);
 
 		// load modified entstring from file
 		sprintf(path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);

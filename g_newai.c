@@ -504,11 +504,13 @@ qboolean monsterlost_checkhint(edict_t* self)
 	edict_t* closest;
 	float		closest_range = 1000000;
 	edict_t* start, * destination;
-	int			field;
-	int			count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0;
+	//int		field;
+	int		count1 = 0, count2 = 0;
+	//int	count3 = 0;
+	int		count4 = 0, count5 = 0;
 	float		r;
 	int			i;
-	qboolean	hint_path_represented[MAX_HINT_CHAINS];
+	qboolean	hint_path_represented[MAX_HINT_CHAINS] = { 0 };
 
 	// if there are no hint paths on this map, exit immediately.
 	if (!hint_paths_present)
@@ -525,7 +527,7 @@ qboolean monsterlost_checkhint(edict_t* self)
 
 	monster_pathchain = NULL;
 
-	field = FOFS(classname);
+	//field = FOFS(classname);
 
 	// find all the hint_paths.
 	// FIXME - can we not do this every time?
@@ -674,7 +676,7 @@ qboolean monsterlost_checkhint(edict_t* self)
 
 	count1 = 0;
 	count2 = 0;
-	count3 = 0;
+	//count3 = 0;
 	count4 = 0;
 	count5 = 0;
 
@@ -906,6 +908,7 @@ qboolean monsterlost_checkhint(edict_t* self)
 
 	return true;
 }
+
 /*
 qboolean monsterlost_checkhint2 (edict_t *self)
 {
@@ -1311,10 +1314,10 @@ void InitHintPaths(void)
 		//			else
 		//				gi.dprintf ("\nhint_path #%d invalid\n\n", i);
 	}
-	//	if (errors)
-	//		gi.error ("hint_path processing failed, fix errors\n");
-	//	if ((g_showlogic) && (g_showlogic->value))
-	//		gi.dprintf ("hint_path processing done, %d hint paths linked\n", num_hint_paths);
+	if (errors)
+		gi.dprintf("hint_path processing failed, fix errors\n");
+	if ((g_showlogic) && (g_showlogic->value))
+		gi.dprintf("hint_path processing done, %d hint paths linked\n", num_hint_paths);
 }
 
 // *****************************

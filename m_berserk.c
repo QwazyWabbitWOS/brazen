@@ -449,27 +449,27 @@ void berserk_jump_wait_land(edict_t* self)
 // GRIM 19/10/2001 11:52PM - no jump frames, so make some up
 mframe_t berserk_frames_jump[] =
 {
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, berserk_jump_now,
-	ai_move, 0, berserk_jump_wait_land,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, berserk_jump_now},
+	{ai_move, 0, berserk_jump_wait_land},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL}
 };
 mmove_t berserk_move_jump = { FRAME_slam1, FRAME_slam8, berserk_frames_jump, berserk_run };
 
 mframe_t berserk_frames_jump2[] =
 {
-	ai_move, -8, NULL,
-	ai_move, -4, NULL,
-	ai_move, -4, NULL,
-	ai_move, 0, berserk_jump_now,
-	ai_move, 0, berserk_jump_wait_land,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL,
-	ai_move, 0, NULL
+	{ai_move, -8, NULL},
+	{ai_move, -4, NULL},
+	{ai_move, -4, NULL},
+	{ai_move, 0, berserk_jump_now},
+	{ai_move, 0, berserk_jump_wait_land},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL},
+	{ai_move, 0, NULL}
 };
 mmove_t berserk_move_jump2 = { FRAME_slam1, FRAME_slam8, berserk_frames_jump2, berserk_run };
 /*

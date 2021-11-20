@@ -1041,6 +1041,9 @@ void SV_Physics_NewToss(edict_t* ent)
 	else
 		wasonground = false;
 
+	if (wasonground)
+		; // do nothing
+
 	wasinwater = ent->waterlevel;
 
 	// find out what we're sitting on.
