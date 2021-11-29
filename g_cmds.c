@@ -816,7 +816,7 @@ void Cmd_Wave_f(edict_t* ent)
 	}
 }
 
-// Mute spammy players.
+// Manage flood protection.
 qboolean CheckFlood(edict_t* ent)
 {
 	int	i;

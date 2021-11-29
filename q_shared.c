@@ -893,6 +893,7 @@ void Com_PageInMemory(byte* buffer, int size)
 
 ============================================================================
 */
+
 // fast "C" macros
 #define Q_isupper(c)    ((c) >= 'A' && (c) <= 'Z')
 #define Q_islower(c)    ((c) >= 'a' && (c) <= 'z')
@@ -1021,15 +1022,6 @@ void Com_sprintf(char* dest, int size, char* fmt, ...)
 			"Input was: %s\n", __func__, len, size, bigbuffer);
 	}
 }
-
-/**
- A wrapper for strncpy that unlike strncpy, always terminates strings with NUL.
- */
-//void Q_strncpy(char* pszDest, const char* pszSrc, int nDestSize)
-//{
-//	strncpy(pszDest, pszSrc, nDestSize);
-//	pszDest[nDestSize - 1] = '\0';
-//}
 
 
 /*

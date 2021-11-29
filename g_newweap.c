@@ -336,15 +336,15 @@ void prox_land(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t* surf)
 		return;
 	}
 
-	if (plane->normal)
+	//if (plane->normal)
+	//{
+	VectorMA(ent->s.origin, -10.0, plane->normal, land_point);
+	if (gi.pointcontents(land_point) & (CONTENTS_SLIME | CONTENTS_LAVA))
 	{
-		VectorMA(ent->s.origin, -10.0, plane->normal, land_point);
-		if (gi.pointcontents(land_point) & (CONTENTS_SLIME | CONTENTS_LAVA))
-		{
-			Prox_Explode(ent);
-			return;
-		}
+		Prox_Explode(ent);
+		return;
 	}
+	//}
 
 	if ((other->svflags & SVF_MONSTER) || other->client || (other->svflags & SVF_DAMAGEABLE))
 	{
