@@ -837,8 +837,8 @@ void func_explosive_explode(edict_t* self, edict_t* inflictor, edict_t* attacker
 					master = master->teamchain;
 					if (!master)
 					{
-						//						if ((g_showlogic) && (g_showlogic->value))
-						//							gi.dprintf ("Couldn't find myself in master's chain, ignoring!\n");
+						//if ((g_showlogic) && (g_showlogic->value))
+						//	gi.dprintf("Couldn't find myself in master's chain, ignoring!\n");
 					}
 				}
 			}

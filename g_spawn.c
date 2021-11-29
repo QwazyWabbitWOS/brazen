@@ -988,9 +988,10 @@ if (skill_level < 1)
 		com_token = COM_Parse(&entities);
 		if (!entities)
 			break;
-		if (com_token[0] != '{')
+		if (com_token[0] != '{') {
 			gi.error("ED_LoadFromFile: found %s when expecting {", com_token);
-
+			return;
+		}
 		if (!ent)
 			ent = g_edicts;
 		else
@@ -1044,9 +1045,14 @@ if (skill_level < 1)
 
 		//PGM - do this before calling the spawn function so it can be overridden.
 #ifdef ROGUE_GRAVITY
-		ent->gravityVector[0] = 0.0;
-		ent->gravityVector[1] = 0.0;
-		ent->gravityVector[2] = -1.0;
+		if (ent)
+		{
+			ent->gravityVector[0] = 0.0f;
+			ent->gravityVector[1] = 0.0f;
+			ent->gravityVector[2] = -1.0f;
+		}
+		else
+			continue;
 #endif
 		//PGM
 
@@ -1212,7 +1218,7 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 
 		//strcpy (original_entstring, entstring); 
 		// GRIM - FIXES problem with ware2, boss2 etc
-		strncpy(original_entstring, entstring, strlen(original_entstring) - 1);
+		Q_strncpyz(original_entstring, strlen(original_entstring) - 1, entstring);
 
 		// load modified entstring from file
 		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
