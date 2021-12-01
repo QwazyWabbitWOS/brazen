@@ -14,7 +14,7 @@
 // the "gameversion" client command will print this plus compile date
 // GRIM 26/06/2001 10:22AM - it's dirty dammit!!
 //#define	GAMEVERSION	"baseq2"
-#define	GAMEVERSION	"brazen"
+#define	GAMEVERSION	"BraZen 2.0"
 // GRIM
 
 // protocol bytes that can be directly added to messages

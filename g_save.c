@@ -160,7 +160,7 @@ is loaded.
 */
 void InitGame(void)
 {
-	gi.dprintf("==== InitGame %s ====\n", GAMEVERSION);
+	gi.dprintf("==== InitGame %s %s ====\n", GAMEVERSION, __DATE__);
 
 	gun_x = gi.cvar("gun_x", "0", 0);
 	gun_y = gi.cvar("gun_y", "0", 0);
@@ -174,7 +174,7 @@ void InitGame(void)
 
 	sv_stopspeed = gi.cvar("sv_stopspeed", "100", 0);		// PGM - was #define in g_phys.c
 
-//ROGUE
+	//ROGUE
 	g_showlogic = gi.cvar("g_showlogic", "0", 0);
 	huntercam = gi.cvar("huntercam", "1", CVAR_SERVERINFO | CVAR_LATCH);
 	strong_mines = gi.cvar("strong_mines", "0", 0);
