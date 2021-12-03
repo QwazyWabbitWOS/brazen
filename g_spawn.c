@@ -1190,17 +1190,17 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 	//OldSpawnEntities (mapname, entstring, spawnpoint);
 	//return; // GRIM TEMP
 
-	if (original_entstring)
-	{
-		gi.TagFree(original_entstring);
-		original_entstring = NULL;
-	}
+	//if (original_entstring)
+	//{
+	//	gi.TagFree(original_entstring);
+	//	original_entstring = NULL;
+	//}
 
-	if (new_entstring)
-	{
-		gi.TagFree(new_entstring);
-		new_entstring = NULL;
-	}
+	//if (new_entstring)
+	//{
+	//	gi.TagFree(new_entstring);
+	//	new_entstring = NULL;
+	//}
 
 	if (!strstr(mapname, ".")) // is this a map?
 	{
@@ -1208,18 +1208,21 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 		char path[MAX_OSPATH];
 
 		// save original entstring for later
-		original_entstring = (char*)gi.TagMalloc((int)strlen(entstring), TAG_GAME);
-		if (original_entstring == NULL)
-		{
-			gi.error("SpawnEntities: can't allocate original_entstring.\n");
-			return;
-		}
-
+		//original_entstring = (char*)gi.TagMalloc((int)strlen(entstring), TAG_GAME);
+		//if (original_entstring == NULL)
+		//{
+		//	gi.error("SpawnEntities: can't allocate original_entstring.\n");
+		//	return;
+		//}
 
 		//strcpy (original_entstring, entstring); 
 		// GRIM - FIXES problem with ware2, boss2 etc
-		Q_strncpyz(original_entstring, strlen(original_entstring) - 1, entstring);
+		//strncpy(original_entstring,  entstring, strlen(original_entstring) - 1);
 
+		//QW// Replace all the fussing around above.
+		original_entstring = G_CopyString(entstring);
+		//QW//
+		 
 		// load modified entstring from file
 		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
 		entfile = fopen(path, "rb");
