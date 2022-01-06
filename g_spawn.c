@@ -801,7 +801,7 @@ void Svcmd_EntZ_f(void)
 				//CreateDirectory (path, NULL);
 
 		// create the file
-		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", gamedir->string, current_mapname);
 		entfile = fopen(path, "wb");
 		if (entfile == NULL)
 		{
@@ -820,7 +820,10 @@ void Svcmd_EntZ_f(void)
 // GRIM
 
 
-// GRIM 10/10/2001 10:12AM - .ant stupport - extra added ent's
+// GRIM 10/10/2001 10:12AM - .ant support - extra added ent's
+//QW: All of this is really unnecessary since an ent file completely
+// replaces map entities and "adding" ents would simply be a matter
+// of appending them to the ent file but the work is done so leave it alone.
 int SpawnAnts(char* mapname, float skill_level)
 {
 	edict_t* ent;
@@ -839,12 +842,12 @@ int SpawnAnts(char* mapname, float skill_level)
 		char path[MAX_OSPATH];
 
 		// load adition entstring from file (and ANT file)
-		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ant", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ant", gamedir->string, current_mapname);
 
 		entfile = fopen(path, "rb");
 		if (entfile != NULL)
 		{
-			gi.dprintf("loading ants from \"%s\"\n", path);
+			gi.dprintf("Loading ants from \"%s\"\n", path);
 			if (!fseek(entfile, 0L, SEEK_END))
 			{
 				long entfile_length;
@@ -1182,7 +1185,6 @@ Creates a server's entity / program execution context by
 parsing textual entity definitions out of an ent file.
 ==============
 */
-// GRIM 7/10/2001 12:33AM - EntZ
 void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 {
 	strcpy(current_mapname, mapname);
@@ -1224,11 +1226,11 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 		//QW//
 		 
 		// load modified entstring from file
-		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", GAMEVERSION, current_mapname);
+		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", gamedir->string, current_mapname);
 		entfile = fopen(path, "rb");
 		if (entfile != NULL)
 		{
-			gi.dprintf("loading ents from \"%s\"\n", path);
+			gi.dprintf("Loading ents from \"%s\"\n", path);
 			if (!fseek(entfile, 0L, SEEK_END))
 			{
 				long entfile_length;

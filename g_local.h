@@ -12,10 +12,8 @@
 // GRIM
 
 // the "gameversion" client command will print this plus compile date
-// GRIM 26/06/2001 10:22AM - it's dirty dammit!!
-//#define	GAMEVERSION	"baseq2"
 #define	GAMEVERSION	"BraZen 2.0"
-// GRIM
+#define	GAMENAME	"brazen"
 
 // protocol bytes that can be directly added to messages
 #define	svc_muzzleflash		1
@@ -272,21 +270,23 @@ typedef struct
 #define WEAP_BFG				11
 
 // GRIM 26/06/2001 10:20AM - new inventory system
+
 typedef struct gitem_s
 {
-	char		*classname;
-	char		*world_model;
-	char		*view_model;
+	char* classname;
+	char* world_model;
+	char* view_model;
 
-	char		*icon;
-	char		*pickup_name;
-	int             tag; // II_### tag
-	int             quantity;
-	int             ammoTag;
-	int             flags;			// IT_* flags
-	int             size;
-	char		*precaches;		// string of all models, sounds, and images this item will use
+	char* icon;
+	char* pickup_name;
+	int   tag;          // II_### tag
+	int   quantity;
+	int   ammoTag;
+	int   flags;        // IT_* flags
+	int   size;
+	char* precaches;    // string of all models, sounds, and images this item will use
 } gitem_t;
+
 // GRIM
 
 
@@ -621,6 +621,7 @@ extern	cvar_t	*spectator_password;
 extern	cvar_t	*needpass;
 extern	cvar_t	*g_select_empty;
 extern	cvar_t	*dedicated;
+extern	cvar_t* gamedir;
 
 extern	cvar_t	*filterban;
 

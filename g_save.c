@@ -183,10 +183,11 @@ void InitGame(void)
 
 		// noset vars
 	dedicated = gi.cvar("dedicated", "0", CVAR_NOSET);
+	gamedir = gi.cvar("gamedir", "brazen", CVAR_NOSET);
 
 	// latched vars
 	sv_cheats = gi.cvar("cheats", "0", CVAR_SERVERINFO | CVAR_LATCH);
-	gi.cvar("gamename", GAMEVERSION, CVAR_SERVERINFO | CVAR_LATCH);
+	gi.cvar("gamename", GAMENAME, CVAR_SERVERINFO | CVAR_LATCH);
 	gi.cvar("gamedate", __DATE__, CVAR_SERVERINFO | CVAR_LATCH);
 
 	maxclients = gi.cvar("maxclients", "4", CVAR_SERVERINFO | CVAR_LATCH);

@@ -18,35 +18,35 @@ gitem_t	itemlist[] =
 /*QUAKED do_not_put_me_in_map - hands (.3 .3 1) (-16 -16 -16) (16 16 16)
 */
 	{
-		"do_not_put_me_in_map",
-		"",
-		"",
+		/* classname */ "hands", // was: "do_not_put_me_in_map",
+		/* world_model */ "",
+		/*view_model */ "",
 		/* icon */      "w_hands",
-		/* pickup */	"HANDS",
+		/* pickup */    "HANDS",
 		/* tag */       II_HANDS,
 		/* quant */     0,
-		/* ammoTag */	0,
-				IT_WEAPON,
-				0,
-				/* precache */ ""
-					},
+		/* ammoTag */   0,
+		/* flags */     IT_WEAPON,
+		/* size */     0,
+		/* precache */ ""
+	},
 
 
 	/*QUAKED weapon_pistol (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_pistol",
-			"models/g_pistol/tris.md2",
-			"models/v_pistol/tris.md2",
-			/* icon */      "w_pistol",
-			/* pickup */	"Pistol",
-			/* tag */       II_PISTOL,
-			/* quant */     24,
-			/* ammoTag */	II_PISTOL_CLIP,
-					IT_WEAPON,
-					10,
-					/* precache */ "models/v_twin_pistols/tris.md2 weapons/blastf1a.wav weapons/pistol_clipin.wav weapons/pistol_clipout.wav"
-						},
+	{
+		"weapon_pistol",
+		"models/g_pistol/tris.md2",
+		"models/v_pistol/tris.md2",
+		/* icon */      "w_pistol",
+		/* pickup */	"Pistol",
+		/* tag */       II_PISTOL,
+		/* quant */     24,
+		/* ammoTag */	II_PISTOL_CLIP,
+		IT_WEAPON,
+		10,
+		/* precache */ "models/v_twin_pistols/tris.md2 weapons/blastf1a.wav weapons/pistol_clipin.wav weapons/pistol_clipout.wav"
+	},
 
 	/*QUAKED ammo_pistolclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
@@ -1597,7 +1597,7 @@ void Touch_Item(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t* surf)
 		else
 			G_FreeEdict(ent);
 	}
-	else if (deathmatch->value || coop->value)
+	else if (deathmatch->value)
 	{
 		SetRespawn(ent, 12);
 		//SetRespawn (ent, 4);

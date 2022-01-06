@@ -902,7 +902,7 @@ void Cmd_Say_f(edict_t* ent, qboolean team, qboolean arg0)
 
 	if (flood_msgs->value)
 	{
-		if (!CheckFlood(ent))
+		if (CheckFlood(ent))
 			return;
 	}
 
