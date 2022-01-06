@@ -30,6 +30,7 @@ cvar_t* dedicated;
 cvar_t* gamedir;
 
 cvar_t* filterban;
+cvar_t* flashlightmode;
 
 cvar_t* sv_maxvelocity;
 cvar_t* sv_gravity;

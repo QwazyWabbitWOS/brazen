@@ -240,6 +240,9 @@
     <ClCompile Include="z_wedit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="flashlight.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="g_local.h">
@@ -327,6 +330,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="g_target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flashlight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

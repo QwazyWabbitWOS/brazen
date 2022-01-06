@@ -624,6 +624,7 @@ extern	cvar_t	*dedicated;
 extern	cvar_t* gamedir;
 
 extern	cvar_t	*filterban;
+extern	cvar_t* flashlightmode; //QW/ mode for flashlight code.
 
 extern	cvar_t	*sv_gravity;
 extern	cvar_t	*sv_maxvelocity;
@@ -1220,6 +1221,10 @@ struct gclient_s
 	float		invincible_framenum;
 	float		breather_framenum;
 	float		enviro_framenum;
+
+	// flashlight
+	edict_t* flashlight;
+	int		flashtype;
 
 	qboolean	grenade_blew_up;
 	float		grenade_time;

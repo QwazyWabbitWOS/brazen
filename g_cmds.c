@@ -1,5 +1,6 @@
 #include "g_local.h"
 #include "m_player.h"
+#include "flashlight.h"
 
 
 char* ClientTeam(edict_t* ent)
@@ -1045,6 +1046,8 @@ void ClientCommand(edict_t* ent)
 		Cmd_Wave_f(ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+	else if (Q_stricmp(cmd, "flashlight") == 0)
+		Cmd_Flashlight(ent);
 	// GRIM 26/06/2001 12:49PM - if all else fails, check with z_cmds.c::z_ClientCommand()
 	else if (z_ClientCommand(ent))
 	{
