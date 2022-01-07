@@ -31,6 +31,22 @@ gitem_t	itemlist[] =
 		/* precache */ ""
 	},
 
+	/* weapon_blaster (.3 .3 1) (-16 -16 -16) (16 16 16)
+	always owned, never in the world
+	*/
+	{
+		"weapon_blaster",
+		"",
+		"models/weapons/v_blast/tris.md2",
+		/* icon */		"w_blaster",
+		/* pickup */	"Blaster",
+		II_BLASTER,
+		0,
+		0,
+		IT_WEAPON | IT_STAY_COOP,
+		0,
+		/* precache */ "weapons/blastf1a.wav misc/lasfly.wav"
+	},
 
 	/*QUAKED weapon_pistol (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/

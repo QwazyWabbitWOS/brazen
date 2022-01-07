@@ -704,34 +704,30 @@ but is called after each death and level change in deathmatch
 void InitClientPersistant(gclient_t* client)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
-//gitem_t		*item;
-// GRIM
+	//gitem_t		*item;
+	// GRIM
 
 	memset(&client->pers, 0, sizeof(client->pers));
 
 	// GRIM 26/06/2001 1:31PM - new inventory system
-	/*
-item = FindItem("Blaster");
-client->pers.selected_item = ITEM_INDEX(item);
-client->pers.inventory[client->pers.selected_item] = 1;
 
-client->pers.weapon = item;
-*/
-// GRIM
+	//item = FindItem("Blaster");
+	//client->pers.selected_item = ITEM_INDEX(item);
+	//client->pers.inventory[client->pers.selected_item] = 1;
+	//client->pers.weapon = item;
+	// GRIM
 
 	client->pers.health = 100;
 	client->pers.max_health = 100;
 
 	// GRIM 26/06/2001 1:31PM - new inventory system
-	/*
-client->pers.max_bullets	= 200;
-client->pers.max_shells		= 100;
-client->pers.max_rockets	= 50;
-client->pers.max_grenades	= 50;
-client->pers.max_cells		= 200;
-client->pers.max_slugs		= 50;
-*/
-	client->pers.hgren_type = II_FRAG_HANDGRENADE;
+	//client->pers.max_bullets = 200;
+	//client->pers.max_shells = 100;
+	//client->pers.max_rockets = 50;
+	//client->pers.max_grenades = 50;
+	//client->pers.max_cells = 200;
+	//client->pers.max_slugs = 50;
+	//client->pers.hgren_type = II_FRAG_HANDGRENADE;
 	// GRIM
 
 	client->pers.connected = true;

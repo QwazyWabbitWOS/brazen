@@ -305,7 +305,7 @@ void use_target_changelevel(edict_t* self, edict_t* other, edict_t* activator)
 		}
 
 		// allow a single player to force exit, no range check when cvar is set.
-		if (!exit_any->value)
+		if (!exit_any->value) // default = 1
 		{
 			// if other players are too far away, no exit
 			for (player = 1; player <= game.maxclients; player++)

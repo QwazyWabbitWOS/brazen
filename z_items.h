@@ -3,6 +3,7 @@
 typedef enum {
 	II_NONE,        // SHOULD NEVER HAPPEN
 	II_HANDS,
+	II_BLASTER,
 	II_PISTOL,
 	II_TWIN_PISTOL,
 	II_SUBMACH,
