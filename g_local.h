@@ -624,7 +624,8 @@ extern	cvar_t	*dedicated;
 extern	cvar_t* gamedir;
 
 extern	cvar_t	*filterban;
-extern	cvar_t* flashlightmode; //QW/ mode for flashlight code.
+extern	cvar_t* flashlightmode; //QW mode for flashlight code.
+extern	cvar_t* exit_any;		//QW allow a single player to force exit.
 
 extern	cvar_t	*sv_gravity;
 extern	cvar_t	*sv_maxvelocity;

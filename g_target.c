@@ -304,23 +304,27 @@ void use_target_changelevel(edict_t* self, edict_t* other, edict_t* activator)
 			}
 		}
 
-		// if other players are too far away, no exit
-		for (player = 1; player <= game.maxclients; player++)
+		// allow a single player to force exit, no range check when cvar is set.
+		if (!exit_any->value)
 		{
-			ent = &g_edicts[player];
-			if (!ent->inuse)
-				continue;
-			if (!ent->client)
-				continue;
-			if (ent->client->pers.spectator)
-				continue;
-			if (ent->movetype == MOVETYPE_NOCLIP)
-				continue;
+			// if other players are too far away, no exit
+			for (player = 1; player <= game.maxclients; player++)
+			{
+				ent = &g_edicts[player];
+				if (!ent->inuse)
+					continue;
+				if (!ent->client)
+					continue;
+				if (ent->client->pers.spectator)
+					continue;
+				if (ent->movetype == MOVETYPE_NOCLIP)
+					continue;
 
-			VectorSubtract(activator->s.origin, ent->s.origin, v);
+				VectorSubtract(activator->s.origin, ent->s.origin, v);
 
-			if (VectorLength(v) > 512)
-				return;
+				if (VectorLength(v) > 512)
+					return;
+			}
 		}
 	}
 	// GRIM
