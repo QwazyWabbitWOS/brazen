@@ -66,115 +66,115 @@ gitem_t	itemlist[] =
 
 	/*QUAKED ammo_pistolclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_pistolclip",
-			"models/a_pistol/tris.md2",
-			NULL,
-			/* icon */      "a_pistol",
-			/* pickup */	"Pistol Clip",
-			/* tag */       II_PISTOL_CLIP,
-			/* quant */     24,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					6,
-					/* precache */ ""
-						},
+	{
+		"ammo_pistolclip",
+		"models/a_pistol/tris.md2",
+		NULL,
+		/* icon */      "a_pistol",
+		/* pickup */	"Pistol Clip",
+		/* tag */       II_PISTOL_CLIP,
+		/* quant */     24,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED weapon_submach (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_submach",
-			"models/g_submach/tris.md2",
-			"models/v_submach/tris.md2",
-			/* icon */      "w_submach",
-			/* pickup */	"Sub-Machinegun",
-			/* tag */       II_SUBMACH,
-			/* quant */     30,
-			/* ammoTag */	II_SUBMACH_CLIP,
-					IT_WEAPON,
-					10,
-					/* precache */ "models/v_twin_submach/tris.md2 weapons/blastf1a.wav weapons/sub_clipin.wav weapons/sub_clipout.wav"
-						},
+	{
+		"weapon_submach",
+		"models/g_submach/tris.md2",
+		"models/v_submach/tris.md2",
+		/* icon */ "w_submach",
+		/* pickup */ "Sub-Machinegun",
+		/* tag */ II_SUBMACH,
+		/* quant */ 30,
+		/* ammoTag */ II_SUBMACH_CLIP,
+		IT_WEAPON,
+		10,
+		/* precache */ "models/v_twin_submach/tris.md2 weapons/blastf1a.wav weapons/sub_clipin.wav weapons/sub_clipout.wav"
+	},
 
 	/*QUAKED ammo_submachclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_submachclip",
-			"models/a_submach/tris.md2",
-			NULL,
-			/* icon */      "a_submach",
-			/* pickup */	"Sub-Machingun Clip",
-			/* tag */       II_SUBMACH_CLIP,
-			/* quant */     30,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					6,
-					/* precache */ ""
-						},
+	{
+		"ammo_submachclip",
+		"models/a_submach/tris.md2",
+		NULL,
+		/* icon */      "a_submach",
+		/* pickup */	"Sub-Machingun Clip",
+		/* tag */       II_SUBMACH_CLIP,
+		/* quant */     30,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED weapon_shotgun (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_shotgun",
-			"models/g_shotgun/tris.md2",
-			"models/v_shotgun/tris.md2",
-			/* icon */      "w_shotgun",
-			/* pickup */	"Shotgun",
-			/* tag */       II_SHOTGUN,
-			/* quant */     18,
-			/* ammoTag */	II_SHOTGUN_CLIP,
-					IT_WEAPON | IT_SLING,
-					30,
-					/* precache */ "models/v_twin_shotguns/tris.md2 weapons/sshotf1b.wav weapons/shotgun_clipin.wav weapons/shotgun_clipout.wav weapons/shotcock.wav"
-						},
+	{
+		"weapon_shotgun",
+		"models/g_shotgun/tris.md2",
+		"models/v_shotgun/tris.md2",
+		/* icon */      "w_shotgun",
+		/* pickup */	"Shotgun",
+		/* tag */       II_SHOTGUN,
+		/* quant */     18,
+		/* ammoTag */	II_SHOTGUN_CLIP,
+		IT_WEAPON | IT_SLING,
+		30,
+		/* precache */ "models/v_twin_shotguns/tris.md2 weapons/sshotf1b.wav weapons/shotgun_clipin.wav weapons/shotgun_clipout.wav weapons/shotcock.wav"
+	},
 
 	/*QUAKED ammo_shotgunclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_shotgunclip",
-			"models/a_shotgun/tris.md2",
-			NULL,
-			/* icon */      "a_shotgun",
-			/* pickup */	"Shotgun Clip",
-			/* tag */       II_SHOTGUN_CLIP,
-			/* quant */     18,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					12,
-					/* precache */ ""
-						},
+	{
+		"ammo_shotgunclip",
+		"models/a_shotgun/tris.md2",
+		NULL,
+		/* icon */      "a_shotgun",
+		/* pickup */	"Shotgun Clip",
+		/* tag */       II_SHOTGUN_CLIP,
+		/* quant */     18,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		12,
+		/* precache */ ""
+	},
 
 	/*QUAKED weapon_fraghgrenade (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_fraghgrenade",
-			"models/g_handgrenade/tris.md2",
-			"models/weapons/v_handgr/tris.md2",
-			/* icon */      "a_fraghgren",
-			/* pickup */	"Fragmentation Hand Grenade",
-			/* tag */       II_FRAG_HANDGRENADE,
-			/* quant */     2,
-			/* ammoTag */	II_FRAG_HANDGRENADE,
-					IT_WEAPON | IT_AMMO,
-					6,
-					/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
-						},
+	{
+		"weapon_fraghgrenade",
+		"models/g_handgrenade/tris.md2",
+		"models/weapons/v_handgr/tris.md2",
+		/* icon */      "a_fraghgren",
+		/* pickup */	"Fragmentation Hand Grenade",
+		/* tag */       II_FRAG_HANDGRENADE,
+		/* quant */     2,
+		/* ammoTag */	II_FRAG_HANDGRENADE,
+		IT_WEAPON | IT_AMMO,
+		6,
+		/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
+	},
 
 	/*QUAKED weapon_emphgrenade (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_emphgrenade",
-			"models/g_emphandgrenade/tris.md2",
-			"models/v_emphandgr/tris.md2",
-			/* icon */      "a_emphgren",
-			/* pickup */	"EMP Hand Grenade",
-			/* tag */       II_EMP_HANDGRENADE,
-			/* quant */     2,
-			/* ammoTag */	II_EMP_HANDGRENADE,
-					IT_WEAPON | IT_AMMO,
-					6,
-					/* precache */ "weapons/bfg__x1b.wav weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
-						},
+	{
+		"weapon_emphgrenade",
+		"models/g_emphandgrenade/tris.md2",
+		"models/v_emphandgr/tris.md2",
+		/* icon */      "a_emphgren",
+		/* pickup */	"EMP Hand Grenade",
+		/* tag */       II_EMP_HANDGRENADE,
+		/* quant */     2,
+		/* ammoTag */	II_EMP_HANDGRENADE,
+		IT_WEAPON | IT_AMMO,
+		6,
+		/* precache */ "weapons/bfg__x1b.wav weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
+	},
 
 
 	/*QUAKED weapon_chaingun (.3 .3 1) (-16 -16 -16) (16 16 16)
@@ -188,608 +188,608 @@ gitem_t	itemlist[] =
 		/* tag */       II_CHAINGUN,
 		/* quant */     999,
 		/* ammoTag */	II_CHAINGUN_PACK,
-				IT_WEAPON | IT_SLING,
-				30,
-				/* precache */ "weapons/chngnu1a.wav weapons/chngnl1a.wav weapons/machgf3b.wav` weapons/chngnd1a.wav"
-					},
+		IT_WEAPON | IT_SLING,
+		30,
+		/* precache */ "weapons/chngnu1a.wav weapons/chngnl1a.wav weapons/machgf3b.wav` weapons/chngnd1a.wav"
+	},
 
 	/*QUAKED ammo_chaingunpack (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_chaingunpack",
-			"models/g_chain/tris.md2",
-			NULL,
-			/* icon */      "a_chpack",
-			/* pickup */	"Chaingun Pack",
-			/* tag */       II_CHAINGUN_PACK,
-			/* quant */     999,
-			/* ammoTag */	0,
-					IT_AMMO | IT_SLING,
-					50,
-					/* precache */ ""
-						},
+	{
+		"ammo_chaingunpack",
+		"models/g_chain/tris.md2",
+		NULL,
+		/* icon */      "a_chpack",
+		/* pickup */	"Chaingun Pack",
+		/* tag */       II_CHAINGUN_PACK,
+		/* quant */     999,
+		/* ammoTag */	0,
+		IT_AMMO | IT_SLING,
+		50,
+		/* precache */ ""
+	},
 
 
 	/*QUAKED weapon_grenadelauncher (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_grenadelauncher",
-			"models/g_launch/tris.md2",
-			"models/weapons/v_launch/tris.md2",
-			/* icon */	"w_glauncher",
-			/* pickup */	"Grenade Launcher",
-			/* tag */       II_GRENADE_LAUNCHER,
-			/* quant */     0,
-			/* ammoTag */	II_FRAG_GRENADES,
-					IT_WEAPON | IT_SLING,
-					30,
-					/* precache */ "models/objects/grenade/tris.md2 weapons/grenlf1a.wav weapons/grenlr1b.wav weapons/grenlb1b.wav"
-						},
+	{
+		"weapon_grenadelauncher",
+		"models/g_launch/tris.md2",
+		"models/weapons/v_launch/tris.md2",
+		/* icon */	"w_glauncher",
+		/* pickup */	"Grenade Launcher",
+		/* tag */       II_GRENADE_LAUNCHER,
+		/* quant */     0,
+		/* ammoTag */	II_FRAG_GRENADES,
+		IT_WEAPON | IT_SLING,
+		30,
+		/* precache */ "models/objects/grenade/tris.md2 weapons/grenlf1a.wav weapons/grenlr1b.wav weapons/grenlb1b.wav"
+	},
 
 	/*QUAKED ammo_grenades (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_grenades",
-			"models/a_grenades/tris.md2",
-			NULL,
-			/* icon */      "a_grenades",
-			/* pickup */	"Grenades",
-			/* tag */       II_FRAG_GRENADES,
-			/* quant */     2,
-			/* ammoTag */	0,
-					IT_AMMO,
-					6,
-					/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
-						},
+	{
+		"ammo_grenades",
+		"models/a_grenades/tris.md2",
+		NULL,
+		/* icon */      "a_grenades",
+		/* pickup */	"Grenades",
+		/* tag */       II_FRAG_GRENADES,
+		/* quant */     2,
+		/* ammoTag */	0,
+		IT_AMMO,
+		6,
+		/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
+	},
 
 	/*QUAKED weapon_arifle (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_arifle",
-			"models/g_arifle/tris.md2",
-			"models/v_arifle//tris.md2",
-			/* icon */	"w_arifle",
-			/* pickup */	"Assault RIfle",
-			/* tag */       II_ASSAULT_RIFLE,
-			/* quant */     55,
-			/* ammoTag */	II_ARIFLE_CLIP,
-					IT_WEAPON | IT_SLING,
-					36,
-					/* precache */ "weapons/arifle_clipin.wav weapons/arifle_clipout.wav weapons/shotcock.wav weapons/hyprbf1a.wav "
-						},
+	{
+		"weapon_arifle",
+		"models/g_arifle/tris.md2",
+		"models/v_arifle//tris.md2",
+		/* icon */	"w_arifle",
+		/* pickup */	"Assault RIfle",
+		/* tag */       II_ASSAULT_RIFLE,
+		/* quant */     55,
+		/* ammoTag */	II_ARIFLE_CLIP,
+		IT_WEAPON | IT_SLING,
+		36,
+		/* precache */ "weapons/arifle_clipin.wav weapons/arifle_clipout.wav weapons/shotcock.wav weapons/hyprbf1a.wav "
+	},
 
 	/*QUAKED ammo_arifleclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_arifleclip",
-			"models/a_arifle/tris.md2",
-			NULL,
-			/* icon */      "a_arifle",
-			/* pickup */	"Assault Rifle Clip",
-			/* tag */       II_ARIFLE_CLIP,
-			/* quant */     55,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					12,
-					/* precache */ ""
-						},
+	{
+		"ammo_arifleclip",
+		"models/a_arifle/tris.md2",
+		NULL,
+		/* icon */      "a_arifle",
+		/* pickup */	"Assault Rifle Clip",
+		/* tag */       II_ARIFLE_CLIP,
+		/* quant */     55,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		12,
+		/* precache */ ""
+	},
 
 	/*QUAKED weapon_railgun (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_railgun",
-			"models/g_rail/tris.md2",
-			"models/weapons/v_rail/tris.md2",
-			/* icon */	"w_railgun",
-			/* pickup */	"Railgun",
-			/* tag */       II_RAILGUN,
-			/* quant */     0,
-			/* ammoTag */	II_SLUGS,
-					IT_WEAPON | IT_SLING,
-					45,
-					/* precache */ "weapons/rg_hum.wav"
-						},
+	{
+		"weapon_railgun",
+		"models/g_rail/tris.md2",
+		"models/weapons/v_rail/tris.md2",
+		/* icon */	"w_railgun",
+		/* pickup */	"Railgun",
+		/* tag */       II_RAILGUN,
+		/* quant */     0,
+		/* ammoTag */	II_SLUGS,
+		IT_WEAPON | IT_SLING,
+		45,
+		/* precache */ "weapons/rg_hum.wav"
+	},
 
 	/*QUAKED ammo_slugs (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_slugs",
-			"models/items/ammo/slugs/medium/tris.md2",
-			NULL,
-			/* icon */      "a_slugs",
-			/* pickup */	"Slugs",
-			/* tag */       II_SLUGS,
-			/* quant */     5,
-			/* ammoTag */	0,
-					IT_AMMO,
-					12,
-					/* precache */ ""
-						},
+	{
+		"ammo_slugs",
+		"models/items/ammo/slugs/medium/tris.md2",
+		NULL,
+		/* icon */      "a_slugs",
+		/* pickup */	"Slugs",
+		/* tag */       II_SLUGS,
+		/* quant */     5,
+		/* ammoTag */	0,
+		IT_AMMO,
+		12,
+		/* precache */ ""
+	},
 
 	/*QUAKED ammo_expshotgunclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_expshotgunclip",
-			"models/a_shotgun/tris.md2",
-			NULL,
-			/* icon */      "a_expshotgun",
-			/* pickup */	"Explosive Shell Shotgun Clip",
-			/* tag */       II_EXP_SHOTGUN_CLIP,
-			/* quant */     18,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					12,
-					/* precache */ ""
-						},
+	{
+		"ammo_expshotgunclip",
+		"models/a_shotgun/tris.md2",
+		NULL,
+		/* icon */      "a_expshotgun",
+		/* pickup */	"Explosive Shell Shotgun Clip",
+		/* tag */       II_EXP_SHOTGUN_CLIP,
+		/* quant */     18,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		12,
+		/* precache */ ""
+	},
 
 	/*QUAKED ammo_solidshotgunclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_solidshotgunclip",
-			"models/a_shotgun/tris.md2",
-			NULL,
-			/* icon */      "a_solidshotgun",
-			/* pickup */	"Solid Shell Shotgun Clip",
-			/* tag */       II_SOLID_SHOTGUN_CLIP,
-			/* quant */     18,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					12,
-					/* precache */ ""
-						},
+	{
+		"ammo_solidshotgunclip",
+		"models/a_shotgun/tris.md2",
+		NULL,
+		/* icon */      "a_solidshotgun",
+		/* pickup */	"Solid Shell Shotgun Clip",
+		/* tag */       II_SOLID_SHOTGUN_CLIP,
+		/* quant */     18,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		12,
+		/* precache */ ""
+	},
 
 	/*QUAKED ammo_hepgrenades (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_hepgrenades",
-			"models/a_grenades/tris.md2",
-			NULL,
-			/* icon */      "a_hepgrenades",
-			/* pickup */	"Hep Grenades",
-			/* tag */       II_HEP_GRENADES,
-			/* quant */     2,
-			/* ammoTag */	0,
-					IT_AMMO,
-					6,
-					/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
-						},
+	{
+		"ammo_hepgrenades",
+		"models/a_grenades/tris.md2",
+		NULL,
+		/* icon */      "a_hepgrenades",
+		/* pickup */	"Hep Grenades",
+		/* tag */       II_HEP_GRENADES,
+		/* quant */     2,
+		/* ammoTag */	0,
+		IT_AMMO,
+		6,
+		/* precache */ "weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
+	},
 
 	/*QUAKED ammo_empgrenades (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_empgrenades",
-			"models/a_grenades/tris.md2",
-			NULL,
-			/* icon */      "a_empgrenades",
-			/* pickup */	"EMP Grenades",
-			/* tag */       II_EMP_GRENADES,
-			/* quant */     2,
-			/* ammoTag */	0,
-					IT_AMMO,
-					6,
-					/* precache */ "weapons/bfg__x1b.wav weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
-						},
+	{
+		"ammo_empgrenades",
+		"models/a_grenades/tris.md2",
+		NULL,
+		/* icon */      "a_empgrenades",
+		/* pickup */	"EMP Grenades",
+		/* tag */       II_EMP_GRENADES,
+		/* quant */     2,
+		/* ammoTag */	0,
+		IT_AMMO,
+		6,
+		/* precache */ "weapons/bfg__x1b.wav weapons/hgrent1a.wav weapons/hgrena1b.wav weapons/hgrenc1b.wav weapons/hgrenb1a.wav weapons/hgrenb2a.wav "
+	},
 
 	/*QUAKED ammo_hvsubmachclip (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"ammo_hvsubmachclip",
-			"models/a_submach/tris.md2",
-			NULL,
-			/* icon */      "a_hvsubmach",
-			/* pickup */	"High-Velocity Sub-Mach Clip",
-			/* tag */       II_HV_SUBMACH_CLIP,
-			/* quant */     30,
-			/* ammoTag */	0,
-					IT_AMMO | IT_CLIP,
-					6,
-					/* precache */ ""
-						},
+	{
+		"ammo_hvsubmachclip",
+		"models/a_submach/tris.md2",
+		NULL,
+		/* icon */      "a_hvsubmach",
+		/* pickup */	"High-Velocity Sub-Mach Clip",
+		/* tag */       II_HV_SUBMACH_CLIP,
+		/* quant */     30,
+		/* ammoTag */	0,
+		IT_AMMO | IT_CLIP,
+		6,
+		/* precache */ ""
+	},
 
 	// armor
 	/*QUAKED item_armor_jacket (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_armor_jacket",
-			"models/items/armor/jacket/tris.md2",
-			NULL,
-			/* icon */      "i_jacketarmor",
-			/* pickup */	"Jacket Armor",
-			/* tag */       II_JACKET_ARMOUR,
-			/* quant */     25,
-			/* ammoTag */	II_JACKET_ARMOUR,
-					IT_WEAPON | IT_ARMOR,
-					6,
-					/* precache */ "misc/ar1_pkup.wav "
-						},
+	{
+		"item_armor_jacket",
+		"models/items/armor/jacket/tris.md2",
+		NULL,
+		/* icon */      "i_jacketarmor",
+		/* pickup */	"Jacket Armor",
+		/* tag */       II_JACKET_ARMOUR,
+		/* quant */     25,
+		/* ammoTag */	II_JACKET_ARMOUR,
+		IT_WEAPON | IT_ARMOR,
+		6,
+		/* precache */ "misc/ar1_pkup.wav "
+	},
 
 	/*QUAKED item_armor_combat (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_armor_combat",
-			"models/items/armor/combat/tris.md2",
-			NULL,
-			/* icon */      "i_combatarmor",
-			/* pickup */	"Combat Armor",
-			/* tag */       II_COMBAT_ARMOUR,
-			/* quant */     50,
-			/* ammoTag */	II_COMBAT_ARMOUR,
-					IT_WEAPON | IT_ARMOR,
-					6,
-					/* precache */ "misc/ar1_pkup.wav "
-						},
+	{
+		"item_armor_combat",
+		"models/items/armor/combat/tris.md2",
+		NULL,
+		/* icon */      "i_combatarmor",
+		/* pickup */	"Combat Armor",
+		/* tag */       II_COMBAT_ARMOUR,
+		/* quant */     50,
+		/* ammoTag */	II_COMBAT_ARMOUR,
+		IT_WEAPON | IT_ARMOR,
+		6,
+		/* precache */ "misc/ar1_pkup.wav "
+	},
 
 	/*QUAKED item_armor_body (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_armor_body",
-			"models/items/armor/body/tris.md2",
-			NULL,
-			/* icon */      "i_bodyarmor",
-			/* pickup */	"Body Armor",
-			/* tag */       II_BODY_ARMOUR,
-			/* quant */     100,
-			/* ammoTag */	II_BODY_ARMOUR,
-					IT_WEAPON | IT_ARMOR,
-					6,
-					/* precache */ "misc/ar1_pkup.wav "
-						},
+	{
+		"item_armor_body",
+		"models/items/armor/body/tris.md2",
+		NULL,
+		/* icon */      "i_bodyarmor",
+		/* pickup */	"Body Armor",
+		/* tag */       II_BODY_ARMOUR,
+		/* quant */     100,
+		/* ammoTag */	II_BODY_ARMOUR,
+		IT_WEAPON | IT_ARMOR,
+		6,
+		/* precache */ "misc/ar1_pkup.wav "
+	},
 
 	// health items
 	/*QUAKED item_health (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_health",
-			"models/items/healing/medium/tris.md2",
-			NULL,
-			/* icon */      "i_health",
-			/* pickup */	"Bind-kit",
-			/* tag */       II_HEALTH,
-			/* quant */     1,
-			/* ammoTag */	II_HEALTH,
-					IT_WEAPON | IT_AMMO | IT_CLIP,
-					6,
-					/* precache */ "items/n_health.wav "
-						},
+	{
+		"item_health",
+		"models/items/healing/medium/tris.md2",
+		NULL,
+		/* icon */      "i_health",
+		/* pickup */	"Bind-kit",
+		/* tag */       II_HEALTH,
+		/* quant */     1,
+		/* ammoTag */	II_HEALTH,
+		IT_WEAPON | IT_AMMO | IT_CLIP,
+		6,
+		/* precache */ "items/n_health.wav "
+	},
 
 	/*QUAKED item_health_large (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_health_large",
-			"models/items/healing/large/tris.md2",
-			NULL,
-			/* icon */      "i_health_large",
-			/* pickup */	"Medi-kit",
-			/* tag */       II_HEALTH_LARGE,
-			/* quant */     1,
-			/* ammoTag */	II_HEALTH_LARGE,
-					IT_WEAPON | IT_AMMO | IT_CLIP,
-					6,
-					/* precache */ "items/l_health.wav "
-						},
+	{
+		"item_health_large",
+		"models/items/healing/large/tris.md2",
+		NULL,
+		/* icon */      "i_health_large",
+		/* pickup */	"Medi-kit",
+		/* tag */       II_HEALTH_LARGE,
+		/* quant */     1,
+		/* ammoTag */	II_HEALTH_LARGE,
+		IT_WEAPON | IT_AMMO | IT_CLIP,
+		6,
+		/* precache */ "items/l_health.wav "
+	},
 
 	/*QUAKED item_bandolier (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_bandolier",
-			"models/items/band/tris.md2",
-			NULL,
-			/* icon */      "p_bandolier",
-			/* pickup */	"Bandolier",
-			/* tag */       II_BANDOLIER,
-			/* quant */     1,
-			/* ammoTag */	II_BANDOLIER,
-					IT_ARMOR,
-					-1,
-					/* precache */ "items/pkup.wav "
-						},
+	{
+		"item_bandolier",
+		"models/items/band/tris.md2",
+		NULL,
+		/* icon */      "p_bandolier",
+		/* pickup */	"Bandolier",
+		/* tag */       II_BANDOLIER,
+		/* quant */     1,
+		/* ammoTag */	II_BANDOLIER,
+		IT_ARMOR,
+		-1,
+		/* precache */ "items/pkup.wav "
+	},
 
 	/*QUAKED item_pack (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"item_pack",
-			"models/items/pack/tris.md2",
-			NULL,
-			/* icon */      "i_pack",
-			/* pickup */	"Back Pack",
-			/* tag */       II_BACK_PACK,
-			/* quant */     1,
-			/* ammoTag */	II_BACK_PACK,
-					IT_ARMOR | IT_SLING,
-					-1,
-					/* precache */ "items/pkup.wav "
-						},
+	{
+		"item_pack",
+		"models/items/pack/tris.md2",
+		NULL,
+		/* icon */      "i_pack",
+		/* pickup */	"Back Pack",
+		/* tag */       II_BACK_PACK,
+		/* quant */     1,
+		/* ammoTag */	II_BACK_PACK,
+		IT_ARMOR | IT_SLING,
+		-1,
+		/* precache */ "items/pkup.wav "
+	},
 
 	// GRIM - not a real weapon - simply gives info on item pos etc
 	/*QUAKED weapon_edit (.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_edit",
-			"models/weapons/g_blast/tris.md2",
-			"models/weapons/v_blast/tris.md2",
-			/* icon */	"w_blaster",
-			/* pickup */	"WEAPON EDIT - GET INFO ON STUFF",
-			/* tag */       II_WEAPON_EDIT,
-			/* quant */     0,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_SLING,
-					1,
-					/* precache */ ""
-						},
+	{
+		"weapon_edit",
+		"models/weapons/g_blast/tris.md2",
+		"models/weapons/v_blast/tris.md2",
+		/* icon */	"w_blaster",
+		/* pickup */	"WEAPON EDIT - GET INFO ON STUFF",
+		/* tag */       II_WEAPON_EDIT,
+		/* quant */     0,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_SLING,
+		1,
+		/* precache */ ""
+	},
 
 	// KEYS
 	/*QUAKED key_data_cd (0 .5 .8) (-16 -16 -16) (16 16 16)
 	key for computer centers
 	*/
-		{
-			"key_data_cd",
-			"models/items/keys/data_cd/tris.md2",
-			NULL,
-			/* icon */      "k_datacd",
-			/* pickup */	"Data CD",
-			/* tag */       II_DATA_CD,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_data_cd",
+		"models/items/keys/data_cd/tris.md2",
+		NULL,
+		/* icon */      "k_datacd",
+		/* pickup */	"Data CD",
+		/* tag */       II_DATA_CD,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_power_cube (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_power_cube",
-			"models/items/keys/power/tris.md2",
-			NULL,
-			/* icon */      "k_powercube",
-			/* pickup */	"Power Cube",
-			/* tag */       II_POWER_CUBE,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_power_cube",
+		"models/items/keys/power/tris.md2",
+		NULL,
+		/* icon */      "k_powercube",
+		/* pickup */	"Power Cube",
+		/* tag */       II_POWER_CUBE,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_pyramid (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_pyramid",
-			"models/items/keys/pyramid/tris.md2",
-			NULL,
-			/* icon */      "k_powercube",
-			/* pickup */	"Pyramid Key",
-			/* tag */       II_PYRAMID_KEY,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_pyramid",
+		"models/items/keys/pyramid/tris.md2",
+		NULL,
+		/* icon */      "k_powercube",
+		/* pickup */	"Pyramid Key",
+		/* tag */       II_PYRAMID_KEY,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_data_spinner (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_data_spinner",
-			"models/items/keys/spinner/tris.md2",
-			NULL,
-			/* icon */      "k_dataspin",
-			/* pickup */	"Data Spinner",
-			/* tag */       II_DATA_SPINNER,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_data_spinner",
+		"models/items/keys/spinner/tris.md2",
+		NULL,
+		/* icon */      "k_dataspin",
+		/* pickup */	"Data Spinner",
+		/* tag */       II_DATA_SPINNER,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_pass (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_pass",
-			"models/items/keys/pass/tris.md2",
-			NULL,
-			/* icon */      "k_security",
-			/* pickup */	"Security Pass",
-			/* tag */       II_SECURITY_PASS,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_pass",
+		"models/items/keys/pass/tris.md2",
+		NULL,
+		/* icon */      "k_security",
+		/* pickup */	"Security Pass",
+		/* tag */       II_SECURITY_PASS,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_blue_key (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_blue_key",
-			"models/items/keys/key/tris.md2",
-			NULL,
-			/* icon */      "k_bluekey",
-			/* pickup */	"Blue Key",
-			/* tag */       II_BLUE_KEY,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_blue_key",
+		"models/items/keys/key/tris.md2",
+		NULL,
+		/* icon */      "k_bluekey",
+		/* pickup */	"Blue Key",
+		/* tag */       II_BLUE_KEY,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_red_key (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_red_key",
-			"models/items/keys/red_key/tris.md2",
-			NULL,
-			/* icon */      "k_redkey",
-			/* pickup */	"Red Key",
-			/* tag */       II_RED_KEY,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_red_key",
+		"models/items/keys/red_key/tris.md2",
+		NULL,
+		/* icon */      "k_redkey",
+		/* pickup */	"Red Key",
+		/* tag */       II_RED_KEY,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_commander_head (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_commander_head",
-			"models/monsters/commandr/head/tris.md2",
-			NULL,
-			/* icon */      "k_comhead",
-			/* pickup */	"Commander's Head",
-			/* tag */       II_COM_HEAD,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_commander_head",
+		"models/monsters/commandr/head/tris.md2",
+		NULL,
+		/* icon */      "k_comhead",
+		/* pickup */	"Commander's Head",
+		/* tag */       II_COM_HEAD,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED key_airstrike_target (0 .5 .8) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"key_airstrike_target",
-			"models/items/keys/target/tris.md2",
-			NULL,
-			/* icon */      "i_airstrike",
-			/* pickup */	"Airstrike Marker",
-			/* tag */       II_AIRSTRIKE_MARKER,
-			/* quant */     1,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
-					6,
-					/* precache */ ""
-						},
+	{
+		"key_airstrike_target",
+		"models/items/keys/target/tris.md2",
+		NULL,
+		/* icon */      "i_airstrike",
+		/* pickup */	"Airstrike Marker",
+		/* tag */       II_AIRSTRIKE_MARKER,
+		/* quant */     1,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_AMMO | IT_CLIP | IT_KEY,
+		6,
+		/* precache */ ""
+	},
 
 	/*QUAKED weapon_stroggblaster(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_stroggblaster",
-			"models/g_sblaster/tris.md2",
-			"models/v_sblaster/tris.md2",
-			/* icon */      "w_sblaster",
-			/* pickup */	"Strogg-Blaster",
-			/* tag */       II_STROGG_BLASTER,
-			/* quant */     10,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "models/objects/laser/tris.md2 misc/lasfly.wav soldier/solatck2.wav"
-						},
+	{
+		"weapon_stroggblaster",
+		"models/g_sblaster/tris.md2",
+		"models/v_sblaster/tris.md2",
+		/* icon */      "w_sblaster",
+		/* pickup */	"Strogg-Blaster",
+		/* tag */       II_STROGG_BLASTER,
+		/* quant */     10,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "models/objects/laser/tris.md2 misc/lasfly.wav soldier/solatck2.wav"
+	},
 
 	/*QUAKED weapon_stroggshotgun(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_stroggshotgun",
-			"models/g_sshotgun/tris.md2",
-			"models/v_sshotgun/tris.md2",
-			/* icon */      "w_sshot",
-			/* pickup */	"Strogg-Shotgun",
-			/* tag */       II_STROGG_SHOTGUN,
-			/* quant */     6,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "soldier/solatck1.wav"
-						},
+	{
+		"weapon_stroggshotgun",
+		"models/g_sshotgun/tris.md2",
+		"models/v_sshotgun/tris.md2",
+		/* icon */      "w_sshot",
+		/* pickup */	"Strogg-Shotgun",
+		/* tag */       II_STROGG_SHOTGUN,
+		/* quant */     6,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "soldier/solatck1.wav"
+	},
 
 	/*QUAKED weapon_stroggsubmach(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_stroggsubmach",
-			"models/g_ssubmach/tris.md2",
-			"models/v_ssubmach/tris.md2",
-			/* icon */      "w_ssubmach",
-			/* pickup */	"Strogg-SubMachinegun",
-			/* tag */       II_STROGG_SUBMACH,
-			/* quant */     20,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "soldier/solatck3.wav"
-						},
+	{
+		"weapon_stroggsubmach",
+		"models/g_ssubmach/tris.md2",
+		"models/v_ssubmach/tris.md2",
+		/* icon */      "w_ssubmach",
+		/* pickup */	"Strogg-SubMachinegun",
+		/* tag */       II_STROGG_SUBMACH,
+		/* quant */     20,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "soldier/solatck3.wav"
+	},
 
 	/*QUAKED weapon_infchain(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_infchain",
-			"models/g_inf/tris.md2",
-			"models/v_inf/tris.md2",
-			/* icon */      "w_inf",
-			/* pickup */	"Infantry-Chaingun",
-			/* tag */       II_INF_CHAINGUN,
-			/* quant */     20,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "infantry/infatck1.wav"
-						},
+	{
+		"weapon_infchain",
+		"models/g_inf/tris.md2",
+		"models/v_inf/tris.md2",
+		/* icon */      "w_inf",
+		/* pickup */	"Infantry-Chaingun",
+		/* tag */       II_INF_CHAINGUN,
+		/* quant */     20,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "infantry/infatck1.wav"
+	},
 
 	/*QUAKED weapon_gunchain(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_gunchain",
-			"models/g_gunner/tris.md2",
-			"models/v_gunner/tris.md2",
-			/* icon */      "w_gunchain",
-			/* pickup */	"Gunner-Chaingun",
-			/* tag */       II_GUN_CHAINGUN,
-			/* quant */     40,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "gunner/gunatck1.wav gunner/gunatck2.wav"
-						},
+	{
+		"weapon_gunchain",
+		"models/g_gunner/tris.md2",
+		"models/v_gunner/tris.md2",
+		/* icon */      "w_gunchain",
+		/* pickup */	"Gunner-Chaingun",
+		/* tag */       II_GUN_CHAINGUN,
+		/* quant */     40,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "gunner/gunatck1.wav gunner/gunatck2.wav"
+	},
 
 	/*QUAKED weapon_medichyper(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_medichyper",
-			"models/g_medic/tris.md2",
-			"models/v_medic/tris.md2",
-			/* icon */      "w_medicgun",
-			/* pickup */	"Medic Hyper-Blaster",
-			/* tag */       II_MEDIC_HYPER_BLASTER,
-			/* quant */     20,
-			/* ammoTag */	0,
-					IT_WEAPON,
-					10,
-					/* precache */ "medic/medatck1.wav"
-						},
+	{
+		"weapon_medichyper",
+		"models/g_medic/tris.md2",
+		"models/v_medic/tris.md2",
+		/* icon */      "w_medicgun",
+		/* pickup */	"Medic Hyper-Blaster",
+		/* tag */       II_MEDIC_HYPER_BLASTER,
+		/* quant */     20,
+		/* ammoTag */	0,
+		IT_WEAPON,
+		10,
+		/* precache */ "medic/medatck1.wav"
+	},
 
 	/*QUAKED weapon_bitchrlauncher(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_bitchrlauncher",
-			"models/g_bitch/tris.md2",
-			"models/v_bitch/tris.md2",
-			/* icon */      "w_bitch",
-			/* pickup */	"Bitch Rocket-Launcher",
-			/* tag */       II_BITCH_ROCKET_LAUNCHER,
-			/* quant */     8,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_SLING,
-					35,
-					/* precache */ "chick/chkatck2.wav"
-						},
+	{
+		"weapon_bitchrlauncher",
+		"models/g_bitch/tris.md2",
+		"models/v_bitch/tris.md2",
+		/* icon */      "w_bitch",
+		/* pickup */	"Bitch Rocket-Launcher",
+		/* tag */       II_BITCH_ROCKET_LAUNCHER,
+		/* quant */     8,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_SLING,
+		35,
+		/* precache */ "chick/chkatck2.wav"
+	},
 
 	/*QUAKED weapon_tankrlauncher(.3 .3 1) (-16 -16 -16) (16 16 16)
 	*/
-		{
-			"weapon_tankrlauncher",
-			"models/g_tank/tris.md2",
-			"models/v_tank/tris.md2",
-			/* icon */      "w_tank",
-			/* pickup */	"Tank Rocket-Launcher",
-			/* tag */       II_TANK_ROCKET_LAUNCHER,
-			/* quant */     12,
-			/* ammoTag */	0,
-					IT_WEAPON | IT_SLING,
-					45,
-					/* precache */ "tank/tnkatck1.wav"
-						},
+	{
+		"weapon_tankrlauncher",
+		"models/g_tank/tris.md2",
+		"models/v_tank/tris.md2",
+		/* icon */      "w_tank",
+		/* pickup */	"Tank Rocket-Launcher",
+		/* tag */       II_TANK_ROCKET_LAUNCHER,
+		/* quant */     12,
+		/* ammoTag */	0,
+		IT_WEAPON | IT_SLING,
+		45,
+		/* precache */ "tank/tnkatck1.wav"
+	},
 
 	// end of list marker
 	{NULL}
