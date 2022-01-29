@@ -233,7 +233,7 @@ void InitGame(void)
 	sv_maxdropped = gi.cvar("sv_maxdropped", "64", CVAR_ARCHIVE);
 	sv_maxknives = gi.cvar("sv_maxknives", "64", CVAR_ARCHIVE);
 	sv_edit = gi.cvar("sv_edit", "0", CVAR_NOSET);
-	sv_equipment = gi.cvar("sv_equipment", "weapon_submach ammo_submachclip ammo_submachclip weapon_fraghgrenade", CVAR_LATCH);
+	sv_equipment = gi.cvar("sv_equipment", "", CVAR_LATCH);
 	// GRIM
 
 	// items

@@ -1768,13 +1768,14 @@ void SP_worldspawn(edict_t * ent)
 	// GRIM 4/11/2001 6:44PM
 	if (st.equipment)
 		gi.cvar_set("sv_equipment", st.equipment);
-	else if (deathmatch->value)
+	else if (deathmatch->value) //QW// note r1q2 and q2pro force deathmatch 0 if coop is set.
 	{
-		if (!sv_equipment->string || (sv_equipment->string[0] == 0))
+		if (sv_equipment->string[0] == 0)
 			gi.cvar_forceset("sv_equipment", "weapon_submach ammo_submachclip ammo_submachclip weapon_fraghgrenade");
 	}
 	else
-		gi.cvar_forceset("sv_equipment", "weapon_pistol ammo_pistolclip ammo_pistolclip");
+		if (sv_equipment->string[0] == 0)
+			gi.cvar_forceset("sv_equipment", "weapon_pistol ammo_pistolclip ammo_pistolclip ammo_pistolclip");
 	// GRIM
 
 	snd_fry = gi.soundindex("player/fry.wav");	// standing in lava / slime
