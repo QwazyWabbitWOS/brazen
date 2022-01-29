@@ -265,15 +265,15 @@ void G_UseTargets(edict_t* ent, edict_t* activator)
 						master = master->teamchain;
 						if (!master)
 						{
-							//							if ((g_showlogic) && (g_showlogic->value))
-							//								gi.dprintf ("Couldn't find myself in master's chain, ignoring!\n");
+							//if ((g_showlogic) && (g_showlogic->value))
+							//	gi.dprintf ("Couldn't find myself in master's chain, ignoring!\n");
 						}
 					}
 				}
 				else
 				{
-					//					if ((g_showlogic) && (g_showlogic->value))
-					//						gi.dprintf ("No master to free myself from, ignoring!\n");
+					//if ((g_showlogic) && (g_showlogic->value))
+					//	gi.dprintf ("No master to free myself from, ignoring!\n");
 				}
 			}
 			// PMM

@@ -1562,10 +1562,11 @@ void ClientUserinfoChanged(edict_t* ent, char* userinfo)
 
 	// set spectator
 	s = Info_ValueForKey(userinfo, "spectator");
-	// spectators are only supported in deathmatch
-	if (deathmatch->value && *s && strcmp(s, "0"))
+
+	//QW// Changed this. Allow specs in coop too.
+	if (*s && strcmp(s, "0"))
 		ent->client->pers.spectator = true;
-	else
+	else 
 		ent->client->pers.spectator = false;
 
 	// set skin

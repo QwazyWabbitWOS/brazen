@@ -1774,7 +1774,7 @@ void SP_worldspawn(edict_t * ent)
 			gi.cvar_forceset("sv_equipment", "weapon_submach ammo_submachclip ammo_submachclip weapon_fraghgrenade");
 	}
 	else
-		gi.cvar_forceset("sv_equipment", "weapon_pistol ammo_pistolclip");
+		gi.cvar_forceset("sv_equipment", "weapon_pistol ammo_pistolclip ammo_pistolclip");
 	// GRIM
 
 	snd_fry = gi.soundindex("player/fry.wav");	// standing in lava / slime
