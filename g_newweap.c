@@ -366,15 +366,19 @@ void prox_land(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t* surf)
 		float backoff, change;
 		int i;
 
-		if (!plane->normal) // this happens if you hit a point object, maybe other cases
-		{
+		//QwazyWabbit remove this since plane->normal is always true
+		//if (!plane->normal) // this happens if you hit a point object, maybe other cases
+		//{
+		//QW
 			// Since we can't tell what's going to happen, just blow up
 //			if ((g_showlogic) && (g_showlogic->value))
 //				gi.dprintf ("bad normal for surface, exploding!\n");
 
-			Prox_Explode(ent);
-			return;
-		}
+		//QW plane->normal is always true so this is dead code.
+		//	Prox_Explode(ent);
+		//	return;
+		//}
+		//QW
 
 		if ((other->movetype == MOVETYPE_PUSH) && (plane->normal[2] > 0.7))
 			stick_ok = 1;
