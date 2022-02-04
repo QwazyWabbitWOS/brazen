@@ -83,6 +83,7 @@ game$(ARCH).real.$(SHLIBEXT) : $(GAME_OBJS)
 	$(CC) $(CFLAGS) -shared -o $@ $(GAME_OBJS) -ldl -lm
 	$(LIBTOOL) -r $@
 
+-include dependencies
 
 #############################################################################
 # MISC
@@ -101,6 +102,4 @@ all:
 	make clean
 	make depends
 	make
-
--include dependencies
 
