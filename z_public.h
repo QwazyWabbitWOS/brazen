@@ -65,49 +65,49 @@ void UpdateInv(edict_t* ent);
 void EndCoopView(edict_t* ent);
 void CmdCoopView(edict_t* ent);
 
-#define CYCLE_ITEMS_TIME        1
-#define MAX_WEAPONS             16
+#define CYCLE_ITEMS_TIME    2   // duration of the weapons selector presentation in HUD.
+#define MAX_WEAPONS         16
 
 // means of death
-#define MOD_PISTOL		34
-#define MOD_TWIN_PISTOL		35
-#define MOD_ARIFLE		36
-#define MOD_EXP_SHOTGUN		37
-#define MOD_SOLID_SHOTGUN	38
-#define MOD_HV_SUBMACH		39
-#define MOD_EMP_HANDGRENADE	40
-#define MOD_EMP_HG_SPLASH	41
-#define MOD_EMP_GRENADE		42
-#define MOD_EMP_G_SPLASH	43
-#define MOD_HEP_GRENADE		44
-#define MOD_HEP_G_SPLASH	45
+#define MOD_PISTOL          34
+#define MOD_TWIN_PISTOL     35
+#define MOD_ARIFLE          36
+#define MOD_EXP_SHOTGUN     37
+#define MOD_SOLID_SHOTGUN   38
+#define MOD_HV_SUBMACH      39
+#define MOD_EMP_HANDGRENADE 40
+#define MOD_EMP_HG_SPLASH   41
+#define MOD_EMP_GRENADE     42
+#define MOD_EMP_G_SPLASH    43
+#define MOD_HEP_GRENADE     44
+#define MOD_HEP_G_SPLASH    45
 
 // edict->flags
-#define	FL_CYBERNETIC	0x00020000	// creature is cyber-netic components, thus greatly affected by EMP grenades etc
+#define	FL_CYBERNETIC   0x00020000	// creature is cyber-netic components, thus greatly affected by EMP grenades etc
 
 
 
 // hit locations
-#define LOCATION_NONE           0
+#define LOCATION_NONE       0
 
-#define LOCATION_FRONT          1
-#define LOCATION_LEFT           2
-#define LOCATION_RIGHT          4
-#define LOCATION_BACK           8
+#define LOCATION_FRONT      1
+#define LOCATION_LEFT       2
+#define LOCATION_RIGHT      4
+#define LOCATION_BACK       8
 
-#define LOCATION_HEAD           16
-#define LOCATION_CHEST          32
-#define LOCATION_STOMACH        64
-#define LOCATION_LEGS           128
-#define LOCATION_ARMS		256
+#define LOCATION_HEAD       16
+#define LOCATION_CHEST      32
+#define LOCATION_STOMACH    64
+#define LOCATION_LEGS       128
+#define LOCATION_ARMS       256
 
 // GRIM 26/06/2001 11:44AM - holds current weapon info
-#define CSTAT_RIGHTHAND                 0
-#define CSTAT_RIGHTHAND_AMMO            1
-#define CSTAT_RIGHTHAND_FLAGS		2
-#define CSTAT_RIGHTHAND_AMMOTYPE	3
-#define CSTAT_LEFTHAND                  4
-#define CSTAT_LEFTHAND_AMMO             5
-#define CSTAT_LEFTHAND_FLAGS            6
-#define CSTAT_LEFTHAND_AMMOTYPE		7
+#define CSTAT_RIGHTHAND             0
+#define CSTAT_RIGHTHAND_AMMO        1
+#define CSTAT_RIGHTHAND_FLAGS       2
+#define CSTAT_RIGHTHAND_AMMOTYPE    3
+#define CSTAT_LEFTHAND              4
+#define CSTAT_LEFTHAND_AMMO         5
+#define CSTAT_LEFTHAND_FLAGS        6
+#define CSTAT_LEFTHAND_AMMOTYPE     7
 // GRIM
