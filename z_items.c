@@ -87,7 +87,7 @@ gitem_t	itemlist[] =
 		"models/g_submach/tris.md2",
 		"models/v_submach/tris.md2",
 		/* icon */ "w_submach",
-		/* pickup */ "Sub-Machinegun",
+		/* pickup */	"Sub-Machinegun",
 		/* tag */ II_SUBMACH,
 		/* quant */ 30,
 		/* ammoTag */ II_SUBMACH_CLIP,
@@ -1066,7 +1066,7 @@ void PrecacheItem(gitem_t* it)
 			PrecacheItem(ammo);
 	}
 
-	// parse the space seperated precache string for other items
+	// parse the space separated precache string for other items
 	s = it->precaches;
 	if (!s || !s[0])
 		return;

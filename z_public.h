@@ -37,7 +37,6 @@ qboolean CanLeftReload(edict_t* ent);
 void UpdateExtraAmmoCounts(edict_t* ent);
 int GetFreeBodyArea(gitem_t* item, edict_t* ent);
 void StashItem(edict_t* player, gitem_t* item, int bodyarea, int quantity, int flags, int ammotype);
-void RemoveItem(edict_t* player, int bodyarea);
 int CountOffHandGrenades(edict_t* ent, int type);
 qboolean Pickup_BAItem(gitem_t* item, int count, int flags, int ammotype, edict_t* other);
 
