@@ -1106,8 +1106,9 @@ void ClientCommand(edict_t* ent)
 		Cmd_Kill_f(ent);
 	else if (Q_stricmp(cmd, "putaway") == 0)
 		Cmd_PutAway_f(ent);
-	else if (Q_stricmp(cmd, "spectate") == 0 || Q_stricmp(cmd, "observe") == 0
-		|| (Q_stricmp(cmd, "observer") == 0)) 
+	else if (Q_stricmp(cmd, "spectate") == 0
+		|| (Q_stricmp(cmd, "observer") == 0)
+		|| (Q_stricmp(cmd, "observe") == 0))
 	{
 		Cmd_Spectator_f(ent);
 	}
