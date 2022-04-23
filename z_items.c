@@ -672,7 +672,7 @@ gitem_t	itemlist[] =
 		/* icon */      "w_sblaster",
 		/* pickup */	"Strogg-Blaster",
 		/* tag */       II_STROGG_BLASTER,
-		/* quant */     10,
+		/* quant */     100,
 		/* ammoTag */	0,
 		IT_WEAPON,
 		10,
