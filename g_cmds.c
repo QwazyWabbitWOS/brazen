@@ -49,72 +49,72 @@ void SelectNextItem(edict_t* ent, int itflags)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gclient_t	*cl;
-int			i, index;
-gitem_t		*it;
+	gclient_t* cl;
+	int			i, index;
+	gitem_t* it;
 
-cl = ent->client;
+	cl = ent->client;
 
-if (cl->chase_target) {
-	ChaseNext(ent);
-	return;
-}
+	if (cl->chase_target) {
+		ChaseNext(ent);
+		return;
+	}
 
-// scan  for the next valid one
-for (i=1 ; i<=MAX_ITEMS ; i++)
-{
-	index = (cl->pers.selected_item + i)%MAX_ITEMS;
-	if (!cl->pers.inventory[index])
-		continue;
-	it = &itemlist[index];
-	if (!it->use)
-		continue;
-	if (!(it->flags & itflags))
-		continue;
+	// scan  for the next valid one
+	for (i = 1; i <= MAX_ITEMS; i++)
+	{
+		index = (cl->pers.selected_item + i) % MAX_ITEMS;
+		if (!cl->pers.inventory[index])
+			continue;
+		it = &itemlist[index];
+		if (!it->use)
+			continue;
+		if (!(it->flags & itflags))
+			continue;
 
-	cl->pers.selected_item = index;
-	return;
-}
+		cl->pers.selected_item = index;
+		return;
+	}
 
-cl->pers.selected_item = -1;
-*/
-// GRIM
+	cl->pers.selected_item = -1;
+	*/
+	// GRIM
 }
 
 void SelectPrevItem(edict_t* ent, int itflags)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gclient_t	*cl;
-int			i, index;
-gitem_t		*it;
+	gclient_t* cl;
+	int			i, index;
+	gitem_t* it;
 
-cl = ent->client;
+	cl = ent->client;
 
-if (cl->chase_target) {
-	ChasePrev(ent);
-	return;
-}
+	if (cl->chase_target) {
+		ChasePrev(ent);
+		return;
+	}
 
-// scan  for the next valid one
-for (i=1 ; i<=MAX_ITEMS ; i++)
-{
-	index = (cl->pers.selected_item + MAX_ITEMS - i)%MAX_ITEMS;
-	if (!cl->pers.inventory[index])
-		continue;
-	it = &itemlist[index];
-	if (!it->use)
-		continue;
-	if (!(it->flags & itflags))
-		continue;
+	// scan  for the next valid one
+	for (i = 1; i <= MAX_ITEMS; i++)
+	{
+		index = (cl->pers.selected_item + MAX_ITEMS - i) % MAX_ITEMS;
+		if (!cl->pers.inventory[index])
+			continue;
+		it = &itemlist[index];
+		if (!it->use)
+			continue;
+		if (!(it->flags & itflags))
+			continue;
 
-	cl->pers.selected_item = index;
-	return;
-}
+		cl->pers.selected_item = index;
+		return;
+	}
 
-cl->pers.selected_item = -1;
-*/
-// GRIM
+	cl->pers.selected_item = -1;
+	*/
+	// GRIM
 }
 
 void ValidateSelectedItem(edict_t* ent)
@@ -143,150 +143,150 @@ void Cmd_Give_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-char		*name;
-gitem_t		*it;
-int			index;
-int			i;
-qboolean	give_all;
-edict_t		*it_ent;
+	char* name;
+	gitem_t* it;
+	int			index;
+	int			i;
+	qboolean	give_all;
+	edict_t* it_ent;
 
-if (deathmatch->value && !sv_cheats->value)
-{
-	gi.cprintf (ent, PRINT_HIGH, "You must run the server with '+set cheats 1' to enable this command.\n");
-	return;
-}
+	if (deathmatch->value && !sv_cheats->value)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "You must run the server with '+set cheats 1' to enable this command.\n");
+		return;
+	}
 
-name = gi.args();
+	name = gi.args();
 
-if (Q_stricmp(name, "all") == 0)
-	give_all = true;
-else
-	give_all = false;
-
-if (give_all || Q_stricmp(gi.argv(1), "health") == 0)
-{
-	if (gi.argc() == 3)
-		ent->health = atoi(gi.argv(2));
+	if (Q_stricmp(name, "all") == 0)
+		give_all = true;
 	else
-		ent->health = ent->max_health;
-	if (!give_all)
-		return;
-}
+		give_all = false;
 
-if (give_all || Q_stricmp(name, "weapons") == 0)
-{
-	for (i=0 ; i<game.num_items ; i++)
+	if (give_all || Q_stricmp(gi.argv(1), "health") == 0)
 	{
-		it = itemlist + i;
-		if (!it->pickup)
-			continue;
-		if (!(it->flags & IT_WEAPON))
-			continue;
-		ent->client->pers.inventory[i] += 1;
+		if (gi.argc() == 3)
+			ent->health = atoi(gi.argv(2));
+		else
+			ent->health = ent->max_health;
+		if (!give_all)
+			return;
 	}
-	if (!give_all)
-		return;
-}
 
-if (give_all || Q_stricmp(name, "ammo") == 0)
-{
-	for (i=0 ; i<game.num_items ; i++)
+	if (give_all || Q_stricmp(name, "weapons") == 0)
 	{
-		it = itemlist + i;
-		if (!it->pickup)
-			continue;
-		if (!(it->flags & IT_AMMO))
-			continue;
-		Add_Ammo (ent, it, 1000);
+		for (i = 0; i < game.num_items; i++)
+		{
+			it = itemlist + i;
+			if (!it->pickup)
+				continue;
+			if (!(it->flags & IT_WEAPON))
+				continue;
+			ent->client->pers.inventory[i] += 1;
+		}
+		if (!give_all)
+			return;
 	}
-	if (!give_all)
-		return;
-}
 
-if (give_all || Q_stricmp(name, "armor") == 0)
-{
-	gitem_armor_t	*info;
-
-	it = FindItem("Jacket Armor");
-	ent->client->pers.inventory[ITEM_INDEX(it)] = 0;
-
-	it = FindItem("Combat Armor");
-	ent->client->pers.inventory[ITEM_INDEX(it)] = 0;
-
-	it = FindItem("Body Armor");
-	info = (gitem_armor_t *)it->info;
-	ent->client->pers.inventory[ITEM_INDEX(it)] = info->max_count;
-
-	if (!give_all)
-		return;
-}
-
-if (give_all || Q_stricmp(name, "Power Shield") == 0)
-{
-	it = FindItem("Power Shield");
-	it_ent = G_Spawn();
-	it_ent->classname = it->classname;
-	SpawnItem (it_ent, it);
-	Touch_Item (it_ent, ent, NULL, NULL);
-	if (it_ent->inuse)
-		G_FreeEdict(it_ent);
-
-	if (!give_all)
-		return;
-}
-
-if (give_all)
-{
-	for (i=0 ; i<game.num_items ; i++)
+	if (give_all || Q_stricmp(name, "ammo") == 0)
 	{
-		it = itemlist + i;
-		if (!it->pickup)
-			continue;
-		if (it->flags & (IT_ARMOR|IT_WEAPON|IT_AMMO))
-			continue;
-		ent->client->pers.inventory[i] = 1;
+		for (i = 0; i < game.num_items; i++)
+		{
+			it = itemlist + i;
+			if (!it->pickup)
+				continue;
+			if (!(it->flags & IT_AMMO))
+				continue;
+			Add_Ammo(ent, it, 1000);
+		}
+		if (!give_all)
+			return;
 	}
-	return;
-}
 
-it = FindItem (name);
-if (!it)
-{
-	name = gi.argv(1);
-	it = FindItem (name);
+	if (give_all || Q_stricmp(name, "armor") == 0)
+	{
+		gitem_armor_t* info;
+
+		it = FindItem("Jacket Armor");
+		ent->client->pers.inventory[ITEM_INDEX(it)] = 0;
+
+		it = FindItem("Combat Armor");
+		ent->client->pers.inventory[ITEM_INDEX(it)] = 0;
+
+		it = FindItem("Body Armor");
+		info = (gitem_armor_t*)it->info;
+		ent->client->pers.inventory[ITEM_INDEX(it)] = info->max_count;
+
+		if (!give_all)
+			return;
+	}
+
+	if (give_all || Q_stricmp(name, "Power Shield") == 0)
+	{
+		it = FindItem("Power Shield");
+		it_ent = G_Spawn();
+		it_ent->classname = it->classname;
+		SpawnItem(it_ent, it);
+		Touch_Item(it_ent, ent, NULL, NULL);
+		if (it_ent->inuse)
+			G_FreeEdict(it_ent);
+
+		if (!give_all)
+			return;
+	}
+
+	if (give_all)
+	{
+		for (i = 0; i < game.num_items; i++)
+		{
+			it = itemlist + i;
+			if (!it->pickup)
+				continue;
+			if (it->flags & (IT_ARMOR | IT_WEAPON | IT_AMMO))
+				continue;
+			ent->client->pers.inventory[i] = 1;
+		}
+		return;
+	}
+
+	it = FindItem(name);
 	if (!it)
 	{
-		gi.cprintf (ent, PRINT_HIGH, "unknown item\n");
+		name = gi.argv(1);
+		it = FindItem(name);
+		if (!it)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "unknown item\n");
+			return;
+		}
+	}
+
+	if (!it->pickup)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "non-pickup item\n");
 		return;
 	}
-}
 
-if (!it->pickup)
-{
-	gi.cprintf (ent, PRINT_HIGH, "non-pickup item\n");
-	return;
-}
+	index = ITEM_INDEX(it);
 
-index = ITEM_INDEX(it);
-
-if (it->flags & IT_AMMO)
-{
-	if (gi.argc() == 3)
-		ent->client->pers.inventory[index] = atoi(gi.argv(2));
+	if (it->flags & IT_AMMO)
+	{
+		if (gi.argc() == 3)
+			ent->client->pers.inventory[index] = atoi(gi.argv(2));
+		else
+			ent->client->pers.inventory[index] += it->quantity;
+	}
 	else
-		ent->client->pers.inventory[index] += it->quantity;
-}
-else
-{
-	it_ent = G_Spawn();
-	it_ent->classname = it->classname;
-	SpawnItem (it_ent, it);
-	Touch_Item (it_ent, ent, NULL, NULL);
-	if (it_ent->inuse)
-		G_FreeEdict(it_ent);
-}
-*/
-// GRIM
+	{
+		it_ent = G_Spawn();
+		it_ent->classname = it->classname;
+		SpawnItem(it_ent, it);
+		Touch_Item(it_ent, ent, NULL, NULL);
+		if (it_ent->inuse)
+			G_FreeEdict(it_ent);
+	}
+	*/
+	// GRIM
 }
 
 
@@ -391,32 +391,32 @@ void Cmd_Use_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-int			index;
-gitem_t		*it;
-char		*s;
+	int			index;
+	gitem_t* it;
+	char* s;
 
-s = gi.args();
-it = FindItem (s);
-if (!it)
-{
-	gi.cprintf (ent, PRINT_HIGH, "unknown item: %s\n", s);
-	return;
-}
-if (!it->use)
-{
-	gi.cprintf (ent, PRINT_HIGH, "Item is not usable.\n");
-	return;
-}
-index = ITEM_INDEX(it);
-if (!ent->client->pers.inventory[index])
-{
-	gi.cprintf (ent, PRINT_HIGH, "Out of item: %s\n", s);
-	return;
-}
+	s = gi.args();
+	it = FindItem(s);
+	if (!it)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "unknown item: %s\n", s);
+		return;
+	}
+	if (!it->use)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Item is not usable.\n");
+		return;
+	}
+	index = ITEM_INDEX(it);
+	if (!ent->client->pers.inventory[index])
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Out of item: %s\n", s);
+		return;
+	}
 
-it->use (ent, it);
-*/
-// GRIM
+	it->use(ent, it);
+	*/
+	// GRIM
 }
 
 
@@ -431,32 +431,32 @@ void Cmd_Drop_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-int			index;
-gitem_t		*it;
-char		*s;
+	int			index;
+	gitem_t* it;
+	char* s;
 
-s = gi.args();
-it = FindItem (s);
-if (!it)
-{
-	gi.cprintf (ent, PRINT_HIGH, "unknown item: %s\n", s);
-	return;
-}
-if (!it->drop)
-{
-	gi.cprintf (ent, PRINT_HIGH, "Item is not dropable.\n");
-	return;
-}
-index = ITEM_INDEX(it);
-if (!ent->client->pers.inventory[index])
-{
-	gi.cprintf (ent, PRINT_HIGH, "Out of item: %s\n", s);
-	return;
-}
+	s = gi.args();
+	it = FindItem(s);
+	if (!it)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "unknown item: %s\n", s);
+		return;
+	}
+	if (!it->drop)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Item is not dropable.\n");
+		return;
+	}
+	index = ITEM_INDEX(it);
+	if (!ent->client->pers.inventory[index])
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Out of item: %s\n", s);
+		return;
+	}
 
-it->drop (ent, it);
-*/
-// GRIM
+	it->drop(ent, it);
+	*/
+	// GRIM
 }
 
 
@@ -516,25 +516,25 @@ void Cmd_InvUse_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gitem_t		*it;
+	gitem_t* it;
 
-ValidateSelectedItem (ent);
+	ValidateSelectedItem(ent);
 
-if (ent->client->pers.selected_item == -1)
-{
-	gi.cprintf (ent, PRINT_HIGH, "No item to use.\n");
-	return;
-}
+	if (ent->client->pers.selected_item == -1)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "No item to use.\n");
+		return;
+	}
 
-it = &itemlist[ent->client->pers.selected_item];
-if (!it->use)
-{
-	gi.cprintf (ent, PRINT_HIGH, "Item is not usable.\n");
-	return;
-}
-it->use (ent, it);
-*/
-// GRIM
+	it = &itemlist[ent->client->pers.selected_item];
+	if (!it->use)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Item is not usable.\n");
+		return;
+	}
+	it->use(ent, it);
+	*/
+	// GRIM
 }
 
 /*
@@ -546,35 +546,35 @@ void Cmd_WeapPrev_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gclient_t	*cl;
-int			i, index;
-gitem_t		*it;
-int			selected_weapon;
+	gclient_t* cl;
+	int			i, index;
+	gitem_t* it;
+	int			selected_weapon;
 
-cl = ent->client;
+	cl = ent->client;
 
-if (!cl->pers.weapon)
-	return;
+	if (!cl->pers.weapon)
+		return;
 
-selected_weapon = ITEM_INDEX(cl->pers.weapon);
+	selected_weapon = ITEM_INDEX(cl->pers.weapon);
 
-// scan  for the next valid one
-for (i=1 ; i<=MAX_ITEMS ; i++)
-{
-	index = (selected_weapon + i)%MAX_ITEMS;
-	if (!cl->pers.inventory[index])
-		continue;
-	it = &itemlist[index];
-	if (!it->use)
-		continue;
-	if (! (it->flags & IT_WEAPON) )
-		continue;
-	it->use (ent, it);
-	if (cl->pers.weapon == it)
-		return;	// successful
-}
-*/
-// GRIM
+	// scan  for the next valid one
+	for (i = 1; i <= MAX_ITEMS; i++)
+	{
+		index = (selected_weapon + i) % MAX_ITEMS;
+		if (!cl->pers.inventory[index])
+			continue;
+		it = &itemlist[index];
+		if (!it->use)
+			continue;
+		if (!(it->flags & IT_WEAPON))
+			continue;
+		it->use(ent, it);
+		if (cl->pers.weapon == it)
+			return;	// successful
+	}
+	*/
+	// GRIM
 }
 
 /*
@@ -586,35 +586,35 @@ void Cmd_WeapNext_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gclient_t	*cl;
-int			i, index;
-gitem_t		*it;
-int			selected_weapon;
+	gclient_t* cl;
+	int			i, index;
+	gitem_t* it;
+	int			selected_weapon;
 
-cl = ent->client;
+	cl = ent->client;
 
-if (!cl->pers.weapon)
-	return;
+	if (!cl->pers.weapon)
+		return;
 
-selected_weapon = ITEM_INDEX(cl->pers.weapon);
+	selected_weapon = ITEM_INDEX(cl->pers.weapon);
 
-// scan  for the next valid one
-for (i=1 ; i<=MAX_ITEMS ; i++)
-{
-	index = (selected_weapon + MAX_ITEMS - i)%MAX_ITEMS;
-	if (!cl->pers.inventory[index])
-		continue;
-	it = &itemlist[index];
-	if (!it->use)
-		continue;
-	if (! (it->flags & IT_WEAPON) )
-		continue;
-	it->use (ent, it);
-	if (cl->pers.weapon == it)
-		return;	// successful
-}
-*/
-// GRIM
+	// scan  for the next valid one
+	for (i = 1; i <= MAX_ITEMS; i++)
+	{
+		index = (selected_weapon + MAX_ITEMS - i) % MAX_ITEMS;
+		if (!cl->pers.inventory[index])
+			continue;
+		it = &itemlist[index];
+		if (!it->use)
+			continue;
+		if (!(it->flags & IT_WEAPON))
+			continue;
+		it->use(ent, it);
+		if (cl->pers.weapon == it)
+			return;	// successful
+	}
+	*/
+	// GRIM
 }
 
 /*
@@ -626,24 +626,24 @@ void Cmd_WeapLast_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gclient_t	*cl;
-int			index;
-gitem_t		*it;
+	gclient_t* cl;
+	int			index;
+	gitem_t* it;
 
-cl = ent->client;
+	cl = ent->client;
 
-if (!cl->pers.weapon || !cl->pers.lastweapon)
-	return;
+	if (!cl->pers.weapon || !cl->pers.lastweapon)
+		return;
 
-index = ITEM_INDEX(cl->pers.lastweapon);
-if (!cl->pers.inventory[index])
-	return;
-it = &itemlist[index];
-if (!it->use)
-	return;
-if (! (it->flags & IT_WEAPON) )
-	return;
-it->use (ent, it);
+	index = ITEM_INDEX(cl->pers.lastweapon);
+	if (!cl->pers.inventory[index])
+		return;
+	it = &itemlist[index];
+	if (!it->use)
+		return;
+	if (!(it->flags & IT_WEAPON))
+		return;
+	it->use(ent, it);
 	*/
 	// GRIM
 }
@@ -657,25 +657,25 @@ void Cmd_InvDrop_f(edict_t* ent)
 {
 	// GRIM 26/06/2001 4:57PM - new inventory system
 	/*
-gitem_t		*it;
+	gitem_t* it;
 
-ValidateSelectedItem (ent);
+	ValidateSelectedItem(ent);
 
-if (ent->client->pers.selected_item == -1)
-{
-	gi.cprintf (ent, PRINT_HIGH, "No item to drop.\n");
-	return;
-}
+	if (ent->client->pers.selected_item == -1)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "No item to drop.\n");
+		return;
+	}
 
-it = &itemlist[ent->client->pers.selected_item];
-if (!it->drop)
-{
-	gi.cprintf (ent, PRINT_HIGH, "Item is not dropable.\n");
-	return;
-}
-it->drop (ent, it);
-*/
-// GRIM
+	it = &itemlist[ent->client->pers.selected_item];
+	if (!it->drop)
+	{
+		gi.cprintf(ent, PRINT_HIGH, "Item is not dropable.\n");
+		return;
+	}
+	it->drop(ent, it);
+	*/
+	// GRIM
 }
 
 /*
@@ -1107,8 +1107,8 @@ void ClientCommand(edict_t* ent)
 	else if (Q_stricmp(cmd, "putaway") == 0)
 		Cmd_PutAway_f(ent);
 	else if (Q_stricmp(cmd, "spectate") == 0
-		|| (Q_stricmp(cmd, "observer") == 0)
-		|| (Q_stricmp(cmd, "observe") == 0))
+		|| (Q_stricmp(cmd, "observe") == 0)
+		|| (Q_stricmp(cmd, "observer") == 0))
 	{
 		Cmd_Spectator_f(ent);
 	}

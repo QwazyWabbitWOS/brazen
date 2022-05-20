@@ -1615,9 +1615,7 @@ void Touch_Item(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t* surf)
 	}
 	else if (deathmatch->value || coop->value)
 	{
-		SetRespawn(ent, 12);
-		//SetRespawn (ent, 4);
-		//SetRespawn (ent, 30);
+		SetRespawn (ent, 30);
 	}
 	else
 		G_FreeEdict(ent);
