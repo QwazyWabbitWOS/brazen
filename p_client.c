@@ -1210,10 +1210,14 @@ void spectator_respawn(edict_t* ent)
 
 	ent->client->respawn_time = level.time;
 
-	if (ent->client->pers.spectator)
+	if (ent->client->pers.spectator) {
 		gi.bprintf(PRINT_HIGH, "%s has moved to the sidelines\n", ent->client->pers.netname);
-	else
+		ent->flags |= FL_NOTARGET; //QW// present no target to monsters in coop
+	}
+	else {
 		gi.bprintf(PRINT_HIGH, "%s joined the game\n", ent->client->pers.netname);
+		ent->flags &= ~FL_NOTARGET;
+	}
 }
 
 //==============================================================
@@ -1563,10 +1567,10 @@ void ClientUserinfoChanged(edict_t* ent, char* userinfo)
 	// set spectator
 	s = Info_ValueForKey(userinfo, "spectator");
 
-	//QW// Changed this. Allow specs in coop too.
-	if (*s && strcmp(s, "0"))
+	//QW// Changed this. Allow spectator in dm and coop.
+	if (*s && strcmp(s, "0")) // any value that's not 0 sets spec.
 		ent->client->pers.spectator = true;
-	else 
+	else
 		ent->client->pers.spectator = false;
 
 	// set skin
@@ -2030,7 +2034,7 @@ void ClientBeginServerFrame(edict_t* ent)
 
 	client = ent->client;
 
-	if (deathmatch->value &&
+	if ((deathmatch->value || coop->value) &&
 		client->pers.spectator != client->resp.spectator &&
 		(level.time - client->respawn_time) >= 5) {
 		spectator_respawn(ent);
