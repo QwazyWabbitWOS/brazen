@@ -1,9 +1,7 @@
 #
-# Quake2 gamei386.real.so Makefile for Linux
+# Quake2 Makefile for Linux
 #
 # Jan '98 by Zoid <zoid@idsoftware.com>
-#
-# ELF only
 #
 # Edited December 08, 2018 by QwazyWabbit
 #
@@ -30,11 +28,8 @@ CC = clang -std=c17 -Wpedantic -Wall
 CFLAGS=-O3 -DARCH="$(ARCH)" -DSTDC_HEADERS
 # This is for 32-bit build on 64-bit host
 ifeq ($(ARCH),i386)
-CFLAGS =-m32 -O3 -DARCH="$(ARCH)" -DSTDC_HEADERS -I/usr/include
+CFLAGS +=-m32 -I/usr/include
 endif
-
-# use this when debugging
-#CFLAGS=-g -Og -DDEBUG -DARCH="$(ARCH)" -Wall -pedantic
 
 # flavors of Linux
 ifeq ($(shell uname),Linux)
@@ -57,17 +52,8 @@ BUILD_DIR = build$(ARCH)
 # Ensure build directory exists
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
-DO_SHLIB_CC=$(CC) $(CFLAGS) $(SHLIBCFLAGS) -o $@ -c $<
 
-# Pattern rule to place objects in build directory
-$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	$(DO_SHLIB_CC)
-
-#############################################################################
-# SETUP AND BUILD
-# GAME
-#############################################################################
-
+# List of source files
 GAME_SRCS = \
 flashlight.c g_ai.c g_chase.c g_cmds.c g_combat.c g_func.c g_main.c g_misc.c \
 g_monster.c g_newai.c g_newdm.c g_newfnc.c g_newtarg.c g_newtrig.c g_newweap.c \
@@ -83,13 +69,14 @@ z_sweapon.c z_tankrl.c z_weapon.c z_wedit.c
 
 GAME_OBJS = $(GAME_SRCS:%.c=$(BUILD_DIR)/%.o)
 
+# Pattern rule to place objects in build directory
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(SHLIBCFLAGS) -MMD -MP -MF $(@:.o=.d) -o $@ -c $<
+
+-include $(GAME_OBJS:.o=.d)
+
 # Build all object files that are out-of-date
 game: $(GAME_OBJS) game$(ARCH).real.$(SHLIBEXT)
-# Build everything (always rebuild all objects and the shared library)
-
-all: 
-	$(MAKE) clean
-	$(MAKE) $(BUILD_DIR) $(GAME_OBJS) game$(ARCH).real.$(SHLIBEXT)
 
 # Main target: depends on all object files
 game$(ARCH).real.$(SHLIBEXT) : $(GAME_OBJS)
@@ -97,15 +84,13 @@ game$(ARCH).real.$(SHLIBEXT) : $(GAME_OBJS)
 	$(LIBTOOL) -r $@
 	file $@
 
-#############################################################################
-# MISC
-#############################################################################
+# Build everything (always rebuild all objects and the shared library)
+all:
+	$(MAKE) clean
+	$(MAKE) $(BUILD_DIR)
+	$(MAKE) $(GAME_OBJS)
+	$(MAKE) game$(ARCH).real.$(SHLIBEXT)
+
 
 clean:
 	rm -rf $(BUILD_DIR)
-
-depends:
-	$(CC) $(CFLAGS) -MM $(GAME_SRCS) > dependencies
-
--include dependencies
-
