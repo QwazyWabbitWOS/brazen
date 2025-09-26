@@ -1,7 +1,7 @@
 #include "g_local.h"
 #include "m_player.h"
 
-void CheckCrossHair(edict_t* ent)
+static void CheckCrossHair(edict_t* ent)
 {
 	vec3_t forward, right, offset = { 0 }, start, end, pos = { 0 };
 	edict_t* foundEnt = NULL;

@@ -145,7 +145,7 @@ void SP_turret_driver(edict_t* self);
 void SP_func_plat2(edict_t* ent);
 void SP_func_door_secret2(edict_t* ent);
 void SP_func_force_wall(edict_t* ent);
-void SP_info_player_coop_lava(edict_t* self);
+//void SP_info_player_coop_lava(edict_t* self);
 void SP_info_teleport_destination(edict_t* self);
 void SP_trigger_teleport(edict_t* self);
 void SP_trigger_disguise(edict_t* self);

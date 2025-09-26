@@ -94,7 +94,7 @@ void Calc_Arc(edict_t* ent)
 
 void P_ProjectSource(gclient_t* client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
 {
-	vec3_t	_distance;
+	vec3_t	_distance = { 0 };
 
 	VectorCopy(distance, _distance);
 	if (client->pers.hand == LEFT_HANDED)
@@ -143,7 +143,7 @@ qboolean CheckAltAmmo(edict_t* ent, gitem_t* curweapon, int ammoTag)
 	return false;
 }
 
-char* GetTwoWeaponViewModel(gitem_t* right, gitem_t* left)
+static char* GetTwoWeaponViewModel(gitem_t* right, gitem_t* left)
 {
 	if (right->tag == II_PISTOL)
 	{
@@ -166,7 +166,7 @@ char* GetTwoWeaponViewModel(gitem_t* right, gitem_t* left)
 	return NULL;
 }
 
-int GetTwoWeaponModelIndex2Tag(gitem_t* right, gitem_t* left)
+static int GetTwoWeaponModelIndex2Tag(gitem_t* right, gitem_t* left)
 {
 	if (right->tag == II_PISTOL)
 	{
@@ -189,7 +189,7 @@ int GetTwoWeaponModelIndex2Tag(gitem_t* right, gitem_t* left)
 	return 0;
 }
 
-qboolean TwoWeaponComboOk(edict_t* ent, int rtag, int ltag)
+static qboolean TwoWeaponComboOk(edict_t* ent, int rtag, int ltag)
 {
 	gitem_t* right, * left;
 	//qboolean two;
@@ -404,7 +404,7 @@ void ChangeRightWeapon(edict_t* ent)
 
 //======================================================================
 
-void AutoSwitchOld(edict_t* ent)
+static void AutoSwitchOld(edict_t* ent)
 {
 	int rba, lba;
 
@@ -429,7 +429,7 @@ void AutoSwitchOld(edict_t* ent)
 	ent->client->previous_left_tag = -1;
 }
 
-void AutoSwitchAnything(edict_t* ent)
+static void AutoSwitchAnything(edict_t* ent)
 {
 	int i;
 

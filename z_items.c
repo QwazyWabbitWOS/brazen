@@ -924,7 +924,7 @@ int CountItemByTag(edict_t* ent, int index)
 Use_Item
 ================
 */
-void Use_Item(edict_t* ent, edict_t* other, edict_t* activator)
+static void Use_Item(edict_t* ent, edict_t* other, edict_t* activator)
 {
 	ent->svflags &= ~SVF_NOCLIENT;
 	ent->use = NULL;
@@ -1435,7 +1435,7 @@ int GetFreeBodyArea(gitem_t* item, edict_t* ent)
 Pickup_BAItem
 ===============
 */
-qboolean Pickup_LooseAmmo(edict_t* ent, edict_t* other)
+static qboolean Pickup_LooseAmmo(edict_t* ent, edict_t* other)
 {
 	int i, calc;
 	int count = ent->count;
@@ -1662,7 +1662,7 @@ void DroppedThink(edict_t* ent)
 // Checks if a key ended up in lava or slime
 // if so, it will respawn the key at the last rally point
 // or failing that, back at the start of the level
-void DroppedKeyCheck(edict_t* key)
+static void DroppedKeyCheck(edict_t* key)
 {
 	edict_t* ent, * point = NULL;
 	int player, contents;
@@ -1740,7 +1740,7 @@ void DroppedKeyCheck(edict_t* key)
 	}
 }
 
-edict_t* GetDroppedItem(int num)
+static edict_t* GetDroppedItem(int num)
 {
 	edict_t* ent;
 	int     i;
@@ -1758,7 +1758,7 @@ edict_t* GetDroppedItem(int num)
 	return NULL;
 }
 
-void DropBandolier(edict_t* ent, edict_t* self)
+static void DropBandolier(edict_t* ent, edict_t* self)
 {
 	edict_t* dropped = NULL;
 	int i;
@@ -1786,7 +1786,7 @@ void DropBandolier(edict_t* ent, edict_t* self)
 	}
 }
 
-void DropBackPack(edict_t* ent, edict_t* self)
+static void DropBackPack(edict_t* ent, edict_t* self)
 {
 	edict_t* dropped = NULL;
 	int i;
@@ -2107,7 +2107,7 @@ qboolean CanLeftReload(edict_t* ent)
 //======================================================================
 
 // check for offhand grenades
-void OffHandGrenades(edict_t* ent, int handstat, int ammostat, int ammopicstat)
+static void OffHandGrenades(edict_t* ent, int handstat, int ammostat, int ammopicstat)
 {
 	gitem_t* item;
 	int count = -1;

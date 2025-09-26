@@ -36,11 +36,6 @@ typedef unsigned char 		byte;
 typedef enum { false, true }	qboolean;
 
 
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-
-
 // angle indexes
 #define	PITCH				0		// up / down
 #define	YAW					1		// left / right

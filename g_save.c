@@ -266,7 +266,7 @@ void InitGame(void)
 
 //=========================================================
 
-void WriteField1(FILE* f, field_t* field, byte* base)
+static void WriteField1(FILE* f, field_t* field, byte* base)
 {
 	void* p;
 	int			len;
@@ -339,7 +339,7 @@ void WriteField1(FILE* f, field_t* field, byte* base)
 }
 
 
-void WriteField2(FILE* f, field_t* field, byte* base)
+static void WriteField2(FILE* f, field_t* field, byte* base)
 {
 	size_t		len;
 	void* p;
@@ -363,7 +363,7 @@ void WriteField2(FILE* f, field_t* field, byte* base)
 	}
 }
 
-void ReadField(FILE* f, field_t* field, byte* base)
+static void ReadField(FILE* f, field_t* field, byte* base)
 {
 	void* p;
 	int		len;
@@ -449,7 +449,7 @@ WriteClient
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void WriteClient(FILE* f, gclient_t* client)
+static void WriteClient(FILE* f, gclient_t* client)
 {
 	field_t* field;
 	gclient_t	temp;
@@ -480,7 +480,7 @@ ReadClient
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void ReadClient(FILE* f, gclient_t* client)
+static void ReadClient(FILE* f, gclient_t* client)
 {
 	field_t* field;
 	size_t	count;
@@ -583,7 +583,7 @@ WriteEdict
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void WriteEdict(FILE* f, edict_t* ent)
+static void WriteEdict(FILE* f, edict_t* ent)
 {
 	field_t* field;
 	edict_t		temp;
@@ -615,7 +615,7 @@ WriteLevelLocals
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void WriteLevelLocals(FILE* f)
+static void WriteLevelLocals(FILE* f)
 {
 	field_t* field;
 	level_locals_t		temp;
@@ -647,7 +647,7 @@ ReadEdict
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void ReadEdict(FILE* f, edict_t* ent)
+static void ReadEdict(FILE* f, edict_t* ent)
 {
 	field_t* field;
 	size_t	count;
@@ -669,7 +669,7 @@ ReadLevelLocals
 All pointer variables (except function pointers) must be handled specially.
 ==============
 */
-void ReadLevelLocals(FILE* f)
+static void ReadLevelLocals(FILE* f)
 {
 	field_t* field;
 	size_t	count;
