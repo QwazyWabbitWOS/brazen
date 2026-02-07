@@ -703,6 +703,8 @@ void WriteLevel(char* filename)
 		gi.error("Couldn't open %s", filename);
 		return;
 	}
+	gi.dprintf("%s %s\n", __func__, filename);
+
 	// write out edict size for checking
 	i = sizeof(edict_t);
 	fwrite(&i, sizeof(i), 1, f);
@@ -761,6 +763,8 @@ void ReadLevel(char* filename)
 		gi.error("Couldn't open %s", filename);
 		return;
 	}
+	gi.dprintf("%s %s\n", __func__, filename);
+
 	// free any dynamic memory allocated by loading the level
 	// base state
 	gi.FreeTags(TAG_LEVEL);

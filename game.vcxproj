@@ -161,6 +161,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Default</FloatingPointModel>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
