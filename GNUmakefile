@@ -16,7 +16,7 @@ ARCH := $(shell uname -m | sed -e s/i.86/i386/ \
 # On 64-bit OS use the command: setarch i386 make all
 # to obtain the 32-bit binary DLL on 64-bit Linux.
 
-CC = clang -std=c17 -Wpedantic -Wall
+CC = gcc -std=c17 -Wpedantic -Wall
 
 # on x64 machines do this preparation:
 # sudo apt-get install ia32-libs
