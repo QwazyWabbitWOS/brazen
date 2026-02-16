@@ -1,5 +1,18 @@
 //g_local.h -- local definitions for game module
 
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN	// non-MFC
+#define _USE_MATH_DEFINES		// for some POSIX math constants (M_PI)
+#include <windows.h>
+#include <direct.h> // for _mkdir()
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+_CrtMemState startup1;	// memory diagnostics
+#else
+#define OutputDebugString	//not doing Windows
+#endif
+
 #include "q_shared.h"
 
 // define GAME_INCLUDE so that game.h does not define the
@@ -12,7 +25,7 @@
 // GRIM
 
 // the "gameversion" client command will print this plus compile date
-#define	GAMEVERSION	"BraZen 2.0"
+#define	GAMEVERSION	"BraZen 2.0m"
 #define	GAMENAME	"brazen"
 
 // protocol bytes that can be directly added to messages

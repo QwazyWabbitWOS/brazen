@@ -160,6 +160,10 @@ is loaded.
 */
 void InitGame(void)
 {
+#ifdef	_WIN32
+	_CrtMemCheckpoint(&startup1);
+#endif
+
 	gi.dprintf("==== InitGame %s %s ====\n", GAMEVERSION, __DATE__);
 
 	gun_x = gi.cvar("gun_x", "0", 0);
@@ -703,6 +707,7 @@ void WriteLevel(char* filename)
 		gi.error("Couldn't open %s", filename);
 		return;
 	}
+
 	gi.dprintf("%s %s\n", __func__, filename);
 
 	// write out edict size for checking
@@ -763,6 +768,7 @@ void ReadLevel(char* filename)
 		gi.error("Couldn't open %s", filename);
 		return;
 	}
+
 	gi.dprintf("%s %s\n", __func__, filename);
 
 	// free any dynamic memory allocated by loading the level
