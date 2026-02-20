@@ -164,7 +164,7 @@ void InitGame(void)
 	_CrtMemCheckpoint(&startup1);
 #endif
 
-	gi.dprintf("==== InitGame %s %s ====\n", GAMEVERSION, __DATE__);
+	gi.dprintf("==== InitGame "GAMEVERSION" "BUILD" "__DATE__" ====\n"); //QW so we have the full banner in one place in the binary
 
 	gun_x = gi.cvar("gun_x", "0", 0);
 	gun_y = gi.cvar("gun_y", "0", 0);

@@ -25,8 +25,14 @@ _CrtMemState startup1;	// memory diagnostics
 // GRIM
 
 // the "gameversion" client command will print this plus compile date
-#define	GAMEVERSION	"BraZen 2.0m"
+#define	GAMEVERSION	"BraZen 2.1"
 #define	GAMENAME	"brazen"
+
+#ifdef _DEBUG
+#define BUILD	"Debug"
+#else
+#define BUILD	"Release"
+#endif
 
 // protocol bytes that can be directly added to messages
 #define	svc_muzzleflash		1
