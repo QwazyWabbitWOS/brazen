@@ -257,17 +257,17 @@ void G_UseTargets(edict_t* ent, edict_t* activator)
 					master = t->teammaster;
 					while (!done)
 					{
+						if (master == NULL)
+						{
+							//QW Prevent dereferencing NULL pointer
+							break;
+						}
 						if (master->teamchain == t)
 						{
 							master->teamchain = t->teamchain;
 							done = true;
 						}
 						master = master->teamchain;
-						if (!master)
-						{
-							//if ((g_showlogic) && (g_showlogic->value))
-							//	gi.dprintf ("Couldn't find myself in master's chain, ignoring!\n");
-						}
 					}
 				}
 				else

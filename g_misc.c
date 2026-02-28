@@ -827,7 +827,7 @@ void func_explosive_explode(edict_t* self, edict_t* inflictor, edict_t* attacker
 			master = self->teammaster;
 			if (master && master->inuse)		// because mappers (other than jim (usually)) are stupid....
 			{
-				while (!done)
+				while (!done && master)
 				{
 					if (master->teamchain == self)
 					{
@@ -835,18 +835,8 @@ void func_explosive_explode(edict_t* self, edict_t* inflictor, edict_t* attacker
 						done = true;
 					}
 					master = master->teamchain;
-					if (!master)
-					{
-						//if ((g_showlogic) && (g_showlogic->value))
-						//	gi.dprintf("Couldn't find myself in master's chain, ignoring!\n");
-					}
 				}
 			}
-		}
-		else
-		{
-			//			if ((g_showlogic) && (g_showlogic->value))
-			//				gi.dprintf ("No master to free myself from, ignoring!\n");
 		}
 	}
 
