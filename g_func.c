@@ -103,7 +103,7 @@ void Move_Begin(edict_t* ent)
 		return;
 	}
 	VectorScale(ent->moveinfo.dir, ent->moveinfo.speed, ent->velocity);
-	frames = floor((ent->moveinfo.remaining_distance / ent->moveinfo.speed) / FRAMETIME);
+	frames = floorf((ent->moveinfo.remaining_distance / ent->moveinfo.speed) / FRAMETIME);
 	ent->moveinfo.remaining_distance -= frames * ent->moveinfo.speed * FRAMETIME;
 	ent->nextthink = level.time + (frames * FRAMETIME);
 	ent->think = Move_Final;
@@ -152,7 +152,7 @@ void AngleMove_Done(edict_t* ent)
 
 void AngleMove_Final(edict_t* ent)
 {
-	vec3_t	move;
+	vec3_t	move = { 0 };
 
 	if (ent->moveinfo.state == STATE_UP)
 		VectorSubtract(ent->moveinfo.end_angles, ent->s.angles, move);
@@ -165,7 +165,7 @@ void AngleMove_Final(edict_t* ent)
 		return;
 	}
 
-	VectorScale(move, 1.0 / FRAMETIME, ent->avelocity);
+	VectorScale(move, 1.0f / FRAMETIME, ent->avelocity);
 
 	ent->think = AngleMove_Done;
 	ent->nextthink = level.time + FRAMETIME;
@@ -173,7 +173,7 @@ void AngleMove_Final(edict_t* ent)
 
 void AngleMove_Begin(edict_t* ent)
 {
-	vec3_t	destdelta;
+	vec3_t	destdelta = { 0 };
 	float	len;
 	float	traveltime;
 	float	frames;
@@ -205,10 +205,10 @@ void AngleMove_Begin(edict_t* ent)
 		return;
 	}
 
-	frames = floor(traveltime / FRAMETIME);
+	frames = floorf(traveltime / FRAMETIME);
 
 	// scale the destdelta vector by the time spent traveling to get velocity
-	VectorScale(destdelta, 1.0 / traveltime, ent->avelocity);
+	VectorScale(destdelta, 1.0f / traveltime, ent->avelocity);
 
 	//PGM
 		// if we're done accelerating, act as a normal rotation
@@ -257,7 +257,10 @@ The team has completed a frame of movement, so
 change the speed for the next frame
 ==============
 */
-#define AccelerationDistance(target, rate)	(target * ((target / rate) + 1) / 2)
+float AccelerationDistance(float target, float rate)
+{
+	return (target * ((target / rate) + 1) / 2);
+}
 
 void plat_CalcAcceleratedMove(moveinfo_t* moveinfo)
 {
@@ -280,7 +283,7 @@ void plat_CalcAcceleratedMove(moveinfo_t* moveinfo)
 		float	f;
 
 		f = (moveinfo->accel + moveinfo->decel) / (moveinfo->accel * moveinfo->decel);
-		moveinfo->move_speed = (-2 + sqrtf(4 - 4 * f * (-2 * moveinfo->remaining_distance))) / (2 * f);
+		moveinfo->move_speed = (float)(-2 + sqrtf(4 - 4 * f * (-2 * moveinfo->remaining_distance))) / (2 * f);
 		decel_dist = AccelerationDistance(moveinfo->move_speed, moveinfo->decel);
 	}
 
@@ -508,7 +511,7 @@ void Touch_Plat_Center(edict_t* ent, edict_t* other, cplane_t* plane, csurface_t
 edict_t* plat_spawn_inside_trigger(edict_t* ent)
 {
 	edict_t* trigger;
-	vec3_t	tmin, tmax;
+	vec3_t	tmin = { 0 }, tmax = { 0 };
 
 	//
 	// middle trigger
@@ -582,17 +585,17 @@ void SP_func_plat(edict_t* ent)
 	if (!ent->speed)
 		ent->speed = 20;
 	else
-		ent->speed *= 0.1;
+		ent->speed *= 0.1f;
 
 	if (!ent->accel)
 		ent->accel = 5;
 	else
-		ent->accel *= 0.1;
+		ent->accel *= 0.1f;
 
 	if (!ent->decel)
 		ent->decel = 5;
 	else
-		ent->decel *= 0.1;
+		ent->decel *= 0.1f;
 
 	if (!ent->dmg)
 		ent->dmg = 2;
@@ -1319,7 +1322,7 @@ void button_killed(edict_t* self, edict_t* inflictor, edict_t* attacker, int dam
 
 void SP_func_button(edict_t* ent)
 {
-	vec3_t	abs_movedir;
+	vec3_t	abs_movedir = { 0 };
 	float	dist;
 
 	G_SetMovedir(ent->s.angles, ent->movedir);
@@ -1702,7 +1705,7 @@ void Think_CalcMoveSpeed(edict_t* self)
 void Think_SpawnDoorTrigger(edict_t* ent)
 {
 	edict_t* other;
-	vec3_t		mins, maxs;
+	vec3_t		mins = { 0 }, maxs = { 0 };
 
 	if (ent->flags & FL_TEAMSLAVE)
 		return;		// only the team leader spawns a trigger
@@ -1801,7 +1804,7 @@ void door_touch(edict_t* self, edict_t* other, cplane_t* plane, csurface_t* surf
 
 void SP_func_door(edict_t* ent)
 {
-	vec3_t	abs_movedir;
+	vec3_t	abs_movedir = { 0 };
 
 	if (ent->sounds != 1)
 	{
@@ -1968,8 +1971,8 @@ void SP_func_door_rotating(edict_t* ent)
 	}
 
 	VectorCopy(ent->s.angles, ent->pos1);
-	VectorMA(ent->s.angles, st.distance, ent->movedir, ent->pos2);
-	ent->moveinfo.distance = st.distance;
+	VectorMA(ent->s.angles, (float)st.distance, ent->movedir, ent->pos2);
+	ent->moveinfo.distance = (float)st.distance;
 
 	ent->movetype = MOVETYPE_PUSH;
 	ent->solid = SOLID_BSP;
@@ -2093,7 +2096,7 @@ SMART causes the water to adjust its speed depending on distance to player.
 
 void SP_func_water(edict_t* self)
 {
-	vec3_t	abs_movedir;
+	vec3_t	abs_movedir = { 0 };
 
 	G_SetMovedir(self->s.angles, self->movedir);
 	self->movetype = MOVETYPE_PUSH;
@@ -2264,10 +2267,9 @@ void train_piece_wait(edict_t* self)
 void train_next(edict_t* self)
 {
 	edict_t* ent;
-	vec3_t		dest;
-	qboolean	first;
+	vec3_t dest = { 0 };
+	qboolean first = true;
 
-	first = true;
 again:
 	if (!self->target)
 	{
@@ -2363,7 +2365,7 @@ again:
 void train_resume(edict_t* self)
 {
 	edict_t* ent;
-	vec3_t	dest;
+	vec3_t	dest = { 0 };
 
 	ent = self->target_ent;
 
@@ -2585,7 +2587,7 @@ void SP_func_timer(edict_t* self)
 
 	if (self->spawnflags & 1)
 	{
-		self->nextthink = level.time + 1.0 + st.pausetime + self->delay + self->wait + crandom() * self->random;
+		self->nextthink = level.time + 1.0f + st.pausetime + self->delay + self->wait + crandom() * self->random;
 		self->activator = self;
 	}
 
@@ -2608,7 +2610,7 @@ void func_conveyor_use(edict_t* self, edict_t* other, edict_t* activator)
 	}
 	else
 	{
-		self->speed = self->count;
+		self->speed = (float)self->count;
 		self->spawnflags |= 1;
 	}
 
@@ -2623,7 +2625,7 @@ void SP_func_conveyor(edict_t* self)
 
 	if (!(self->spawnflags & 1))
 	{
-		self->count = self->speed;
+		self->count = (int)self->speed;
 		self->speed = 0;
 	}
 
@@ -2778,7 +2780,7 @@ void SP_func_door_secret(edict_t* ent)
 	// calculate positions
 	AngleVectors(ent->s.angles, forward, right, up);
 	VectorClear(ent->s.angles);
-	side = 1.0 - (ent->spawnflags & SECRET_1ST_LEFT);
+	side = 1.0f - (ent->spawnflags & SECRET_1ST_LEFT);
 	if (ent->spawnflags & SECRET_1ST_DOWN)
 		width = fabsf(DotProduct(up, ent->size));
 	else

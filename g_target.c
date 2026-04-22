@@ -265,7 +265,7 @@ void use_target_changelevel(edict_t* self, edict_t* other, edict_t* activator)
 	vec3_t v;
 
 	if (level.intermissiontime)
-		return;// allready activated
+		return; // already activated
 
 	if (coop->value)
 	{

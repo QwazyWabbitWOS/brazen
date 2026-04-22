@@ -1087,7 +1087,7 @@ void EndCoopView(edict_t* ent)
 		VectorCopy(decoy->spawnpoint, ent->client->ps.viewangles);
 		VectorCopy(decoy->spawnpoint, ent->client->v_angle);
 		for (i = 0; i < 3; i++)
-			ent->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(ent->client->v_angle[i] - ent->client->resp.cmd_angles[i]);
+			ent->client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(ent->client->v_angle[i] - ent->client->resp.cmd_angles[i]);
 		decoy->decoy = false;
 
 		ent->movetype = MOVETYPE_WALK;

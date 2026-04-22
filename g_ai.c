@@ -105,7 +105,7 @@ Distance is for slight position adjustments needed by the animations
 */
 void ai_stand(edict_t* self, float dist)
 {
-	vec3_t	v;
+	vec3_t	v = { 0 };
 	// PMM
 	qboolean retval;
 
@@ -215,7 +215,7 @@ Use this call with a distance of 0 to replace ai_face
 */
 void ai_charge(edict_t* self, float dist)
 {
-	vec3_t	v;
+	vec3_t	v = { 0 };
 	// PMM
 	float	ofs;
 	// PMM
@@ -337,7 +337,7 @@ returns the range catagorization of an entity reletive to self
 */
 int range(edict_t* self, edict_t* other)
 {
-	vec3_t	v;
+	vec3_t	v = { 0 };
 	float	len;
 
 	VectorSubtract(self->s.origin, other->s.origin, v);
@@ -390,7 +390,7 @@ returns 1 if the entity is in front (in sight) of self
 */
 qboolean infront(edict_t* self, edict_t* other)
 {
-	vec3_t	vec;
+	vec3_t	vec = { 0 };
 	float	dot;
 	vec3_t	forward;
 
@@ -409,12 +409,13 @@ qboolean infront(edict_t* self, edict_t* other)
 
 void HuntTarget(edict_t* self)
 {
-	vec3_t	vec;
+	vec3_t	vec = { 0 };
 
 	self->goalentity = self->enemy;
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 		self->monsterinfo.stand(self);
 	else
+		if (self->monsterinfo.run != NULL)		//QW//coop mode hack
 		self->monsterinfo.run(self);
 	VectorSubtract(self->enemy->s.origin, self->s.origin, vec);
 	self->ideal_yaw = vectoyaw(vec);
@@ -442,7 +443,7 @@ void FoundTarget(edict_t* self)
 		level.sight_entity->light_level = 128;
 	}
 
-	self->show_hostile = level.time + 1;		// wake up other monsters
+	self->show_hostile = level.time + 1.0f;		// wake up other monsters
 
 	VectorCopy(self->enemy->s.origin, self->monsterinfo.last_sighting);
 	self->monsterinfo.trail_time = level.time;
@@ -706,7 +707,7 @@ qboolean FindTarget(edict_t* self)
 	}
 	else	// heardit
 	{
-		vec3_t	temp;
+		vec3_t	temp = { 0 };
 
 		if (self->spawnflags & 1)
 		{
@@ -787,7 +788,7 @@ qboolean FacingIdeal(edict_t* self)
 
 qboolean M_CheckAttack(edict_t* self)
 {
-	vec3_t	spot1, spot2;
+	vec3_t	spot1 = { 0 }, spot2 = { 0 };
 	float	chance;
 	trace_t	tr;
 
@@ -881,19 +882,19 @@ qboolean M_CheckAttack(edict_t* self)
 
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
-		chance = 0.4;
+		chance = 0.4f;
 	}
 	else if (enemy_range == RANGE_MELEE)
 	{
-		chance = 0.2;
+		chance = 0.2f;
 	}
 	else if (enemy_range == RANGE_NEAR)
 	{
-		chance = 0.1;
+		chance = 0.1f;
 	}
 	else if (enemy_range == RANGE_MID)
 	{
-		chance = 0.02;
+		chance = 0.02f;
 	}
 	else
 	{
@@ -903,7 +904,7 @@ qboolean M_CheckAttack(edict_t* self)
 	if (skill->value == 0)
 		chance *= 0.5;
 	else if (skill->value >= 2)
-		chance *= 2;
+		chance *= 2.0;
 
 	// PGM - go ahead and shoot every time if it's a info_notnull
 	if ((random() < chance) || (self->enemy->solid == SOLID_NOT))
@@ -1087,7 +1088,7 @@ used by ai_run and ai_stand
 */
 qboolean ai_checkattack(edict_t* self, float dist)
 {
-	vec3_t		temp;
+	vec3_t		temp = { 0 };
 	qboolean	hesDeadJim;
 	// PMM
 	qboolean	retval;
@@ -1301,7 +1302,7 @@ The monster has an enemy it is trying to kill
 */
 void ai_run(edict_t* self, float dist)
 {
-	vec3_t		v;
+	vec3_t		v = { 0 };
 	edict_t* tempgoal;
 	edict_t* save;
 	qboolean	bnew;
@@ -1669,7 +1670,7 @@ void ai_run(edict_t* self, float dist)
 			{
 				if (left < 1)
 				{
-					VectorSet(v, d2 * left * 0.5, -16, 0);
+					VectorSet(v, d2 * left * 0.5f, -16, 0);
 					G_ProjectSource(self->s.origin, v, v_forward, v_right, left_target);
 					//					gi.dprintf("incomplete path, go part way and adjust again\n");
 				}
@@ -1686,7 +1687,7 @@ void ai_run(edict_t* self, float dist)
 			{
 				if (right < 1)
 				{
-					VectorSet(v, d2 * right * 0.5, 16, 0);
+					VectorSet(v, d2 * right * 0.5f, 16, 0);
 					G_ProjectSource(self->s.origin, v, v_forward, v_right, right_target);
 					//					gi.dprintf("incomplete path, go part way and adjust again\n");
 				}

@@ -1,6 +1,6 @@
 #include "g_local.h"
 
-typedef struct
+typedef struct spawn_s
 {
 	char* name;
 	void	(*spawn)(edict_t* ent);
@@ -196,6 +196,7 @@ spawn_t	spawns[] = {
 		{"weapon_blaster", NULL},
 		{"weapon_shotgun", NULL},
 		{"weapon_supershotgun", NULL},
+		{"weapon_machinegun", NULL},
 		{"weapon_chaingun", NULL},
 		{"ammo_grenades", NULL},
 		{"weapon_grenadelauncher", NULL},
@@ -789,6 +790,8 @@ char* original_entstring = NULL;
 char* new_entstring = NULL;
 char* added_entstring = NULL;
 
+// Create an ent file from the current map.
+// This can only be used if cheats is 1.
 void Svcmd_EntZ_f(void)
 {
 	if (original_entstring)
@@ -808,7 +811,7 @@ void Svcmd_EntZ_f(void)
 			gi.dprintf("can't open \"%s\"\n", path);
 			return;
 		}
-		if (fwrite(original_entstring, strlen(original_entstring) + 1, 1, entfile) != 1)
+		if (fwrite(original_entstring, strlen(original_entstring), 1, entfile) != 1)
 			gi.dprintf("can't write to \"%s\"\n", path);
 		else
 			gi.dprintf("ents saved to \"%s\"\n", path);
@@ -1192,17 +1195,17 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 	//OldSpawnEntities (mapname, entstring, spawnpoint);
 	//return; // GRIM TEMP
 
-	//if (original_entstring)
-	//{
-	//	gi.TagFree(original_entstring);
-	//	original_entstring = NULL;
-	//}
+	if (original_entstring)
+	{
+		gi.TagFree(original_entstring);
+		original_entstring = NULL;
+	}
 
-	//if (new_entstring)
-	//{
-	//	gi.TagFree(new_entstring);
-	//	new_entstring = NULL;
-	//}
+	if (new_entstring)
+	{
+		gi.TagFree(new_entstring);
+		new_entstring = NULL;
+	}
 
 	if (!strstr(mapname, ".")) // is this a map?
 	{
@@ -1210,21 +1213,17 @@ void SpawnEntities(char* mapname, char* entstring, char* spawnpoint)
 		char path[MAX_OSPATH];
 
 		// save original entstring for later
-		//original_entstring = (char*)gi.TagMalloc((int)strlen(entstring), TAG_GAME);
-		//if (original_entstring == NULL)
-		//{
-		//	gi.error("SpawnEntities: can't allocate original_entstring.\n");
-		//	return;
-		//}
+		original_entstring = (char*)gi.TagMalloc((int)strlen(entstring), TAG_GAME);
+		if (original_entstring == NULL)
+		{
+			gi.error("SpawnEntities: can't allocate original_entstring.\n");
+			return;
+		}
 
 		//strcpy (original_entstring, entstring); 
 		// GRIM - FIXES problem with ware2, boss2 etc
-		//strncpy(original_entstring,  entstring, strlen(original_entstring) - 1);
-
-		//QW// Replace all the fussing around above.
-		original_entstring = G_CopyString(entstring);
-		//QW//
-		 
+		Q_strncpyz(original_entstring, strlen(entstring), entstring);
+ 
 		// load modified entstring from file
 		Com_sprintf(path, sizeof path, "%s/maps/ents/%s.ent", gamedir->string, current_mapname);
 		entfile = fopen(path, "rb");

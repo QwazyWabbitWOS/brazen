@@ -117,7 +117,7 @@ void G_TouchDeadBodies(edict_t* ent)
 	}
 }
 
-void TempQuakeThink(edict_t* self)
+static void TempQuakeThink(edict_t* self)
 {
 	int		i;
 	edict_t* player;
@@ -209,8 +209,6 @@ qboolean CheckBox(edict_t* ent)
 
 	return false;
 }
-
-void SP_misc_teleporter_dest(edict_t* ent);
 
 void CheckCoopAllDead(void)
 {
@@ -316,7 +314,7 @@ static void rally_point_think(edict_t* ent)
 	ent->nextthink = level.time + FRAMETIME;
 }
 
-void rally_point_touch(edict_t* self, edict_t* other, cplane_t* plane, csurface_t* surf)
+static void rally_point_touch(edict_t* self, edict_t* other, cplane_t* plane, csurface_t* surf)
 {
 	edict_t* ent;
 	int player;

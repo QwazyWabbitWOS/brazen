@@ -1,11 +1,12 @@
 //g_local.h -- local definitions for game module
 
+#pragma once
+
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN	// non-MFC
-#define _USE_MATH_DEFINES		// for some POSIX math constants (M_PI)
+#define _CRTDBG_MAP_ALLOC
 #include <windows.h>
 #include <direct.h> // for _mkdir()
-#define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
 _CrtMemState startup1;	// memory diagnostics
@@ -24,8 +25,10 @@ _CrtMemState startup1;	// memory diagnostics
 #include "z_items.h"
 // GRIM
 
+#include "flashlight.h" //QW Added a flashlight
+
 // the "gameversion" client command will print this plus compile date
-#define	GAMEVERSION	"BraZen 2.1"
+#define	GAMEVERSION	"BraZen 2.2"
 #define	GAMENAME	"brazen"
 
 #ifdef _DEBUG
@@ -253,7 +256,7 @@ MOVETYPE_NEWTOSS		// PGM - for deathball
 
 
 
-typedef struct
+typedef struct gitem_armor_s
 {
 	int		base_count;
 	int		max_count;
@@ -315,7 +318,7 @@ typedef struct gitem_s
 // it should be initialized at dll load time, and read/written to
 // the server.ssv file for savegames
 //
-typedef struct
+typedef struct game_locals_s
 {
 	char		helpmessage1[512];
 	char		helpmessage2[512];
@@ -346,7 +349,7 @@ typedef struct
 // this structure is cleared as each map is entered
 // it is read/written to the level.sav file for savegames
 //
-typedef struct
+typedef struct level_locals_s
 {
 	int			framenum;
 	float		time;
@@ -397,7 +400,7 @@ typedef struct
 // spawn_temp_t is only used to hold entity field values that
 // can be set from the editor, but aren't actualy present
 // in edict_t during gameplay
-typedef struct
+typedef struct spawn_temp_s
 {
 	// world vars
 	char		*sky;
@@ -424,7 +427,7 @@ typedef struct
 } spawn_temp_t;
 
 
-typedef struct
+typedef struct moveinfo_s
 {
 	// fixed data
 	vec3_t		start_origin;
@@ -455,14 +458,14 @@ typedef struct
 } moveinfo_t;
 
 
-typedef struct
+typedef struct mframe_s
 {
 	void	(*aifunc)(edict_t *self, float dist);
 	float	dist;
 	void	(*thinkfunc)(edict_t *self);
 } mframe_t;
 
-typedef struct
+typedef struct mmove_s
 {
 	int			firstframe;
 	int			lastframe;
@@ -470,7 +473,7 @@ typedef struct
 	void		(*endfunc)(edict_t *self);
 } mmove_t;
 
-typedef struct
+typedef struct monsterinfo_s
 {
 	mmove_t		*currentmove;
 	unsigned int	aiflags;		// PGM - unsigned, since we're close to the max
@@ -643,7 +646,6 @@ extern	cvar_t	*dedicated;
 extern	cvar_t* gamedir;
 
 extern	cvar_t	*filterban;
-extern	cvar_t* flashlightmode; //QW mode for flashlight code.
 extern	cvar_t* exit_any;		//QW allow a single player to force exit.
 
 extern	cvar_t	*sv_gravity;
@@ -724,7 +726,7 @@ typedef enum {
 	F_IGNORE
 } fieldtype_t;
 
-typedef struct
+typedef struct field_s
 {
 	char	*name;
 	int		ofs;
@@ -891,6 +893,8 @@ void ThrowHead (edict_t *self, char *gibname, int damage, int type);
 void ThrowClientHead (edict_t *self, int damage);
 void ThrowGib (edict_t *self, char *gibname, int damage, int type);
 void BecomeExplosion1(edict_t *self);
+void SP_misc_teleporter_dest(edict_t* ent);
+
 
 //
 // g_ai.c
@@ -1116,7 +1120,7 @@ extern void ED_CallSpawn(edict_t* ent);
 
 
 // client data that stays across multiple level loads
-typedef struct
+typedef struct client_persistant_s
 {
 	char		userinfo[MAX_INFO_STRING];
 	char		netname[16];
@@ -1163,7 +1167,7 @@ typedef struct
 } client_persistant_t;
 
 // client data that stays across deathmatch respawns
-typedef struct
+typedef struct client_respawn_s
 {
 	client_persistant_t	coop_respawn;	// what to set client->pers to on a respawn
 	int			enterframe;			// level.framenum the client entered the game

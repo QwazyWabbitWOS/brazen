@@ -5,6 +5,8 @@
 
 #include "g_local.h"
 
+cvar_t* flashlightmode;
+
 void FlashlightReset(edict_t* self)
 {
 	if (self->owner->client && self->owner->client->flashlight)

@@ -80,18 +80,26 @@ qboolean SV_RunThink(edict_t* ent)
 	float	thinktime;
 
 	thinktime = ent->nextthink;
+
 	if (thinktime <= 0)
 		return true;
 	if (thinktime > level.time + 0.001)
 		return true;
 
 	ent->nextthink = 0;
-	if (!ent->think) {
-		gi.error("NULL ent->think");
+
+	if (!ent->think || !ent->inuse)
+	{
+		if (ent->classname && ent->model)
+			gi.dprintf("NULL ent->think (classname %s, model %s mapname %s)\n", ent->classname, ent->model, level.mapname);
+		else if (ent->classname)
+			gi.dprintf("NULL ent->think (classname %s mapname %s)\n", ent->classname, level.mapname);
+		else
+			gi.dprintf("NULL ent->think (mapname %s)\n", level.mapname);
 		return false;
 	}
-	ent->think(ent);
 
+	ent->think(ent);
 	return false;
 }
 
@@ -172,11 +180,13 @@ int SV_FlyMove(edict_t* ent, float time, int mask)
 	vec3_t		dir;
 	float		d;
 	int			numplanes;
-	vec3_t		planes[MAX_CLIP_PLANES];
-	vec3_t		primal_velocity, original_velocity, new_velocity;
+	vec3_t		planes[MAX_CLIP_PLANES] = { 0 };
+	vec3_t		primal_velocity = { 0 };
+	vec3_t		original_velocity = { 0 };
+	vec3_t		new_velocity;
 	int			i, j;
 	trace_t		trace;
-	vec3_t		end;
+	vec3_t		end = { 0 };
 	float		time_left;
 	int			blocked;
 
@@ -257,7 +267,7 @@ int SV_FlyMove(edict_t* ent, float time, int mask)
 			ClipVelocity(original_velocity, planes[i], new_velocity, 1);
 
 			for (j = 0; j < numplanes; j++)
-				if ((j != i) && !VectorCompare(planes[i], planes[j]))
+				if (j != i && !VectorCompare(planes[i], planes[j]))
 				{
 					if (DotProduct(new_velocity, planes[j]) < 0)
 						break;	// not ok
@@ -338,45 +348,40 @@ Does not change the entities velocity at all
 */
 trace_t SV_PushEntity(edict_t* ent, vec3_t push)
 {
-	trace_t	trace;
-	vec3_t	start;
-	vec3_t	end;
-	int		mask;
+	trace_t trace;
+	vec3_t start = { 0 };
+	vec3_t end = { 0 };
+	int mask;
 
 	VectorCopy(ent->s.origin, start);
 	VectorAdd(start, push, end);
 
-retry:
-	if (ent->clipmask)
-		mask = ent->clipmask;
-	else
-		mask = MASK_SOLID;
+	while (1) {
+		if (ent->clipmask)
+			mask = ent->clipmask;
+		else
+			mask = MASK_SOLID;
 
-	trace = gi.trace(start, ent->mins, ent->maxs, end, ent, mask);
+		trace = gi.trace(start, ent->mins, ent->maxs, end, ent, mask);
+		VectorCopy(trace.endpos, ent->s.origin);
+		gi.linkentity(ent);
 
-	VectorCopy(trace.endpos, ent->s.origin);
-	gi.linkentity(ent);
+		if (trace.fraction == 1.0f)
+			break;
 
-	if (trace.fraction != 1.0)
-	{
 		SV_Impact(ent, &trace);
 
 		// if the pushed entity went away and the pusher is still there
-		if (!trace.ent->inuse && ent->inuse)
-		{
+		if (!trace.ent->inuse && ent->inuse) {
 			// move the pusher back and try again
 			VectorCopy(start, ent->s.origin);
 			gi.linkentity(ent);
-			goto retry;
+			// update end in case push changed
+			VectorAdd(start, push, end);
+			continue;
 		}
+		break;
 	}
-
-	// ================
-	// PGM
-		// FIXME - is this needed?
-	ent->gravity = 1.0;
-	// PGM
-	// ================
 
 	if (ent->inuse)
 		G_TouchTriggers(ent);
@@ -385,7 +390,7 @@ retry:
 }
 
 
-typedef struct
+typedef struct pushed_s
 {
 	edict_t* ent;
 	vec3_t	origin;
@@ -652,7 +657,7 @@ A moving object that doesn't obey physics
 void SV_Physics_Noclip(edict_t* ent)
 {
 	// regular thinking
-	if (!SV_RunThink(ent))
+	if (!ent->inuse || !SV_RunThink(ent))
 		return;
 
 	VectorMA(ent->s.angles, FRAMETIME, ent->avelocity, ent->s.angles);
@@ -684,10 +689,12 @@ void SV_Physics_Toss(edict_t* ent)
 	edict_t* slave;
 	qboolean	wasinwater;
 	qboolean	isinwater;
-	vec3_t		old_origin;
+	vec3_t		old_origin = { 0 };
 
 	// regular thinking
 	SV_RunThink(ent);
+	if (!ent->inuse)
+		return;
 
 	// if not a team captain, so movement will be handled elsewhere
 	if (ent->flags & FL_TEAMSLAVE)

@@ -9,7 +9,7 @@
 #define TELEPORT_CTF_ONLY		4
 #define TELEPORT_START_ON		8
 
-extern void TeleportEffect(vec3_t origin);
+//extern void TeleportEffect(vec3_t origin);
 
 /*QUAKED info_teleport_destination (.5 .5 .5) (-16 -16 -24) (16 16 32)
 Destination marker for a teleporter.
@@ -74,7 +74,7 @@ void trigger_teleport_touch(edict_t* self, edict_t* other, cplane_t* plane, csur
 
 		// set angles
 		for (i = 0; i < 3; i++)
-			other->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(dest->s.angles[i] - other->client->resp.cmd_angles[i]);
+			other->client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(dest->s.angles[i] - other->client->resp.cmd_angles[i]);
 
 		VectorClear(other->client->ps.viewangles);
 		VectorClear(other->client->v_angle);

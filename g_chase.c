@@ -56,7 +56,8 @@ void UpdateChaseCam(edict_t* ent)
 	VectorCopy(goal, o);
 	o[2] += 6;
 	trace = gi.trace(goal, vec3_origin, vec3_origin, o, targ, MASK_SOLID);
-	if (trace.fraction < 1) {
+	if (trace.fraction < 1)
+	{
 		VectorCopy(trace.endpos, goal);
 		goal[2] -= 6;
 	}
@@ -64,7 +65,8 @@ void UpdateChaseCam(edict_t* ent)
 	VectorCopy(goal, o);
 	o[2] -= 6;
 	trace = gi.trace(goal, vec3_origin, vec3_origin, o, targ, MASK_SOLID);
-	if (trace.fraction < 1) {
+	if (trace.fraction < 1)
+	{
 		VectorCopy(trace.endpos, goal);
 		goal[2] += 6;
 	}
@@ -78,7 +80,7 @@ void UpdateChaseCam(edict_t* ent)
 
 	VectorCopy(goal, ent->s.origin);
 	for (i = 0; i < 3; i++)
-		ent->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(targ->client->v_angle[i]);// - ent->client->resp.cmd_angles[i]);
+		ent->client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(targ->client->v_angle[i]);// - ent->client->resp.cmd_angles[i]);
 
 	// GRIM 10/10/2001 10:30PM - NEW COOP
 	/*if (targ->deadflag) {
@@ -99,7 +101,7 @@ void UpdateChaseCam(edict_t* ent)
 void ChaseNext(edict_t* ent)
 {
 	int i;
-	edict_t* e = { 0 };
+	edict_t* e = NULL;
 
 	if (!ent->client->chase_target)
 		return;
@@ -127,7 +129,7 @@ void ChaseNext(edict_t* ent)
 void ChasePrev(edict_t* ent)
 {
 	int i;
-	edict_t* e = { 0 };
+	edict_t* e = NULL;
 
 	if (!ent->client->chase_target)
 		return;
@@ -136,7 +138,7 @@ void ChasePrev(edict_t* ent)
 	do {
 		i--;
 		if (i < 1)
-			i = maxclients->value;
+			i = (int)maxclients->value;
 		e = g_edicts + i;
 		if (!e->inuse)
 			continue;
@@ -165,7 +167,8 @@ void GetChaseTarget(edict_t* ent)
 			continue;
 		// GRIM
 
-		if (other->inuse && !other->client->resp.spectator) {
+		if (other->inuse && !other->client->resp.spectator)
+		{
 			ent->client->chase_target = other;
 			ent->client->update_chase = true;
 			UpdateChaseCam(ent);

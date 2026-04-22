@@ -956,7 +956,7 @@ edict_t* SelectCoopSpawnPoint(edict_t* ent)
 		target = spot->targetname;
 		if (!target)
 			target = "";
-		if (Q_stricmp(game.spawnpoint, target) == 0)
+		if (strcmp(game.spawnpoint, target) == 0)
 		{	// this is a coop spawn point for one of the clients here
 			index--;
 			if (!index)
@@ -1372,7 +1372,7 @@ void PutClientInServer(edict_t* ent)
 	// set the delta angle
 	for (i = 0; i < 3; i++)
 	{
-		client->ps.pmove.delta_angles[i] = ANGLE2SHORT(spawn_angles[i] - client->resp.cmd_angles[i]);
+		client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(spawn_angles[i] - client->resp.cmd_angles[i]);
 	}
 
 	ent->s.angles[PITCH] = 0;
@@ -1494,7 +1494,7 @@ void ClientBegin(edict_t* ent)
 		// state when the game is saved, so we need to compensate
 		// with deltaangles
 		for (i = 0; i < 3; i++)
-			ent->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(ent->client->ps.viewangles[i]);
+			ent->client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(ent->client->ps.viewangles[i]);
 	}
 	else
 	{
@@ -1702,7 +1702,7 @@ void ClientDisconnect(edict_t* ent)
 {
 	int		playernum;
 
-	if (!ent->client)
+	if (!ent || !ent->client)
 		return;
 
 	gi.bprintf(PRINT_HIGH, "%s disconnected\n", ent->client->pers.netname);
@@ -1779,6 +1779,9 @@ void ClientThink(edict_t* ent, usercmd_t* ucmd)
 	edict_t* other;
 	int		i, j;
 	pmove_t	pm;
+
+	if (!ent || !ent->client)
+		return;
 
 	level.current_entity = ent;
 	client = ent->client;

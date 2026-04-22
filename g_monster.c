@@ -129,6 +129,7 @@ void M_FliesOff(edict_t* self)
 {
 	self->s.effects &= ~EF_FLIES;
 	self->s.sound = 0;
+	self->nextthink = 0;
 }
 
 void M_FliesOn(edict_t* self)
@@ -161,7 +162,7 @@ void AttackFinished(edict_t* self, float time)
 
 void M_CheckGround(edict_t* ent)
 {
-	vec3_t		point;
+	vec3_t		point = { 0 };
 	trace_t		trace;
 
 	if (ent->flags & (FL_SWIM | FL_FLY))
@@ -232,7 +233,7 @@ void M_CheckGround(edict_t* ent)
 
 void M_CatagorizePosition(edict_t* ent)
 {
-	vec3_t		point;
+	vec3_t		point = { 0 };
 	int			cont;
 
 	//
@@ -281,7 +282,7 @@ void M_WorldEffects(edict_t* ent)
 			{	// drown!
 				if (ent->pain_debounce_time < level.time)
 				{
-					dmg = 2 + 2 * floorf(level.time - ent->air_finished);
+					dmg = (int)(2 + 2 * floorf(level.time - ent->air_finished));
 					if (dmg > 15)
 						dmg = 15;
 					T_Damage(ent, world, world, vec3_origin, ent->s.origin, vec3_origin, dmg, 0, DAMAGE_NO_ARMOR, MOD_WATER);
@@ -299,7 +300,7 @@ void M_WorldEffects(edict_t* ent)
 			{	// suffocate!
 				if (ent->pain_debounce_time < level.time)
 				{
-					dmg = 2 + 2 * floorf(level.time - ent->air_finished);
+					dmg = (int)(2 + 2 * floorf(level.time - ent->air_finished));
 					if (dmg > 15)
 						dmg = 15;
 					T_Damage(ent, world, world, vec3_origin, ent->s.origin, vec3_origin, dmg, 0, DAMAGE_NO_ARMOR, MOD_WATER);
@@ -323,7 +324,7 @@ void M_WorldEffects(edict_t* ent)
 	{
 		if (ent->damage_debounce_time < level.time)
 		{
-			ent->damage_debounce_time = level.time + 0.2;
+			ent->damage_debounce_time = level.time + 0.2f;
 			T_Damage(ent, world, world, vec3_origin, ent->s.origin, vec3_origin, 10 * ent->waterlevel, 0, 0, MOD_LAVA);
 		}
 	}
@@ -359,7 +360,7 @@ void M_WorldEffects(edict_t* ent)
 
 void M_droptofloor(edict_t* ent)
 {
-	vec3_t		end;
+	vec3_t		end = { 0 };
 	trace_t		trace;
 
 #ifdef ROGUE_GRAVITY
@@ -528,7 +529,6 @@ void M_MoveFrame(edict_t* self)
 	int		index;
 
 	move = self->monsterinfo.currentmove;
-	self->nextthink = level.time + FRAMETIME;
 
 	if ((self->monsterinfo.nextframe) && (self->monsterinfo.nextframe >= move->firstframe) && (self->monsterinfo.nextframe <= move->lastframe))
 	{
@@ -593,6 +593,7 @@ void monster_think(edict_t* self)
 	M_CatagorizePosition(self);
 	M_WorldEffects(self);
 	M_SetEffects(self);
+	self->nextthink = level.time + FRAMETIME;
 }
 
 
@@ -819,7 +820,7 @@ qboolean monster_start(edict_t* self)
 
 void monster_start_go(edict_t* self)
 {
-	vec3_t	v;
+	vec3_t	v = { 0 };
 
 	if (self->health <= 0)
 		return;

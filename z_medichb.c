@@ -35,6 +35,10 @@ void Think_MedicWeapon(edict_t* ent)
 {
 	int newState = -1;
 	int newFrame = -1;
+
+	if (!ent || !ent->client)
+		return;
+
 	int ammoRight = ent->client->pers.cstats[CSTAT_RIGHTHAND_AMMO];
 	qboolean bAttack = ((ent->client->latched_buttons | ent->client->buttons) & BUTTON_ATTACK);
 	qboolean bAltAttack = ((ent->client->latched_buttons | ent->client->buttons) & BUTTON_ALT_ATTACK);

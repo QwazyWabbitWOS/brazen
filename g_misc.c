@@ -39,14 +39,14 @@ Misc functions
 */
 void VelocityForDamage(int damage, vec3_t v)
 {
-	v[0] = 100.0 * crandom();
-	v[1] = 100.0 * crandom();
-	v[2] = 200.0 + 100.0 * random();
+	v[0] = 100.0f * crandom();
+	v[1] = 100.0f * crandom();
+	v[2] = 200.0f + 100.0f * random();
 
 	if (damage < 50)
-		VectorScale(v, 0.7, v);
+		VectorScale(v, 0.7f, v);
 	else
-		VectorScale(v, 1.2, v);
+		VectorScale(v, 1.2f, v);
 }
 
 void ClipGibVelocity(edict_t* ent)
@@ -398,7 +398,7 @@ void SP_path_corner(edict_t* self)
 {
 	if (!self->targetname)
 	{
-		gi.dprintf("path_corner with no targetname at %s\n", vtos(self->s.origin));
+		gi.dprintf("%s path_corner with no targetname at %s\n", __func__, vtos(self->s.origin));
 		G_FreeEdict(self);
 		return;
 	}
@@ -520,7 +520,7 @@ void SP_viewthing(edict_t* ent)
 	VectorSet(ent->maxs, 16, 16, 32);
 	ent->s.modelindex = gi.modelindex("models/objects/banner/tris.md2");
 	gi.linkentity(ent);
-	ent->nextthink = level.time + 0.5;
+	ent->nextthink = level.time + 0.5f;
 	ent->think = TH_viewthing;
 	return;
 }
@@ -785,7 +785,7 @@ void func_explosive_explode(edict_t* self, edict_t* inflictor, edict_t* attacker
 	// start chunks towards the center
 	VectorScale(size, 0.5, size);
 
-	mass = self->mass;
+	mass = (int)self->mass;
 	if (!mass)
 		mass = 75;
 
@@ -1111,7 +1111,7 @@ void SP_misc_explobox(edict_t* self)
 
 	self->model = "models/objects/barrels/tris.md2";
 	self->s.modelindex = gi.modelindex(self->model);
-	VectorSet(self->mins, -16, -16,-40);
+	VectorSet(self->mins, -16, -16, -40);
 	VectorSet(self->maxs, 16, 16, 40);
 
 	if (!self->mass)
@@ -1473,7 +1473,7 @@ void misc_viper_bomb_prethink(edict_t* self)
 	if (diff < -1.0)
 		diff = -1.0;
 
-	VectorScale(self->moveinfo.dir, 1.0 + diff, v);
+	VectorScale(self->moveinfo.dir, 1.0f + diff, v);
 	v[2] = diff;
 
 	diff = self->s.angles[2];
@@ -1703,16 +1703,17 @@ void SP_target_character(edict_t* self)
 void target_string_use(edict_t* self, edict_t* other, edict_t* activator)
 {
 	edict_t* e;
-	int		n, l;
+	int		n;
+	int		len;
 	char	c;
 
-	l = (int)strlen(self->message);
+	len = (int)strlen(self->message);
 	for (e = self->teammaster; e; e = e->teamchain)
 	{
 		if (!e->count)
 			continue;
 		n = e->count - 1;
-		if (n > l)
+		if (n > len)
 		{
 			e->s.frame = 12;
 			continue;
@@ -1762,11 +1763,11 @@ static void func_clock_reset(edict_t* self)
 	if (self->spawnflags & 1)
 	{
 		self->health = 0;
-		self->wait = self->count;
+		self->wait = (float)self->count;
 	}
 	else if (self->spawnflags & 2)
 	{
-		self->health = self->count;
+		self->health = (int)self->count;
 		self->wait = 0;
 	}
 }
@@ -1824,11 +1825,8 @@ void func_clock_think(edict_t* self)
 
 		time(&gmtime);
 		ltime = localtime(&gmtime);
-		Com_sprintf(self->message, CLOCK_MESSAGE_SIZE, "%2i:%2i:%2i", ltime->tm_hour, ltime->tm_min, ltime->tm_sec);
-		if (self->message[3] == ' ')
-			self->message[3] = '0';
-		if (self->message[6] == ' ')
-			self->message[6] = '0';
+		Com_sprintf(self->message, CLOCK_MESSAGE_SIZE,
+			"%02i:%02i:%02i", ltime->tm_hour, ltime->tm_min, ltime->tm_sec);
 	}
 
 	self->enemy->message = self->message;
@@ -1938,7 +1936,7 @@ void teleporter_touch(edict_t* self, edict_t* other, cplane_t* plane, csurface_t
 
 	// set angles
 	for (i = 0; i < 3; i++)
-		other->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(dest->s.angles[i] - other->client->resp.cmd_angles[i]);
+		other->client->ps.pmove.delta_angles[i] = (short)ANGLE2SHORT(dest->s.angles[i] - other->client->resp.cmd_angles[i]);
 
 	VectorClear(other->s.angles);
 	VectorClear(other->client->ps.viewangles);

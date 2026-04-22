@@ -746,7 +746,7 @@ void T_Damage(edict_t* targ, edict_t* inflictor, edict_t* attacker, vec3_t dir, 
 	// easy mode takes half damage
 	if (skill->value == 0 && deathmatch->value == 0 && targ->client)
 	{
-		damage *= 0.5;
+		damage /= 2;
 		if (!damage)
 			damage = 1;
 	}
@@ -795,9 +795,9 @@ void T_Damage(edict_t* targ, edict_t* inflictor, edict_t* attacker, vec3_t dir, 
 				mass = targ->mass;
 
 			if (targ->client && attacker == targ)
-				VectorScale(dir, 1600.0 * (float)knockback / mass, kvel);	// the rocket jump hack...
+				VectorScale(dir, 1600.0f * knockback / mass, kvel);	// the rocket jump hack...
 			else
-				VectorScale(dir, 500.0 * (float)knockback / mass, kvel);
+				VectorScale(dir, 500.0f * knockback / mass, kvel);
 
 			VectorAdd(targ->velocity, kvel, targ->velocity);
 		}
@@ -1013,7 +1013,7 @@ void T_RadiusDamage(edict_t* inflictor, edict_t* attacker, float damage, edict_t
 		VectorAdd(ent->mins, ent->maxs, v);
 		VectorMA(ent->s.origin, 0.5, v, v);
 		VectorSubtract(inflictor->s.origin, v, v);
-		points = damage - 0.5 * VectorLength(v);
+		points = damage - 0.5f * VectorLength(v);
 		// GRIM 6/10/2001 12:39PM - nope
 		//if (ent == attacker)
 			//points = points * 0.5;

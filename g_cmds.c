@@ -1,14 +1,11 @@
 #include "g_local.h"
 #include "m_player.h"
-#include "flashlight.h"
 
 
 char* ClientTeam(edict_t* ent)
 {
 	char* p;
-	static char	value[512];
-
-	value[0] = 0;
+	static char	value[MAX_INFO_VALUE] = { 0 };
 
 	if (!ent->client)
 		return value;
@@ -733,8 +730,8 @@ void Cmd_Players_f(edict_t* ent)
 	int		i;
 	int		count;
 	char	small[64];
-	char	large[1280];
-	int		index[256];
+	char	large[1280] = { 0 }; //QW appears to be an arbitrary max message size
+	int		index[MAX_CLIENTS] = { 0 };
 
 	count = 0;
 	for (i = 0; i < maxclients->value; i++)
@@ -757,10 +754,10 @@ void Cmd_Players_f(edict_t* ent)
 			game.clients[index[i]].pers.netname);
 		if (strlen(small) + strlen(large) > sizeof(large) - 100)
 		{	// can't print all of them in one packet
-			strcat(large, "...\n");
+			Q_strncatz(large, sizeof large, "...\n");
 			break;
 		}
-		strcat(large, small);
+		Q_strncatz(large, sizeof large, small);
 	}
 
 	gi.cprintf(ent, PRINT_HIGH, "%s\n%i players\n", large, count);
@@ -779,6 +776,10 @@ void Cmd_Wave_f(edict_t* ent)
 
 	// can't wave when ducked
 	if (ent->client->ps.pmove.pm_flags & PMF_DUCKED)
+		return;
+
+	// Or when you're a ghost.
+	if (ent->movetype == MOVETYPE_NOCLIP && ent->solid == SOLID_NOT)
 		return;
 
 	if (ent->client->anim_priority > ANIM_WAVE)
@@ -879,9 +880,9 @@ void Cmd_Say_f(edict_t* ent, qboolean team, qboolean arg0)
 
 	if (arg0)
 	{
-		strcat(text, gi.argv(0));
-		strcat(text, " ");
-		strcat(text, gi.args());
+		Q_strncatz(text, sizeof text, gi.argv(0));
+		Q_strncatz(text, sizeof text, " ");
+		Q_strncatz(text, sizeof text, gi.args());
 	}
 	else
 	{
@@ -930,12 +931,13 @@ void Cmd_PlayerList_f(edict_t* ent)
 {
 	int i;
 	char str[80];
-	char text[1400];
+	char text[1400] = { 0 };
 	edict_t* e2;
 
 	// connect time, ping, score, name
 	*text = 0;
-	for (i = 0, e2 = g_edicts + 1; i < maxclients->value; i++, e2++) {
+	for (i = 0, e2 = g_edicts + 1; i < maxclients->value; i++, e2++)
+	{
 		if (!e2->inuse)
 			continue;
 
@@ -946,12 +948,13 @@ void Cmd_PlayerList_f(edict_t* ent)
 			e2->client->resp.score,
 			e2->client->pers.netname,
 			e2->client->resp.spectator ? " (spectator)" : "");
-		if (strlen(text) + strlen(str) > sizeof(text) - 50) {
+		if (strlen(text) + strlen(str) > sizeof(text) - 50)
+		{
 			sprintf(text + strlen(text), "And more...\n");
 			gi.cprintf(ent, PRINT_HIGH, "%s", text);
 			return;
 		}
-		strcat(text, str);
+		Q_strncatz(text, sizeof text, str);
 	}
 	gi.cprintf(ent, PRINT_HIGH, "%s", text);
 }

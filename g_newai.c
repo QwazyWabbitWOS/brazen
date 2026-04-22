@@ -496,7 +496,7 @@ void hintpath_stop(edict_t* self)
 //		and the monster's enemy. if only one person is visible from the endpoints,
 //		it will not go for it.
 // =============
-qboolean monsterlost_checkhint2(edict_t* self);
+//qboolean monsterlost_checkhint2(edict_t* self); //QW// function was commented out prior 
 
 qboolean monsterlost_checkhint(edict_t* self)
 {

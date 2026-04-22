@@ -130,7 +130,7 @@ void Prox_Explode(edict_t* ent)
 		PlayerNoise(owner, ent->s.origin, PNOISE_IMPACT);
 	}
 
-	// play quad sound if appopriate
+	// play quad sound if appropriate
 	if (ent->dmg > PROX_DAMAGE)
 		gi.sound(ent, CHAN_ITEM, gi.soundindex("items/damage3.wav"), 1, ATTN_NORM, 0);
 
