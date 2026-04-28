@@ -10,7 +10,7 @@ char* ClientTeam(edict_t* ent)
 	if (!ent->client)
 		return value;
 
-	strcpy(value, Info_ValueForKey(ent->client->pers.userinfo, "skin"));
+	Q_strncpyz(value, sizeof value, Info_ValueForKey(ent->client->pers.userinfo, "skin"));
 	p = strchr(value, '/');
 	if (!p)
 		return value;
@@ -33,8 +33,8 @@ qboolean OnSameTeam(edict_t* ent1, edict_t* ent2)
 	if (!((int)(dmflags->value) & (DF_MODELTEAMS | DF_SKINTEAMS)))
 		return false;
 
-	strcpy(ent1Team, ClientTeam(ent1));
-	strcpy(ent2Team, ClientTeam(ent2));
+	Q_strncpyz(ent1Team, sizeof ent1Team, ClientTeam(ent1));
+	Q_strncpyz(ent2Team, sizeof ent2Team, ClientTeam(ent2));
 
 	if (strcmp(ent1Team, ent2Team) == 0)
 		return true;
@@ -893,14 +893,14 @@ void Cmd_Say_f(edict_t* ent, qboolean team, qboolean arg0)
 			p++;
 			p[strlen(p) - 1] = 0;
 		}
-		strcat(text, p);
+		Q_strncatz(text, sizeof text, p);
 	}
 
 	// don't let text be too long for malicious reasons
 	if (strlen(text) > 150)
 		text[150] = 0;
 
-	strcat(text, "\n");
+	Q_strncatz(text, sizeof text, "\n");
 
 	if (flood_msgs->value)
 	{
@@ -941,7 +941,7 @@ void Cmd_PlayerList_f(edict_t* ent)
 		if (!e2->inuse)
 			continue;
 
-		Com_sprintf(str, sizeof(str), "%02d:%02d %4d %3d %s%s\n",
+		Com_sprintf(str, sizeof str, "%02d:%02d %4d %3d %s%s\n",
 			(level.framenum - e2->client->resp.enterframe) / 600,
 			((level.framenum - e2->client->resp.enterframe) % 600) / 10,
 			e2->client->ping,
@@ -950,7 +950,7 @@ void Cmd_PlayerList_f(edict_t* ent)
 			e2->client->resp.spectator ? " (spectator)" : "");
 		if (strlen(text) + strlen(str) > sizeof(text) - 50)
 		{
-			sprintf(text + strlen(text), "And more...\n");
+			Com_sprintf(text + strlen(text), sizeof text, "And more...\n");
 			gi.cprintf(ent, PRINT_HIGH, "%s", text);
 			return;
 		}

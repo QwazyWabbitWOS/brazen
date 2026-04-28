@@ -1567,7 +1567,7 @@ void ClientUserinfoChanged(edict_t* ent, char* userinfo)
 	// set spectator
 	s = Info_ValueForKey(userinfo, "spectator");
 
-	//QW// Changed this. Allow spectator in dm and coop.
+	//QW// Changed this to allow spectator in dm and coop.
 	if (*s && strcmp(s, "0")) // any value that's not 0 sets spec.
 		ent->client->pers.spectator = true;
 	else

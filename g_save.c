@@ -6,38 +6,38 @@
 mmove_t mmove_reloc;
 
 field_t fields[] = {
-	{"classname", FOFS(classname), F_LSTRING},
-	{"model", FOFS(model), F_LSTRING},
-	{"spawnflags", FOFS(spawnflags), F_INT},
-	{"speed", FOFS(speed), F_FLOAT},
-	{"accel", FOFS(accel), F_FLOAT},
-	{"decel", FOFS(decel), F_FLOAT},
-	{"target", FOFS(target), F_LSTRING},
-	{"targetname", FOFS(targetname), F_LSTRING},
-	{"pathtarget", FOFS(pathtarget), F_LSTRING},
-	{"deathtarget", FOFS(deathtarget), F_LSTRING},
-	{"killtarget", FOFS(killtarget), F_LSTRING},
-	{"combattarget", FOFS(combattarget), F_LSTRING},
-	{"message", FOFS(message), F_LSTRING},
-	{"team", FOFS(team), F_LSTRING},
-	{"wait", FOFS(wait), F_FLOAT},
-	{"delay", FOFS(delay), F_FLOAT},
-	{"random", FOFS(random), F_FLOAT},
-	{"move_origin", FOFS(move_origin), F_VECTOR},
-	{"move_angles", FOFS(move_angles), F_VECTOR},
-	{"style", FOFS(style), F_INT},
-	{"count", FOFS(count), F_INT},
-	{"health", FOFS(health), F_INT},
-	{"sounds", FOFS(sounds), F_INT},
-	{"light", 0, F_IGNORE},
-	{"dmg", FOFS(dmg), F_INT},
-	{"mass", FOFS(mass), F_INT},
-	{"volume", FOFS(volume), F_FLOAT},
-	{"attenuation", FOFS(attenuation), F_FLOAT},
-	{"map", FOFS(map), F_LSTRING},
-	{"origin", FOFS(s.origin), F_VECTOR},
-	{"angles", FOFS(s.angles), F_VECTOR},
-	{"angle", FOFS(s.angles), F_ANGLEHACK},
+	{"classname", FOFS(classname), F_LSTRING, 0},
+	{"model", FOFS(model), F_LSTRING, 0},
+	{"spawnflags", FOFS(spawnflags), F_INT, 0},
+	{"speed", FOFS(speed), F_FLOAT, 0},
+	{"accel", FOFS(accel), F_FLOAT, 0},
+	{"decel", FOFS(decel), F_FLOAT, 0},
+	{"target", FOFS(target), F_LSTRING, 0},
+	{"targetname", FOFS(targetname), F_LSTRING, 0},
+	{"pathtarget", FOFS(pathtarget), F_LSTRING, 0},
+	{"deathtarget", FOFS(deathtarget), F_LSTRING, 0},
+	{"killtarget", FOFS(killtarget), F_LSTRING, 0},
+	{"combattarget", FOFS(combattarget), F_LSTRING, 0},
+	{"message", FOFS(message), F_LSTRING, 0},
+	{"team", FOFS(team), F_LSTRING, 0},
+	{"wait", FOFS(wait), F_FLOAT, 0},
+	{"delay", FOFS(delay), F_FLOAT, 0},
+	{"random", FOFS(random), F_FLOAT, 0},
+	{"move_origin", FOFS(move_origin), F_VECTOR, 0},
+	{"move_angles", FOFS(move_angles), F_VECTOR, 0},
+	{"style", FOFS(style), F_INT, 0},
+	{"count", FOFS(count), F_INT, 0},
+	{"health", FOFS(health), F_INT, 0},
+	{"sounds", FOFS(sounds), F_INT, 0},
+	{"light", 0, F_IGNORE, 0},
+	{"dmg", FOFS(dmg), F_INT, 0},
+	{"mass", FOFS(mass), F_INT, 0},
+	{"volume", FOFS(volume), F_FLOAT, 0},
+	{"attenuation", FOFS(attenuation), F_FLOAT, 0},
+	{"map", FOFS(map), F_LSTRING, 0},
+	{"origin", FOFS(s.origin), F_VECTOR, 0},
+	{"angles", FOFS(s.angles), F_VECTOR, 0},
+	{"angle", FOFS(s.angles), F_ANGLEHACK, 0},
 
 	{"goalentity", FOFS(goalentity), F_EDICT, FFL_NOSPAWN},
 	{"movetarget", FOFS(movetarget), F_EDICT, FFL_NOSPAWN},
@@ -86,7 +86,7 @@ field_t fields[] = {
 {"item", STOFS(item), F_LSTRING, FFL_SPAWNTEMP},
 
 //need for item field in edict struct, FFL_SPAWNTEMP item will be skipped on saves
-	{"item", FOFS(item), F_ITEM},
+	{"item", FOFS(item), F_ITEM, 0},
 
 	{"gravity", STOFS(gravity), F_LSTRING, FFL_SPAWNTEMP},
 	{"sky", STOFS(sky), F_LSTRING, FFL_SPAWNTEMP},
@@ -99,17 +99,17 @@ field_t fields[] = {
 	{"nextmap", STOFS(nextmap), F_LSTRING, FFL_SPAWNTEMP},
 
 	// ROGUE
-	{"bad_area", FOFS(bad_area), F_EDICT},
+	{"bad_area", FOFS(bad_area), F_EDICT, 0},
 	// while the hint_path stuff could be reassembled on the fly, no reason to be different
-	{"hint_chain", FOFS(hint_chain), F_EDICT},
-	{"monster_hint_chain", FOFS(monster_hint_chain), F_EDICT},
-	{"target_hint_chain", FOFS(target_hint_chain), F_EDICT},
+	{"hint_chain", FOFS(hint_chain), F_EDICT, 0},
+	{"monster_hint_chain", FOFS(monster_hint_chain), F_EDICT, 0},
+	{"target_hint_chain", FOFS(target_hint_chain), F_EDICT, 0},
 	//
-	{"goal_hint", FOFS(monsterinfo.goal_hint), F_EDICT},
-	{"badMedic1", FOFS(monsterinfo.badMedic1), F_EDICT},
-	{"badMedic2", FOFS(monsterinfo.badMedic2), F_EDICT},
-	{"last_player_enemy", FOFS(monsterinfo.last_player_enemy), F_EDICT},
-	{"commander", FOFS(monsterinfo.commander), F_EDICT},
+	{"goal_hint", FOFS(monsterinfo.goal_hint), F_EDICT, 0},
+	{"badMedic1", FOFS(monsterinfo.badMedic1), F_EDICT, 0 },
+	{"badMedic2", FOFS(monsterinfo.badMedic2), F_EDICT, 0 },
+	{"last_player_enemy", FOFS(monsterinfo.last_player_enemy), F_EDICT, 0 },
+	{"commander", FOFS(monsterinfo.commander), F_EDICT, 0 },
 	{"blocked", FOFS(monsterinfo.blocked), F_MMOVE, FFL_NOSPAWN},
 	{"duck", FOFS(monsterinfo.duck), F_MMOVE, FFL_NOSPAWN},
 	{"unduck", FOFS(monsterinfo.unduck), F_MMOVE, FFL_NOSPAWN},
@@ -126,27 +126,27 @@ field_t fields[] = {
 
 field_t		levelfields[] =
 {
-	{"changemap", LLOFS(changemap), F_LSTRING},
+	{"changemap", LLOFS(changemap), F_LSTRING, 0},
 
-	{"sight_client", LLOFS(sight_client), F_EDICT},
-	{"sight_entity", LLOFS(sight_entity), F_EDICT},
-	{"sound_entity", LLOFS(sound_entity), F_EDICT},
-	{"sound2_entity", LLOFS(sound2_entity), F_EDICT},
+	{"sight_client", LLOFS(sight_client), F_EDICT, 0},
+	{"sight_entity", LLOFS(sight_entity), F_EDICT, 0},
+	{"sound_entity", LLOFS(sound_entity), F_EDICT, 0},
+	{"sound2_entity", LLOFS(sound2_entity), F_EDICT, 0},
 
-	{NULL, 0, F_INT}
+	{NULL, 0, F_INT, 0}
 };
 
 field_t		clientfields[] =
 {
 	// GRIM 6/10/2001 1:13PM - fixing save games
-	{"pers.weapon", CLOFS(pers.weapon), F_ITEM},
+	{"pers.weapon", CLOFS(pers.weapon), F_ITEM, 0},
 	//{"pers.lastweapon", CLOFS(pers.lastweapon), F_ITEM},
 	//{"newweapon", CLOFS(newweapon), F_ITEM},
 	//{"newRightWeapon", CLOFS(newRightWeapon), F_INT},
 	//{"newLeftWeapon", CLOFS(newLeftWeapon), F_INT},
 	// GRIM
 
-	{NULL, 0, F_INT}
+	{NULL, 0, F_INT, 0}
 };
 
 /*
@@ -564,6 +564,7 @@ void ReadGame(char* filename)
 	{
 		fclose(f);
 		gi.error("Savegame from an older version.\n");
+		return;
 	}
 
 	g_edicts = gi.TagMalloc(game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
@@ -753,7 +754,7 @@ No clients are connected yet.
 */
 void ReadLevel(char* filename)
 {
-	int		entnum;
+	int		entnum = 0;
 	FILE* f;
 	int		i;
 	void* base;
@@ -791,6 +792,7 @@ void ReadLevel(char* filename)
 	{
 		fclose(f);
 		gi.error("ReadLevel: function pointers have moved");
+		return;
 	}
 #else
 	gi.dprintf("Function offsets %d\n", ((byte*)base) - ((byte*)InitGame));
