@@ -28,7 +28,7 @@ _CrtMemState startup1;	// memory diagnostics
 #include "flashlight.h" //QW Added a flashlight
 
 // the "gameversion" client command will print this plus compile date
-#define	GAMEVERSION	"BraZen 2.2"
+#define	GAMEVERSION	"BraZen 2.3"
 #define	GAMENAME	"brazen"
 
 #ifdef _DEBUG
